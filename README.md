@@ -8,11 +8,11 @@ Każdy pracuje **wyłącznie na swojej gałęzi** (branch), której nazwa jest *
 ```bash
 git checkout <indeks>
 ```
-### Wyświetlenie wszystkich gałęzi (ta, na której jesteście jest oznaczona *)
+### Wyświetlenie wszystkich gałęzi (ta, na której jesteś powinna być oznaczona *)
 ```bash
 git branch
 ```
-> **Uwaga:** Nigdy nie wykonujemy żadnych zmian bezpośrednio na gałęzi `main`!
+> **Uwaga:** Nigdy nie wykonuj żadnych zmian bezpośrednio na gałęzi `main`!
 ---
 ## [2] Rozpoczęcie pracy
 Po przełączeniu się na swoją gałąź należy pobrać najnowsze zmiany z `main` i scalić je:
