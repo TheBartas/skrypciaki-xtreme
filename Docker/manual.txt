@@ -1,0 +1,6 @@
+Wymagania to zainstalowany docker compose.
+0. wchodzicie do folderu plusFlix, z niego wywołujecie wszystkie komendy
+1. docker compose build, do zbudowania obrazu i robienia aktualizacji pakietów
+2. docker compose up, do uruchamiania kontenera, aplikacja jest dostępna na 127.0.0.1:8080
+3. docker compose down, do wyłączenia kontenera
+4. docker compose exec php bash, jeśli chcecie wejść do kontenera i zmieniać jego konfigurację na czas działania

@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  php:
+    build: ./docker/php
+    container_name: php_app
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8000"
+      
+    #serwer będzie działał na 127.0.0.1:8080
+    command: php -S 0.0.0.0:8000 -t public
+    #command: bash + symfony serve nie działa
