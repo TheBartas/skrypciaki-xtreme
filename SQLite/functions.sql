@@ -1,12 +1,143 @@
+-- ##### INFO #####
+-- Tutaj znajdują się wszystkie niezbędne funkcje pomocne w realizacji całego projektu.
+-- Na samym dole są funkcje przykładowe i eksperymentalne. 
+-- Jak ktoś doda nową funkcję, niech najpierw opisze co ona robi. 
+
+
+-- ###### ENCJA CATEGORIES ######
+
+-- ============================
+-- Pobierz wszystkie kategorie
+-- > panel administratora
+-- ============================
+-- SELECT * FROM Categories;
+
+-- ============================
+-- Dodawanie nowej kategorii
+-- > panel administratora
+-- ============================
+-- INSERT INTO Categories (genre) 
+-- VALUES ('example');
+
+-- ============================
+-- Edycja kategorii
+-- > panel administratora
+-- ============================
+-- UPDATE Categories
+-- SET genre = 'EXAMPLE'
+-- WHERE cat_ID == 16;
+
+-- ============================
+-- Usunięcie kategorii
+-- > panel administratora
+-- ============================
+-- DELETE FROM Categories
+-- WHERE cat_ID == 16;
+
+
+-- ###### ENCJA TAGS ######
+
+-- ============================
+-- Pobierz wszystkie tagi
+-- > panel administratora
+-- ============================
+-- SELECT * FROM Tags;
+
+-- ============================
+-- Dodawanie nowego tagu
+-- > panel administratora
+-- ============================
+-- INSERT INTO Tags (name)
+-- VALUES ('example');
+
+-- ============================
+-- Edycja tagu
+-- > panel administratora
+-- ============================
+-- UPDATE Tags
+-- SET name = 'EXAMPLE'
+-- WHERE tag_ID == 21;
+
+-- ============================
+-- Usunięcie tagu
+-- > panel administratora
+-- ============================
+-- DELETE FROM Tags
+-- WHERE tag_ID == 21;
+
+
+-- ###### ENCJA STREAMINGS ######
+
+-- ============================
+-- Pobierz wszystkie platformy
+-- > panel administratora
+-- ============================
+-- SELECT * FROM Streamings;
+
+-- ============================
+-- Dodawanie nowej platformy
+-- > panel administratora
+-- ============================
+-- INSERT INTO Streamings (platform_name)
+-- VALUES ('example');
+
+-- ============================
+-- Edycja platformy
+-- > panel administratora
+-- ============================
+-- UPDATE Streamings
+-- SET platform_name = 'EXAMPLE'
+-- WHERE streaming_ID == 7;
+
+-- ============================
+-- Usunięcie tagu
+-- > panel administratora
+-- ============================
+-- DELETE FROM Streamings
+-- WHERE streaming_ID == 7;
+
+
+-- ###### ENCJA ITEM ######
+
+-- ============================
+-- Pobranie wszystkich dzieł
+-- ============================
+-- SELECT * FROM Item;
+
+-- ============================
+-- Pobranie wszystkich FILMÓW
+-- > typ ustalony jako '1'
+-- ============================
+-- SELECT * FROM Item
+-- WHERE type == 1;
+
+-- ============================
+-- Pobranie wszystkich SERIALI
+-- > typ ustalony jako '2'
+-- ============================
+-- SELECT * FROM Item
+-- WHERE type == 2;
+
+-- ============================
+-- Wyszukanie informacji dla
+-- konkretnego filmu
+-- > typ ustalony jako '1'
+-- ============================
+-- SELECT
+--     name,
+--     year,
+--     director,
+--     actors,
+--     duration
+-- FROM Item
+-- WHERE type == 1 AND item_ID == 13;
+
 
 -- Gets all films
 -- SELECT * FROM Item;
 
 -- Gets all platforms
 -- SELECT * FROM Streamings;
-
--- Gets all categories
--- SELECT * FROM Categories;
 
 -- Gets items from Netflix
 -- SELECT name, platform_name 
@@ -47,3 +178,6 @@
 -- INNER JOIN Streamings
 -- ON Item_Streamings.streaming_ID = Streamings.streaming_ID
 -- WHERE Item.name = 'Dark';
+
+
+
