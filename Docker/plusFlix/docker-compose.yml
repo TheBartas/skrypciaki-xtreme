@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
-  php:
+  plusflix:
     build: ./docker/php
-    container_name: php_app
+    container_name: plusflix_app
     working_dir: /app
     volumes:
       - ./backend:/app
