@@ -5,9 +5,9 @@ services:
     working_dir: /app
     volumes:
       - ./backend:/app
+      - ./docker/php:/app/docker/php #okropny volume ale cóż
+      - ../../sqlite:/app/sqlite_source:ro   
     ports:
       - "8080:8000"
-      
-    #serwer będzie działał na 127.0.0.1:8080
-    command: php -S 0.0.0.0:8000 -t public
-    #command: bash + symfony serve nie działa
+    entrypoint: ["/app/docker/php/entrypoint.sh"]
+
