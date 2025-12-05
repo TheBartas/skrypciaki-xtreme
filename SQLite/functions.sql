@@ -101,8 +101,19 @@
 
 -- ============================
 -- Pobranie wszystkich dzieł
+-- W przypadku wyświetlania list
+-- na stronie warto zamienić 
+-- * na konkretne pola, żeby
+-- nie obciążać przesadnie
+-- bazy.
 -- ============================
 -- SELECT * FROM Item;
+-- SELECT 
+--     item_ID,
+--     name,
+--     type,
+--     year
+-- FROM Item;
 
 -- ============================
 -- Pobranie wszystkich FILMÓW
@@ -131,6 +142,127 @@
 --     duration
 -- FROM Item
 -- WHERE type == 1 AND item_ID == 13;
+
+-- ============================
+-- Wyszukanie informacji dla
+-- konkretnego serialu
+-- > typ ustalony jako '2'
+-- ============================
+-- SELECT
+--     name,
+--     year,
+--     director,
+--     actors,
+--     season
+-- FROM Item
+-- WHERE type == 2 AND item_ID == 34;
+
+-- ============================
+-- Wyszukanie informacji dla
+-- konkretnego filmu/serialu
+-- > filtr: 
+-- ============================
+-- SELECT
+--     name,
+--     year,
+--     director,
+--     actors,
+--     season
+-- FROM Item
+-- WHERE type == 2 AND item_ID == 34;
+
+-- ============================
+-- Pobranie filmów/seriali
+-- > filtr: rok produkcji jako
+-- przedział od-do, filmy
+-- ============================
+-- SELECT 
+--     item_ID,
+--     name,
+--     type,
+--     year
+-- FROM Item 
+-- WHERE year > 1990 AND year < 2010 AND type == 1;
+
+-- ============================
+-- Pobranie filmów/seriali
+-- > filtr: rok produkcji
+-- ============================
+-- SELECT 
+--     item_ID,
+--     name,
+--     type,
+--     year
+-- FROM Item 
+-- WHERE year == 2004;
+
+-- ============================
+-- Pobranie filmów/seriali
+-- > filtr: reżyser (autor)
+-- ============================
+-- SELECT 
+--     item_ID,
+--     name,
+--     type,
+--     year
+-- FROM Item 
+-- WHERE director == 'Frank Darabont';
+
+-- ============================
+-- Pobranie filmów/seriali
+-- > filtr: tagi
+-- ============================
+-- SELECT 
+--     Item.item_ID,
+--     Item.name,
+--     Item.type,
+--     Item.year
+-- FROM Item 
+-- INNER JOIN Item_Tags
+-- ON Item.item_ID = Item_Tags.item_ID
+-- INNER JOIN Tags
+-- ON Item_Tags.tag_ID = Tags.tag_ID
+-- WHERE Tags.name IN (
+--     'klasyk', 'Hanks'
+-- )
+-- GROUP BY Item.item_ID;
+
+-- ============================
+-- Pobranie filmów/seriali
+-- > filtr: kategorie
+-- ============================
+-- SELECT 
+--     Item.item_ID,
+--     Item.name,
+--     Item.type,
+--     Item.year
+-- FROM Item 
+-- INNER JOIN Item_Categories
+-- ON Item.item_ID = Item_Categories.item_ID
+-- INNER JOIN Categories
+-- ON Item_Categories.cat_ID = Categories.cat_ID
+-- WHERE Categories.genre IN (
+--     'Horror'
+-- )
+-- GROUP BY Item.item_ID;
+
+
+
+
+
+-- Gets films and series with all their tags
+
+-- SELECT 
+--     Item.item_ID,
+--     Item.name,
+--     Item.type,
+--     Item.year,
+--     Tags.name
+-- FROM Item 
+-- INNER JOIN Item_Tags
+-- ON Item.item_ID = Item_Tags.item_ID
+-- INNER JOIN Tags
+-- ON Item_Tags.tag_ID = Tags.tag_ID;
 
 
 -- Gets all films
