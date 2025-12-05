@@ -1,0 +1,140 @@
+{% extends "admin/base.html.twig" %}
+
+{% block body %}
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+        background: white;
+        padding: 20px;
+        margin: 10% auto;
+        width: 400px;
+        border-radius: 5px;
+    }
+
+    .close {
+        float: right;
+        font-size: 22px;
+        cursor: pointer;
+    }
+</style>
+
+<h1>Kategorie</h1>
+
+<a href="#" id="addCategoryBtn">+ Dodaj kategorię</a>
+
+<input type="text">
+
+<div class="admin-categories-container">
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Nazwa kategorii</th>
+                <th>Liczba powiązanych dzieł</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.genre }}</td>
+                    <td>{{ category.item_count}}</td>
+                    <td>
+                        <a href="#" class="editCategoryBtn"
+                           data-id="{{ category.cat_ID }}"
+                           data-name="{{ category.genre }}">
+                           Edytuj
+                        </a>
+                        <a href="#" 
+                            class="deleteCategoryLink" 
+                            data-id="{{ category.cat_ID }}">
+                            Usuń
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<div id="categoryModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <h2 id="modalTitle">Dodaj kategorię</h2>
+
+        <form id="categoryForm" method="post">
+            <input type="text" name="genre" id="categoryName" placeholder="Nazwa kategorii" required>
+
+            <button type="submit" id="modalSubmitBtn">Zapisz</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    const modal = document.getElementById('categoryModal');
+    const closeBtn = document.querySelector('.close');
+    const addBtn = document.getElementById('addCategoryBtn');
+    const form = document.getElementById('categoryForm');
+    const title = document.getElementById('modalTitle');
+    const nameInput = document.getElementById('categoryName');
+
+    addBtn.onclick = () => {
+        modal.style.display = 'block';
+        title.innerText = "Dodaj kategorię";
+        form.action = "{{ path('admin_category_add') }}";
+        nameInput.value = "";
+    };
+
+    document.querySelectorAll('.editCategoryBtn').forEach(btn => {
+        btn.onclick = () => {
+            modal.style.display = 'block';
+            title.innerText = "Edytuj kategorię";
+
+            let id = btn.dataset.id;
+            let name = btn.dataset.name;
+
+            nameInput.value = name;
+
+            form.action = "/admin/categories/edit/" + id;
+        };
+    });
+
+    document.querySelectorAll('.deleteCategoryLink').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!confirm('Na pewno chcesz usunąć tę kategorię?')) return;
+
+            let id = this.dataset.id;
+
+            let form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/admin/categories/delete/' + id;
+            document.body.appendChild(form);
+
+            form.submit();
+        });
+    });
+
+
+    closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    };
+</script>
+
+{% endblock %}
