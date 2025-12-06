@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Categories;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,19 +14,61 @@ use App\Repository\CategoriesRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController {
+    private function checkAdminLoggedIn(Request $request): ?Response
+    {
+        if ($request->cookies->get('admin_logged_in') !== '1') {
+            return $this->redirectToRoute('admin_login');
+        }
+        return null;
+    }
+
+    #[Route('/login', name: 'admin_login', methods: ['GET','POST'])]
+    public function login(Request $request): Response
+    {
+        $error = null;
+
+        if ($request->isMethod('POST')) {
+            $user = $request->request->get('username');
+            $pass = $request->request->get('password');
+
+            $adminLogin = $_ENV['ADMIN_USER'] ?? 'admin';
+            $adminPass = $_ENV['ADMIN_PASS'] ?? 'devpass';
+
+            if ($user === $adminLogin && $pass === $adminPass) {
+                $response = $this->redirectToRoute('admin_main');
+                $response->headers->setCookie(new Cookie('admin_logged_in', '1'));
+                return $response;
+            } else {
+                $error = 'Niepoprawny login lub hasło';
+            }
+        }
+
+        return $this->render('admin/login.html.twig', [
+            'error' => $error
+        ]);
+    }
 
     #[Route('/main', 'admin_main')]
-    public function adminIndex() {
+    public function adminIndex(Request $request): Response {
+
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
         return $this->render('admin/base.html.twig');
     }
 
     #[Route('/categories', 'admin_categories')]
-    public function categorieList(ManagerRegistry $managerRegistry) : Response {
+    public function categorieList(Request $request, ManagerRegistry $managerRegistry) : Response {
+
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
 
         $connection = $managerRegistry->getConnection();
 
         $sql = "
-            SELECT 
+            SELECT
                 c.cat_ID,
                 c.genre,
                 COUNT(ic.item_id) AS item_count
@@ -46,10 +89,16 @@ class AdminController extends AbstractController {
 
     #[Route('/categories/delete/{id}', name: 'admin_category_delete', methods: ['POST'])]
     public function categorieDelete(
-        Categories $category, 
+        Request $request,
+        Categories $category,
         EntityManagerInterface $em
-        ) : Response 
+        ) : Response
     {
+
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
         $em->remove($category);
         $em->flush();
         return $this->redirectToRoute('admin_categories');
@@ -57,10 +106,15 @@ class AdminController extends AbstractController {
 
     #[Route('/categories/add', name: 'admin_category_add', methods: ['POST'])]
     public function categorieAdd(
-        Request $request, 
+        Request $request,
         EntityManagerInterface $em
-        ) : Response 
+        ) : Response
     {
+
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
         $genre = $request->request->get('genre');
         $category = new Categories();
         $category->setGenre($genre);
@@ -73,11 +127,15 @@ class AdminController extends AbstractController {
 
     #[Route('/categories/edit/{id}', name: 'admin_category_edit', methods: ['POST'])]
     public function categorieEdit(
-        Request $request, 
-        Categories $category, 
+        Request $request,
+        Categories $category,
         EntityManagerInterface $em
-        ) : Response 
+        ) : Response
     {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
         $genre = $request->request->get('genre');
         $category->setGenre($genre);
         $em->flush();
