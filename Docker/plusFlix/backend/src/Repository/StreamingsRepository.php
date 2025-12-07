@@ -16,28 +16,19 @@ class StreamingsRepository extends ServiceEntityRepository
         parent::__construct($registry, Streamings::class);
     }
 
-    //    /**
-    //     * @return Streaming[] Returns an array of Streaming objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Streaming
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findWithItemCount(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            SELECT
+                s.streaming_ID,
+                s.platform_name,
+                COUNT(is_tbl.item_id) AS item_count
+            FROM Streamings s
+            LEFT JOIN Item_Streamings is_tbl ON s.streaming_ID = is_tbl.streaming_ID
+            GROUP BY s.streaming_ID, s.platform_name
+            ORDER BY s.platform_name
+        ";
+        return $conn->executeQuery($sql)->fetchAllAssociative();
+    }
 }

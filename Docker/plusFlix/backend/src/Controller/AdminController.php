@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\Streamings;
+use App\Entity\Tags;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -11,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use App\Repository\CategoriesRepository;
+use App\Repository\StreamingsRepository;
+use App\Repository\TagsRepository;
 
 #[Route('/admin')]
 class AdminController extends AbstractController {
@@ -31,8 +35,8 @@ class AdminController extends AbstractController {
             $user = $request->request->get('username');
             $pass = $request->request->get('password');
 
-            $adminLogin = $_ENV['ADMIN_USER'] ?? 'admin';
-            $adminPass = $_ENV['ADMIN_PASS'] ?? 'devpass';
+            $adminLogin = $_ENV['ADMIN_LOGIN'] ?? 'ENV_ADMIN_LOGIN_MISSING';
+            $adminPass = $_ENV['ADMIN_PASS'] ?? 'ENV_ADMIN_PASS_MISSING';
 
             if ($user === $adminLogin && $pass === $adminPass) {
                 $response = $this->redirectToRoute('admin_main');
@@ -141,4 +145,136 @@ class AdminController extends AbstractController {
         $em->flush();
         return $this->redirectToRoute('admin_categories');
     }
+
+    //--------------------------------STREAMINGS---------------------------------
+
+    #[Route('/streamings', 'admin_streamings')]
+    public function streamingsList(Request $request, StreamingsRepository $streamingsRepository) : Response {
+
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $streamings = $streamingsRepository->findWithItemCount();
+        return $this->render('admin/streamings.html.twig',[
+            'streamings' => $streamings,
+        ]);
+    }
+
+    #[Route('/streamings/delete/{id}', name: 'admin_streaming_delete', methods: ['POST'])]
+    public function streamingDelete(
+        Request $request,
+        Streamings $streaming,
+        EntityManagerInterface $em
+    ) : Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $em->remove($streaming);
+        $em->flush();
+        return $this->redirectToRoute('admin_streamings');
+    }
+
+    #[Route('/streamings/add', name: 'admin_streaming_add', methods: ['POST'])]
+    public function streamingAdd(
+        Request $request,
+        EntityManagerInterface $em
+    ) : Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $platformName = $request->request->get('platform_name');
+        $streaming = new Streamings();
+        $streaming->setPlatformName($platformName);
+
+        $em->persist($streaming);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_streamings');
+    }
+
+    #[Route('/streamings/edit/{id}', name: 'admin_streaming_edit', methods: ['POST'])]
+    public function streamingEdit(
+        Request $request,
+        Streamings $streaming,
+        EntityManagerInterface $em
+    ) : Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $platformName = $request->request->get('platform_name');
+        $streaming->setPlatformName($platformName);
+        $em->flush();
+        return $this->redirectToRoute('admin_streamings');
+    }
+
+
+    //--------------------------------TAGS---------------------------------
+
+    #[Route('/tags', name: 'admin_tags')]
+    public function tagsList(Request $request, TagsRepository $tagsRepository): Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $tags = $tagsRepository->findWithItemCount();
+        return $this->render('admin/tags.html.twig', [
+            'tags' => $tags,
+        ]);
+    }
+
+    #[Route('/tags/add', name: 'admin_tag_add', methods: ['POST'])]
+    public function tagAdd(Request $request, EntityManagerInterface $em): Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $name = $request->request->get('name');
+        $tag = new Tags();
+        $tag->setName($name);
+
+        $em->persist($tag);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
+
+    #[Route('/tags/edit/{id}', name: 'admin_tag_edit', methods: ['POST'])]
+    public function tagEdit(Request $request, Tags $tag, EntityManagerInterface $em): Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $name = $request->request->get('name');
+        $tag->setName($name);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
+
+    #[Route('/tags/delete/{id}', name: 'admin_tag_delete', methods: ['POST'])]
+    public function tagDelete(Request $request, Tags $tag, EntityManagerInterface $em): Response
+    {
+        if ($response = $this->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $em->remove($tag);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
 }
+
+
+
+

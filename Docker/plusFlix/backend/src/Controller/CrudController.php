@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class CrudController extends AbstractController
-{
-    // ------------------- Categories -------------------
+{}
+/*    // ------------------- Categories -------------------
 
     #[Route('/categories/list', name: 'categories_list')]
     public function listCategories(EntityManagerInterface $em): Response
@@ -69,7 +69,6 @@ class CrudController extends AbstractController
     }
 
     // ------------------- Streamings -------------------
-
     #[Route('/streamings/list', name: 'streamings_list')]
     public function listStreamings(EntityManagerInterface $em): Response
     {
@@ -126,3 +125,4 @@ class CrudController extends AbstractController
     }
 }
 
+*/
