@@ -1,0 +1,258 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/admin_item.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="main_content">
+    <h1>
+        Filmy i seriale <a href="#" id="addCategoryBtn"> + </a>
+    </h1>
+    <input id="searchBar" type="search" placeholder="Type your desired item name">
+    <div id="items_container">
+        <div id="items_nav">
+            <p>Tytuł dzieła</p>
+            <p>Rok produkcji</p>
+            <p>Reżyser</p>
+            <p>Kategorie</p>
+            <p>Tagi</p>
+            <p>Streamingi</p>
+            <p>Akcje</p>
+        </div>
+
+        <div id="items">
+            {% for item in items %}
+                <p>{{ item.name }}</p>
+                <p>{{ item.year }}</p>
+                <p>{{ item.director }}</p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <div style="display: flex; align-self: center">
+                    <a href="#" class="editItemBtn" data-id="{{ item.id }}">modyfikuj </a>
+                    |
+                    <a href="#" class="deleteItemBtn" data-id="{{ item.id }}"> usuń</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="itemAddModal" class="modal" style="visibility: hidden">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <h2 id="modalTitle"></h2>
+
+        <form id="itemForm" method="POST" action="{{ path('admin_item_add') }}">
+            <div class="form_input_container">
+                <label>Tytuł dzieła</label><br>
+                <input id="nameInput" type="text" name="name"  placeholder="tytuł dzieła" required><br><br>
+            </div>
+
+            <div class="form_input_container">
+                <label>Rok produkcji</label><br>
+                <input id="yearInput" type="number" name="year"  placeholder="rok produkcji" required><br><br>
+            </div>
+
+            <div class="form_input_container">
+                <label>Reżyser</label><br>
+                <input id="directorInput" type="text" name="director"  placeholder="reżyser" required><br><br>
+            </div>
+
+            <div class="form_input_container">
+                <label>Actors</label><br>
+                <input id="actorsInput" type="text" name="actors" required>
+            </div>
+
+            <div class="form_input_container">
+                <label>Type</label><br>
+                <select id="typeInput" name="type" required>
+                    <option value=1>Movie</option>
+                    <option value=2>Series</option>
+                </select>
+            </div>
+
+            <div class="form_input_container">
+                <label>Duration (minutes)</label><br>
+                <input id="durationInput" type="number" name="duration" required>
+            </div>
+
+            <div class="form_input_container">
+                <label>Season (if Series)</label><br>
+                <input id="seasonInput" type="number" name="season">
+            </div>
+
+            <div class="form_input_container">
+                <label>Tagi</label><br>
+                <p></p>
+                <select id="tagsInput" name="tags" multiple><br><br>
+                </select>
+            </div>
+
+            <div class="form_input_container">
+                <label>Kategorie</label><br>
+                <p></p>
+                <select id="categoriesInput" name="categories" multiple><br><br>
+                </select>
+            </div>
+
+            <div class="form_input_container">
+                <label>Streamingi</label><br>
+                <p></p>
+                <select id="streamingsInput" name="streamings" multiple>
+                </select>
+            </div>
+
+            <button type="submit" id="modalSubmitBtn">Zapisz</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('itemAddModal');
+    const closeBtn = document.querySelector('.close');
+    const addBtn = document.getElementById('addCategoryBtn');
+    const form = document.getElementById('itemForm');
+    const title = document.getElementById('modalTitle');
+    const searchBar = document.getElementById('searchBar');
+    const itemContainer = document.getElementById('items');
+
+    let isEdit = false;  // track mode
+    let editId = null;   // store editing item ID
+
+    form.addEventListener('submit', e => {
+        e.preventDefault(); // prevent normal page reload
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(`${isEdit ? 'Item updated' : 'Item added'}: ID`, data.id);
+                    window.location.reload();
+                } else {
+                    alert('Something went wrong');
+                }
+            })
+            .catch(err => console.error(err));
+    });
+
+    addBtn.onclick = () => {
+        isEdit = false;
+        editId = null;
+        modal.style.visibility = "visible";
+        form.reset();
+        title.innerHTML = "Dodaj Film/Serial";
+        form.action = "{{ path('admin_item_add') }}";
+    };
+
+    document.querySelectorAll('.editItemBtn').forEach( btn => {
+        btn.onclick = () => {
+            isEdit = true;
+            editId = btn.dataset.id;
+
+            fetch(`/admin/item/${editId}`)
+                .then(res => res.json())
+                .then(item => {
+                    modal.style.visibility = "visible";
+                    form.reset();
+
+                    title.innerHTML = "Edytuj Film/Serial";
+
+                    form.action = "{{ path('admin_item_edit', {'id': 'IDPLACEHOLDER'}) }}".replace('IDPLACEHOLDER', editId);
+
+                    // Fill form fields
+                    document.getElementById('nameInput').value = item.name || '';
+                    document.getElementById('yearInput').value = item.year || '';
+                    document.getElementById('directorInput').value = item.director || '';
+                    document.getElementById('actorsInput').value = item.actors || '';
+                    document.getElementById('typeInput').value = item.type || '';
+                    document.getElementById('durationInput').value = item.duration || '';
+                    document.getElementById('seasonInput').value = item.season || '';
+                })
+                .catch(err => console.error('Fetch error:', err));
+        };
+    });
+
+    document.querySelectorAll('.deleteItemBtn').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (!confirm('Na pewno chcesz usunąć ten film/serial?')) return;
+
+            let id = this.dataset.id;
+            console.log(id);
+
+            let form = document.createElement('form');
+            form.method = 'POST';
+            form.action = "{{ path('admin_item_delete', {'id': 'IDPLACEHOLDER'}) }}".replace('IDPLACEHOLDER', id);
+            document.body.appendChild(form);
+
+            form.submit();
+        });
+    });
+
+
+
+    closeBtn.onclick = () => modal.style.visibility = "hidden";
+    // window.onclick = (e) => {
+    //     if ((e.target !== modal) && (modal.style.visibility === "visible"))
+    //         modal.style.visibility = "hidden";
+    // };
+
+    searchBar.onchange = () => {
+        const query = searchBar.value;
+
+        let searchUrl = '/admin/list';
+        searchUrl = searchUrl + '?name=' + query;
+
+        fetch(searchUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Clear existing <p> elements and old content
+                itemContainer.innerHTML = '';
+
+                // Append <p> elements for each item
+                data.forEach(item => {
+                    // name
+                    const pName = document.createElement('p');
+                    pName.textContent = item.name;
+                    itemContainer.appendChild(pName);
+
+                    // year
+                    const pYear = document.createElement('p');
+                    pYear.textContent = `(${item.year})`;
+                    itemContainer.appendChild(pYear);
+
+                    // director
+                    const pDirector = document.createElement('p');
+                    pDirector.textContent = item.director;
+                    itemContainer.appendChild(pDirector);
+
+                    // empty placeholders for alignment
+                    for (let i = 0; i < 3; i++) {
+                        const pEmpty = document.createElement('p');
+                        pEmpty.textContent = '';
+                        itemContainer.appendChild(pEmpty);
+                    }
+
+                    // actions
+                    const actions = document.createElement('div');
+                    actions.style.display = 'flex';
+                    actions.style.alignSelf = 'center';
+                    actions.innerHTML = '<div>modyfikuj</div> | <div>usun</div>';
+                    itemContainer.appendChild(actions);
+                });
+            })
+            .catch(err => console.error('Error fetching items:', err));
+    };
+</script>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {% block title %}
+            <title>Home</title>
+        {% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('styles/public.css') }}">
+        {% block stylesheets %}{% endblock %}
+
+        {% block javascripts %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <div>plusFlix</div>
+            <input type="search" placeholder="wyszukaj film/serial">
+            <a href="#"><div id="popular">Popularne</div></a>
+            <a href="#"><div id="favourite">Ulubione</div></a>
+            <a href="#"><div id="dayNight">dzien noc</div></a>
+        </nav>
+
+        {% block body %}{% endblock %}
+    </body>
+</html>

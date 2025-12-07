@@ -1,0 +1,61 @@
+{% extends "public/base.html.twig" %}
+
+{% block title %}
+    <title>Item Page</title>
+{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/public_item.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="main_content">
+        <div id="leftColumn">
+            <div id="itemImage">image</div>
+            <div id="itemTags">
+                <div class="tag">tag</div>
+            </div>
+        </div>
+
+        <div id="middleColumn">
+            <h1>Title</h1>
+
+            <p>Film | rok</p>
+
+            <h2>Reżyser</h2>
+            <p>Andrew Adamson</p>
+
+            <h2>Kategorie</h2>
+            <p>Komedia, dla dzieci</p>
+
+            <h2>Opis</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget lorem venenatis, accumsan odio ac, fermentum ligula. Phasellus pulvinar aliquet nisi, eget ultrices nunc laoreet id. Nullam finibus mi ultricies, euismod ligula gravida, tincidunt ante. Donec tempus metus et eros vehicula, sit amet dictum purus dictum. Duis porta bibendum velit consectetur elementum. Donec placerat turpis feugiat, faucibus odio tincidunt, aliquet enim. Proin nec diam dignissim, eleifend lacus non, molestie eros. Etiam ac massa tristique, semper elit eu, aliquet erat. Maecenas auctor felis justo, vitae dictum nibh suscipit ut. In id lacinia justo. Donec in molestie lectus. Vivamus eu lacus id eros cursus accumsan. Nullam nibh massa, aliquet id aliquet non, posuere sed enim. Sed augue justo, blandit a sem a, tempus sollicitudin mi. Phasellus non ante vel justo malesuada tempor id ultricies neque. </p>
+
+            <button type="button">Dodaj do ulubionych</button>
+
+            <h2>Gdzie obejrzeć</h2>
+
+            <div id="streamingsContainer">
+                <div class="streaming">N</div>
+            </div>
+        </div>
+
+        <div id="rightColumn">
+            <h2>Już obejrzane?</h2>
+            <div id="itemScore">
+
+            </div>
+
+            <h2>Podobne:</h2>
+            <div id="similarItemsContainer">
+                <div class="similarItem"></div>
+                <div class="similarItem"></div>
+                <div class="similarItem"></div>
+                <div class="similarItem"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
