@@ -1,13 +1,16 @@
 services:
   plusflix:
-    build: ./docker/php
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
     container_name: plusflix_app
     working_dir: /app
     volumes:
-      - ./backend:/app
-      - ./docker/php:/app/docker/php #okropny volume ale cóż
-      - ../../SQLite:/app/sqlite_source:ro   
+      - ./backend/src:/app/src:cached
+      - ./backend/templates:/app/templates:cached
+      - ./backend/public:/app/public:cached
+      - ./backend/.env:/app/.env
+      - ../../SQLite:/app/sqlite_source:ro
     ports:
       - "8080:8000"
-    entrypoint: ["/app/docker/php/entrypoint.sh"]
-
+    entrypoint: ["entrypoint.sh"]

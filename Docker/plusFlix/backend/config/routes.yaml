@@ -10,7 +10,3 @@
 controllers:
       resource: '../src/Controller/'
       type: attribute
-
-crud_controller:
-     resource: '../src/Controller/CrudController.php'
-     type: attribute
