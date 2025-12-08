@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.search-results-container {
+    display: flex;
+    margin: 3rem;
+    gap: 4rem;
+    min-height: 80vh;
+}
+
+.filters-panel {
+    width: 240px;
+    background: #939393;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    align-self: start
+}
+
+.filters-panel h3 {
+    margin-bottom: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.filter-group select {
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.results-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+}
+
+.results-header .query {
+    font-weight: bold;
+    color: #444;
+}
+
+.sort-box {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.sort-box select {
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    gap: 1.5rem;
+    justify-content: start;
+}
+
+.result-card {
+    background: #fff;
+    border-radius: 8px;
+    padding-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+    max-width: 250px;
+    max-height: 450px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.poster-wrapper {
+    position: relative;
+}
+
+.poster {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.streaming-icons {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.streaming-icons img {
+    width: 30px;
+    height: 30px;
+}
+
+.fav-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.info {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.title {
+    font-size: 1rem;
+    margin: 0.2rem 0;
+}
+
+.meta {
+    font-size: 0.9rem;
+    color: #666;
+}

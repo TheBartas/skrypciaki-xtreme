@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}PlusFlix{% endblock %}</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/search_results.css">
+</head>
+
+<body>
+
+<nav class="top-nav">
+    <div class="nav-left">
+        <a href="/" class="logo">PlusFlix</a>
+    </div>
+
+    <div class="nav-center">
+        <div class="nav-search">
+            <form action="/search" method="GET" class="nav-search">
+                <input name="q" type="text" placeholder="Szukaj...">
+                <button>
+                    <img src="https://cdn-icons-png.flaticon.com/256/2866/2866321.png" alt="search">
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <a href="/popularne">Popularne</a>
+        <a href="/ulubione">Ulubione</a>
+        <button class="theme-toggle">ciemno/jasno</button>
+    </div>
+</nav>
+
+{% block body %}{% endblock %}
+
+</body>
+</html>

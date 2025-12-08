@@ -16,6 +16,7 @@ class ItemRepository extends ServiceEntityRepository
         parent::__construct($registry, Item::class);
     }
 
+<<<<<<< HEAD
     //    /**
     //     * @return Item[] Returns an array of Item objects
     //     */
@@ -40,4 +41,20 @@ class ItemRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+=======
+    /**
+     * Szuka elementów po nazwie (częściowe dopasowanie)
+     * @param string $name
+     * @return Item[]
+     */
+    public function findByNameContains(string $name): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('LOWER(i.name) LIKE :name')
+            ->setParameter('name', '%' . strtolower($name) . '%')
+            ->orderBy('i.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+>>>>>>> 88f5649 (km2)
 }

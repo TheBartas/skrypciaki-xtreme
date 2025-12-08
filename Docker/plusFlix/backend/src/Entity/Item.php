@@ -3,16 +3,24 @@
 namespace App\Entity;
 
 use App\Repository\ItemRepository;
+<<<<<<< HEAD
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
+=======
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ItemRepository::class)]
+#[ORM\Table(name: "Item")]
+>>>>>>> 88f5649 (km2)
 class Item
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+<<<<<<< HEAD
     #[ORM\Column]
     private ?int $id = null;
 
@@ -253,4 +261,52 @@ class Item
 
         return $this;
     }
+=======
+    #[ORM\Column(type: "integer", name: "item_ID")]
+    private ?int $id = null;
+
+    #[ORM\Column(type: "string", length: 255, name: "name")]
+    private string $name;
+
+    #[ORM\Column(type: "integer", name: "year")]
+    private int $year;
+
+    #[ORM\Column(type: "string", length: 255, name: "director")]
+    private string $director;
+
+    #[ORM\Column(type: "text", name: "actors")]
+    private string $actors;
+
+    #[ORM\Column(type: "integer", name: "type")]
+    private int $type;
+
+    #[ORM\Column(type: "integer", nullable: true, name: "duration")]
+    private ?int $duration = null;
+
+    #[ORM\Column(type: "integer", nullable: true, name: "season")]
+    private ?int $season = null;
+
+    public function getId(): ?int { return $this->id; }
+
+    public function getName(): string { return $this->name; }
+    public function setName(string $name): self { $this->name = $name; return $this; }
+
+    public function getYear(): int { return $this->year; }
+    public function setYear(int $year): self { $this->year = $year; return $this; }
+
+    public function getDirector(): string { return $this->director; }
+    public function setDirector(string $director): self { $this->director = $director; return $this; }
+
+    public function getActors(): string { return $this->actors; }
+    public function setActors(string $actors): self { $this->actors = $actors; return $this; }
+
+    public function getType(): int { return $this->type; }
+    public function setType(int $type): self { $this->type = $type; return $this; }
+
+    public function getDuration(): ?int { return $this->duration; }
+    public function setDuration(?int $duration): self { $this->duration = $duration; return $this; }
+
+    public function getSeason(): ?int { return $this->season; }
+    public function setSeason(?int $season): self { $this->season = $season; return $this; }
+>>>>>>> 88f5649 (km2)
 }
