@@ -11,6 +11,8 @@ services:
       - ./backend/public:/app/public:cached
       - ./backend/.env:/app/.env
       - ../../SQLite:/app/sqlite_source:ro
+      - ./backend/var:/app/var
+      - ./backend/migrations:/app/migrations
     ports:
       - "8080:8000"
     entrypoint: ["entrypoint.sh"]
