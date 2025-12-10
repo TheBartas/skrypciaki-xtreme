@@ -77,6 +77,16 @@ class ItemRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    //julkowe
+    public function findByNameContains(string $name): array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('LOWER(i.name) LIKE :name')
+            ->setParameter('name', '%' . strtolower($name) . '%')
+            ->orderBy('i.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Item[] Returns an array of Item objects
