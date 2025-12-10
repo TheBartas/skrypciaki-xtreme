@@ -1,0 +1,53 @@
+#main_content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+    margin: 1em;
+}
+
+#items_container {
+    display: flex;
+    flex-direction: column;
+
+    height: 80dvh;
+
+    margin-top: 1em;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#items_nav {
+    position: sticky;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #a3a3a3;
+    justify-items: center;
+}
+
+#items{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    background-color: #D9D9D9;
+    justify-items: center;
+}
+
+#itemForm {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(5, 0.5fr);
+}
+
+form select {
+    height: 2em;
+}
+
+form input {
+    margin-top: 0.2em;
+    border-radius: 0.5em;
+    border: none;
+    width: 70%;
+    height: 2em;
+}
