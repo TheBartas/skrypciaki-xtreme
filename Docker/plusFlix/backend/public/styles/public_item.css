@@ -1,0 +1,64 @@
+#main_content {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+#leftColumn, #middleColumn, #rightColumn {
+    padding: 2em;
+}
+
+#itemImage {
+    background: #2e3136;
+    width: 300px;
+    height: 500px;
+}
+
+#itemTags {
+    margin: 1em 0;
+    display: flex;
+}
+
+.tag {
+    padding: 0.3em 0.5em;
+    background: #0f5f94;
+    border-radius: 1em;
+}
+
+#itemScore {
+    background: #2e3136;
+    width: 300px;
+    height: 150px;
+}
+
+#similarItemsContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.similarItem {
+    margin: 0.5em;
+    background: #2e3136;
+    width: 100px;
+    height: 150px;
+}
+
+#streamingsContainer {
+    background: #2e3136;
+    display: flex;
+    padding: 1em 1.5em;
+    border-radius: 1em;
+    /*width: 300px;*/
+    /*height: 150px;*/
+}
+
+.streaming {
+    display: flex;
+    background: #7690bc;
+    border-radius: 5em;
+
+    width: 5em;
+    height: 5em;
+
+    justify-content: center;
+    align-items: center;
+}
