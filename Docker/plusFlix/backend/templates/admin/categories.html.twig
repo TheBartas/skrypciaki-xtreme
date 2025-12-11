@@ -1,5 +1,10 @@
 {% extends "admin/base.html.twig" %}
 
+{#{% block stylesheets %}#}
+{#    {{ parent() }}#}
+{#    <link rel="stylesheet" href="{{ asset('styles/admin_categories.css') }}">#}
+{#{% endblock %}#}
+
 {% block body %}
 
 <style>
@@ -29,6 +34,7 @@
     }
 </style>
 
+<div id="main_content">
 <h1>Kategorie</h1>
 
 <a href="#" id="addCategoryBtn">+ Dodaj kategorię</a>
@@ -56,8 +62,8 @@
                            data-name="{{ category.genre }}">
                            Edytuj
                         </a>
-                        <a href="#" 
-                            class="deleteCategoryLink" 
+                        <a href="#"
+                            class="deleteCategoryLink"
                             data-id="{{ category.cat_ID }}">
                             Usuń
                         </a>
@@ -67,6 +73,7 @@
         </tbody>
     </table>
 
+</div>
 </div>
 
 <div id="categoryModal" class="modal">

@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Repository\ItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ class HomeController extends AbstractController {
 
     #[Route('/', 'home')]
     public function home() {
-        return $this->render('home/index.html.twig');
+        return $this->render('public/home/index.html.twig');
     }
 
     #[Route('/search', name: 'search_results')]
@@ -46,11 +47,8 @@ class HomeController extends AbstractController {
             throw $this->createNotFoundException('Nie znaleziono dzieła o id ' . $id);
         }
 
-        return $this->render('item/detail.html.twig', [  // placeholder bo nie ma jeszcze tego
+        return $this->render('public/item.html.twig', [  // placeholder bo nie ma jeszcze tego
             'item' => $item,
         ]);
     }
-
-
-
 }
