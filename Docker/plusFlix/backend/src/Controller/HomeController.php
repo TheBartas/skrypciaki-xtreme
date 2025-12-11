@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\ItemRepository;
 use App\Entity\Item;
 
 #[Route('/')]
@@ -50,7 +51,4 @@ class HomeController extends AbstractController {
             'item' => $item,
         ]);
     }
-
-
-
 }
