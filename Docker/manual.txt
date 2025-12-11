@@ -6,3 +6,6 @@ Wymagania to zainstalowany docker compose.
 4. docker compose exec plusflix bash, jeśli chcecie wejść do kontenera, stamtąd możecie wywoływać
    wszystkie komendy symfony cli:
     php bin/console debug:router
+
+6. Migracja do bazy danych: php bin/console doctrine:migrations:migrate
+
