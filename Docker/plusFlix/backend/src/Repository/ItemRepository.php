@@ -88,6 +88,14 @@ class ItemRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByIds(array $ids) : array {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Item[] Returns an array of Item objects
     //     */

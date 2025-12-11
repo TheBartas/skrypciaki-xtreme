@@ -9,6 +9,11 @@ body {
     min-height: 80vh;
 }
 
+.heading {
+    margin: 3rem;
+    gap: 4rem;
+}
+
 .filters-panel {
     width: 240px;
     background: #939393;
@@ -81,8 +86,12 @@ body {
     position: relative;
     max-width: 250px;
     max-height: 450px;
-    text-decoration: none;
     color: inherit;
+}
+
+.result-card a {
+    color: inherit;
+    text-decoration: none;
 }
 
 .poster-wrapper {
@@ -119,6 +128,15 @@ body {
     height: 28px;
     font-size: 16px;
     cursor: pointer;
+    z-index: 10;
+}
+
+.fav-btn:hover {
+    background-color: gold;
+}
+
+.fav-btn.active {
+    background: gold;
 }
 
 .info {

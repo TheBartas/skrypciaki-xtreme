@@ -68,36 +68,44 @@
 
         <div class="results-grid">
             {% for item in results %}
-                <a href="{{ path('item_detail', {'id': item.id}) }}" class="result-card">
-                    <div class="poster-wrapper">
-                        <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
+                <div class="result-card">
+                    <button class="fav-btn" data-id="{{ item.id }}">★</button>
 
-                        <div class="streaming-icons">
-                            <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">
+                    <a href="{{ path('item_detail', {'id': item.id}) }}">
+                        <div class="poster-wrapper">
+                            <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
+
+                            <div class="streaming-icons">
+                                <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">
+                            </div>
+
+
                         </div>
 
-                        <button class="fav-btn">★</button>
-                    </div>
-
-                    <div class="info">
-                        <h4 class="title">{{ item.name }}</h4>
-                        <p class="meta">
-                            {% if item.type == 1 %}
-                                Film
-                            {% elseif item.type == 2 %}
-                                Serial
-                            {% else %}
-                                Inne
-                            {% endif %}
-                            | {{ item.year }}
-                        </p>
-                    </div>
-                </a>
+                        <div class="info">
+                            <h4 class="title">{{ item.name }}</h4>
+                            <p class="meta">
+                                {% if item.type == 1 %}
+                                    Film
+                                {% elseif item.type == 2 %}
+                                    Serial
+                                {% else %}
+                                    Inne
+                                {% endif %}
+                                | {{ item.year }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
         </div>
 
 
     </main>
 </div>
+
+{% block javascript %}
+    <script src="{{ asset('js/favorites.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

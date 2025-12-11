@@ -9,11 +9,12 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ItemRepository;
 use App\Entity\Item;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/')]
 class HomeController extends AbstractController {
 
-    #[Route('/', 'home')]
+    #[Route('/', name: 'home')]
     public function home() {
         return $this->render('home/index.html.twig');
     }
@@ -51,4 +52,16 @@ class HomeController extends AbstractController {
             'item' => $item,
         ]);
     }
+
+    #[Route('/favorites', name: 'favorites_items')]
+    public function favoritesItems(Request $request, ItemRepository $itemRepository) : Response {
+        $favoritesRaw = $request->cookies->get('favorites', '[]');
+        $favorites = json_decode($favoritesRaw, true) ?? [];
+        $favorites = $itemRepository->findByIds(array_map('intval', $favorites));
+
+        return $this->render('search/favorites.html.twig', [
+            'favorites' => $favorites,
+        ]);
+    }
+
 }
