@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #dcdcdc;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: 
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url("https://static0.pocketlintimages.com/wordpress/wp-content/uploads/2024/12/criterion-splash-screen.jpg?q=49&fit=crop&w=750&dpr=2") center/cover no-repeat;
+    filter: blur(8px);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+.logo-fixed {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    background: #2a2a2a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.app-name {
+    text-align: center;
+    margin-top: 8.5rem;
+    color: #fcf64c;
+    font-family: "Impact", sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 6rem; 
+}
+
+.nav-search {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4rem 1rem;
+    width: 100%;
+}
+
+.search-bar {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    margin-bottom: 0.5rem;
+}
+
+.search-bar input {
+    background: rgba(30, 30, 30, 0.65);
+    color: #e6e6e6;
+    flex: 1;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #a3a3a3;
+    border-right: none;
+}
+
+.search-btn {
+    background: rgba(30, 30, 30, 0.75);
+    padding: 0.5rem 1rem;
+    border: 1px solid #a3a3a3;
+    border-left: none;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.search-info {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.streaming-logos-section {
+    text-align: center;
+    margin: 10rem;
+}
+
+.streaming-logos-section h2 {
+    margin-bottom: 3rem;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+}
+
+.logo-circle {
+    width: 100px;
+    height: 100px;
+    background: #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    overflow: hidden;
+    color: #000;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.logo-circle:hover {
+    transform: scale(1.07);
+}
+
+.logo-circle img {
+    width: 100px;
+    height: 100px;
+}

@@ -1,0 +1,111 @@
+{% extends 'search/base.html.twig' %}
+
+{% block title %}Wyniki wyszukiwania{% endblock %}
+
+{% block body %}
+
+<div class="search-results-container">
+
+    <aside class="filters-panel">
+        <h3>Filtry</h3>
+
+        <div class="filter-group">
+            <label>Typ</label>
+            <select>
+                <option>Wszystkie</option>
+                <option>Film</option>
+                <option>Serial</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Rok produkcji</label>
+            <select>
+                <option>Dowolny</option>
+                <option>2020+</option>
+                <option>2010–2019</option>
+                <option>2000–2009</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Autor</label>
+            <select>
+                <option>Dowolny</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Tagi</label>
+            <select>
+                <option>Dowolne</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Kategorie</label>
+            <select>
+                <option>Dowolne</option>
+            </select>
+        </div>
+    </aside>
+
+
+    <main class="results-main">
+
+        <div class="results-header">
+            <h2>Wyniki wyszukiwania dla: <span class="query">{{ query }}</span></h2>
+
+            <div class="sort-box">
+                <label><h2>Sortuj wg: </h2></label>
+                <select>
+                    <option>Popularność</option>
+                    <option>Alfabetycznie</option>
+                    <option>Rok produkcji (najnowsze)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="results-grid">
+            {% for item in results %}
+                <div class="result-card">
+                    <button class="fav-btn" data-id="{{ item.id }}">★</button>
+
+                    <a href="{{ path('item_detail', {'id': item.id}) }}">
+                        <div class="poster-wrapper">
+                            <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
+
+                            <div class="streaming-icons">
+                                <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">
+                            </div>
+
+
+                        </div>
+
+                        <div class="info">
+                            <h4 class="title">{{ item.name }}</h4>
+                            <p class="meta">
+                                {% if item.type == 1 %}
+                                    Film
+                                {% elseif item.type == 2 %}
+                                    Serial
+                                {% else %}
+                                    Inne
+                                {% endif %}
+                                | {{ item.year }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </main>
+</div>
+
+{% block javascript %}
+    <script src="{{ asset('js/favorites.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

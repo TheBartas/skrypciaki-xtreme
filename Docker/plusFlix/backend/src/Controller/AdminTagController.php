@@ -1,0 +1,88 @@
+<?php
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+
+use Doctrine\ORM\EntityManagerInterface;
+
+use App\Repository\TagRepository;
+use App\Entity\Tag;
+use App\Service\AdminSecurityService;
+
+#[Route('/admin')]
+class AdminTagController extends AbstractController {
+
+    private AdminSecurityService $adminSecurity;
+
+    public function __construct(AdminSecurityService $adminSecurity)
+    {
+        $this->adminSecurity = $adminSecurity;
+    }
+    
+    #[Route('/tags', name: 'admin_tags')]
+    public function tagsList(Request $request, TagRepository $tagRepository): Response
+    {
+        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $tags = $tagRepository->findWithItemCount();
+        return $this->render('admin/tags.html.twig', [
+            'tags' => $tags,
+        ]);
+    }
+
+    #[Route('/tags/add', name: 'admin_tag_add', methods: ['POST'])]
+    public function tagAdd(Request $request, EntityManagerInterface $em): Response
+    {
+        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $name = $request->request->get('name');
+        $tag = new Tag();
+        $tag->setTagName($name);
+
+        $em->persist($tag);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
+
+    #[Route('/tags/edit/{id}', name: 'admin_tag_edit', methods: ['POST'])]
+    public function tagEdit(
+        Request $request, 
+        Tag $tag, 
+        EntityManagerInterface $em): Response
+    {
+        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $name = $request->request->get('name');
+        $tag->setTagName($name);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
+
+    #[Route('/tags/delete/{id}', name: 'admin_tag_delete', methods: ['POST'])]
+    public function tagDelete(
+        Request $request, 
+        Tag $tag, 
+        EntityManagerInterface $em): Response
+    {
+        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
+            return $response;
+        }
+
+        $em->remove($tag);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_tags');
+    }
+
+}

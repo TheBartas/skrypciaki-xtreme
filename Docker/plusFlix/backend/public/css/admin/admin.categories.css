@@ -1,0 +1,144 @@
+.categories {
+    width: 900px;
+    display: block;
+}
+
+.categories-heading {
+    margin-bottom: 20px;
+}
+
+#addCategoryBtn {
+    text-decoration: none;
+    color: #000000;
+    font-size: 24px;
+}
+
+.input-research {
+    border: 1px solid #707070;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+    padding: 7px 6px 7px 6px;
+    margin-bottom: 50px;
+    background-color: #fafafa;
+}
+
+.admin-categories-table {
+    width: 100%;
+    max-width: 880px;
+    border-collapse: collapse;
+    background: #e0e0e0;
+}
+
+.admin-categories-table thead th {
+    background: #bcbcbc;
+    text-align: left;
+    padding: 12px 30px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+#th-actin {
+    text-align: center;
+}
+
+#td-action {
+    text-align: center;
+}
+
+.admin-categories-table tbody tr {
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.admin-categories-table td {
+    padding: 12px 30px;
+    font-size: 14px;
+}
+
+.admin-categories-table a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.admin-categories-table a:hover {
+    text-decoration: underline;
+}
+
+.admin-categories-table td:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.admin-table .action-separator {
+    margin: 0 6px 0 10px;
+    color: #444;
+} 
+
+.modal-categories {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.modal-categories-content {
+    display: block;
+    background: #acacac;
+    padding: 15px 20px 15px 20px;
+    margin: 10% auto;
+    width: 600px;
+    height: 180px;
+    border-radius: 2px;
+}
+
+.modal-categories-content #div1 {
+    margin-bottom: 30px;
+}
+
+#categoryForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 30px;
+}
+
+.category-inputs input {
+    width: 100%; 
+    max-width: 390px;
+    padding: 10px 8px 10px 8px;
+    border: 1px solid #acacac;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.category-inputs p {
+    margin: 6px 0 4px 0;
+}
+
+#modal-categories-SubmitBtn {
+    width: 100%;
+    max-width: 80px;
+    padding: 4px 3px 4px 3px;
+    align-self: flex-end;
+    background-color: #545F71;
+    border: 1px solid #545F71;
+    border-radius: 5px;
+    color: #fafafa;
+}
+
+#modal-categories-SubmitBtn:hover {
+    background-color: #616e83;
+}
+
+.modal-categories-close {
+    float: left;
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}

@@ -10,7 +10,9 @@ services:
       - ./backend/templates:/app/templates:cached
       - ./backend/public:/app/public:cached
       - ./backend/.env:/app/.env
-      - ../../SQLite:/app/sqlite_source:ro
+     # - ../../SQLite:/app/sqlite_source:ro ig już niepotrzebne?
+      - ./backend/var:/app/var
+      - ./backend/migrations:/app/migrations
     ports:
       - "8080:8000"
     entrypoint: ["entrypoint.sh"]
