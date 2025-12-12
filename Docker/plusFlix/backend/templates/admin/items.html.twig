@@ -99,23 +99,32 @@
 
             <div class="form_input_container">
                 <label>Tagi</label><br>
-                <p></p>
-                <select id="tagsInput" name="tags" multiple><br><br>
-                </select>
+                <div id="tagsPills" class="pills-container" multiple>
+                    {% for tag in tags %}
+                        <div class="pill" data-value="{{ tag.id }}">{{ tag.tagName }}</div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="tagsInput" name="tags">
             </div>
 
             <div class="form_input_container">
                 <label>Kategorie</label><br>
-                <p></p>
-                <select id="categoriesInput" name="categories" multiple><br><br>
-                </select>
+                <div id="categoriesPills" class="pills-container" multiple>
+                    {% for category in categories %}
+                        <div class="pill" data-value="{{ category.id }}">{{ category.genre }}</div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="categoriesInput" name="categories">
             </div>
 
             <div class="form_input_container">
                 <label>Streamingi</label><br>
-                <p></p>
-                <select id="streamingsInput" name="streamings" multiple>
-                </select>
+                <div id="streamingsPills" class="pills-container" multiple>
+                    {% for streaming in streamings %}
+                        <div class="pill" data-value="{{ streaming.id }}">{{ streaming.platformName }}</div>
+                    {% endfor %}
+                </div>
+                <input type="hidden" id="streamingsInput" name="streamings">
             </div>
 
             <button type="submit" id="modalSubmitBtn">Zapisz</button>
@@ -124,6 +133,54 @@
 </div>
 
 <script>
+    const tagsPills = document.querySelectorAll('#tagsPills .pill');
+    const categoriesPills = document.querySelectorAll('#categoriesPills .pill');
+    const streamingsPills = document.querySelectorAll('#streamingsPills .pill');
+
+    const pillsContainer = document.querySelectorAll('.pills-container');
+
+    pillsContainer.forEach(container => {
+        container.addEventListener('wheel', function (e) {
+            // prevent vertical scrolling
+            e.preventDefault();
+
+            // scroll horizontally
+            container.scrollLeft += e.deltaY;
+        });
+    });
+
+    tagsPills.forEach( pill => {
+        pill.addEventListener('click', () => {
+            pill.classList.toggle('active');
+            const selected = [...document.querySelectorAll('#tagsPills .pill.active')]
+                .map(p => p.dataset.value);
+
+            document.getElementById('tagsInput').value = selected.join(',');
+        });
+    })
+
+    categoriesPills.forEach( pill => {
+        pill.addEventListener('click', () => {
+            pill.classList.toggle('active');
+            const selected = [...document.querySelectorAll('#categoriesPills .pill.active')]
+                .map(p => p.dataset.value);
+
+            document.getElementById('categoriesInput').value = selected.join(',');
+            console.log(document.getElementById('categoriesInput').value);
+        });
+    });
+
+    streamingsPills.forEach( pill => {
+        pill.addEventListener('click', () => {
+            pill.classList.toggle('active');
+            const selected = [...document.querySelectorAll('#streamingsPills .pill.active')]
+                .map(p => p.dataset.value);
+
+            document.getElementById('streamingsInput').value = selected.join(',');
+        });
+    });
+
+
     const modal = document.getElementById('itemAddModal');
     const closeBtn = document.querySelector('.close');
     const addBtn = document.getElementById('addCategoryBtn');
@@ -188,6 +245,36 @@
                     document.getElementById('typeInput').value = item.type || '';
                     document.getElementById('durationInput').value = item.duration || '';
                     document.getElementById('seasonInput').value = item.season || '';
+
+                    document.querySelectorAll('.pill').forEach(pill => pill.classList.remove('active'));
+
+                    item.tags.forEach(Id => {
+                        const pill = document.querySelector(`#tagsPills .pill[data-value="${Id}"]`);
+                        if (pill) pill.classList.add('active');
+                    });
+
+                    item.categories.forEach(Id => {
+                        const pill = document.querySelector(`#categoriesPills .pill[data-value="${Id}"]`);
+                        if (pill) pill.classList.add('active');
+                    });
+
+                    item.streamings.forEach(Id => {
+                        const pill = document.querySelector(`#streamingsPills .pill[data-value="${Id}"]`);
+                        if (pill) pill.classList.add('active');
+                    });
+
+
+                    const selectedT = [...document.querySelectorAll('#tagsPills .pill.active')]
+                        .map(p => p.dataset.value);
+                    document.getElementById('tagsInput').value = selectedT.join(',');
+
+                    const selectedC = [...document.querySelectorAll('#categoriesPills .pill.active')]
+                        .map(p => p.dataset.value);
+                    document.getElementById('categoriesInput').value = selectedC.join(',');
+
+                    const selectedS = [...document.querySelectorAll('#streamingsPills .pill.active')]
+                        .map(p => p.dataset.value);
+                    document.getElementById('streamingsInput').value = selectedS.join(',');
                 })
                 .catch(err => console.error('Fetch error:', err));
         };

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="plusflix">
+<dataSource name="database">
   <database-model serializer="dbm" dbms="SQLITE" family-id="SQLITE" format-version="4.53">
     <root id="1">
       <ServerVersion>3.45.1</ServerVersion>
@@ -499,7 +499,7 @@
     </routine>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-12-06.12:32:03</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-12-12.01:07:06</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1590,275 +1590,342 @@
     <argument id="554" parent="190">
       <Position>1</Position>
     </argument>
-    <table id="555" parent="191" name="Categories"/>
-    <table id="556" parent="191" name="Item"/>
-    <table id="557" parent="191" name="Item_Categories"/>
-    <table id="558" parent="191" name="Item_Ratings"/>
-    <table id="559" parent="191" name="Item_Streamings"/>
-    <table id="560" parent="191" name="Item_Tags"/>
-    <table id="561" parent="191" name="Ratings"/>
-    <table id="562" parent="191" name="Streamings"/>
-    <table id="563" parent="191" name="Tags"/>
-    <table id="564" parent="191" name="sqlite_master">
+    <table id="555" parent="191" name="category"/>
+    <table id="556" parent="191" name="doctrine_migration_versions"/>
+    <table id="557" parent="191" name="item"/>
+    <table id="558" parent="191" name="item_category"/>
+    <table id="559" parent="191" name="item_rating"/>
+    <table id="560" parent="191" name="item_streaming"/>
+    <table id="561" parent="191" name="item_tag"/>
+    <table id="562" parent="191" name="rating"/>
+    <table id="563" parent="191" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="565" parent="191" name="sqlite_sequence">
+    <table id="564" parent="191" name="sqlite_sequence">
       <System>1</System>
     </table>
-    <column id="566" parent="555" name="cat_ID">
+    <table id="565" parent="191" name="streaming"/>
+    <table id="566" parent="191" name="tag"/>
+    <column id="567" parent="555" name="id">
       <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="567" parent="555" name="genre">
-      <Position>2</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <key id="568" parent="555">
-      <ColNames>cat_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="569" parent="556" name="item_ID">
-      <AutoIncrement>1</AutoIncrement>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="570" parent="556" name="name">
+    <column id="568" parent="555" name="genre">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>TEXT|0s</StoredType>
+      <StoredType>VARCHAR(128)|0s</StoredType>
     </column>
-    <column id="571" parent="556" name="year">
+    <key id="569" parent="555">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="570" parent="556" name="version">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>VARCHAR(191)|0s</StoredType>
+    </column>
+    <column id="571" parent="556" name="executed_at">
+      <DefaultExpression>NULL</DefaultExpression>
+      <Position>2</Position>
+      <StoredType>DATETIME|0s</StoredType>
+    </column>
+    <column id="572" parent="556" name="execution_time">
+      <DefaultExpression>NULL</DefaultExpression>
+      <Position>3</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <index id="573" parent="556" name="sqlite_autoindex_doctrine_migration_versions_1">
+      <ColNames>version</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <key id="574" parent="556">
+      <ColNames>version</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_doctrine_migration_versions_1</UnderlyingIndexName>
+    </key>
+    <column id="575" parent="557" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="576" parent="557" name="name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>VARCHAR(128)|0s</StoredType>
+    </column>
+    <column id="577" parent="557" name="year">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="572" parent="556" name="director">
+    <column id="578" parent="557" name="director">
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StoredType>TEXT|0s</StoredType>
+      <StoredType>VARCHAR(128)|0s</StoredType>
     </column>
-    <column id="573" parent="556" name="actors">
+    <column id="579" parent="557" name="actors">
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StoredType>TEXT|0s</StoredType>
+      <StoredType>CLOB|0s</StoredType>
     </column>
-    <column id="574" parent="556" name="type">
+    <column id="580" parent="557" name="type">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="575" parent="556" name="duration">
+    <column id="581" parent="557" name="duration">
+      <DefaultExpression>NULL</DefaultExpression>
       <Position>7</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="576" parent="556" name="season">
+    <column id="582" parent="557" name="season">
+      <DefaultExpression>NULL</DefaultExpression>
       <Position>8</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <key id="577" parent="556">
-      <ColNames>item_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="578" parent="557" name="item_ID">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <column id="579" parent="557" name="cat_ID">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <foreign-key id="580" parent="557">
-      <ColNames>item_ID</ColNames>
-      <RefColNames>item_ID</RefColNames>
-      <RefTableName>Item</RefTableName>
-    </foreign-key>
-    <foreign-key id="581" parent="557">
-      <ColNames>cat_ID</ColNames>
-      <RefColNames>cat_ID</RefColNames>
-      <RefTableName>Categories</RefTableName>
-    </foreign-key>
-    <index id="582" parent="557" name="sqlite_autoindex_Item_Categories_1">
-      <ColNames>item_ID
-cat_ID</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
     <key id="583" parent="557">
-      <ColNames>item_ID
-cat_ID</ColNames>
+      <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_Item_Categories_1</UnderlyingIndexName>
     </key>
-    <column id="584" parent="558" name="item_ID">
+    <column id="584" parent="558" name="item_id">
       <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <column id="585" parent="558" name="rating_ID">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <foreign-key id="586" parent="558">
-      <ColNames>item_ID</ColNames>
-      <RefColNames>item_ID</RefColNames>
-      <RefTableName>Item</RefTableName>
-    </foreign-key>
-    <foreign-key id="587" parent="558">
-      <ColNames>rating_ID</ColNames>
-      <RefColNames>rating_ID</RefColNames>
-      <RefTableName>Ratings</RefTableName>
-    </foreign-key>
-    <index id="588" parent="558" name="sqlite_autoindex_Item_Ratings_1">
-      <ColNames>item_ID
-rating_ID</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="589" parent="558">
-      <ColNames>item_ID
-rating_ID</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_Item_Ratings_1</UnderlyingIndexName>
-    </key>
-    <column id="590" parent="559" name="item_ID">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <column id="591" parent="559" name="streaming_ID">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <foreign-key id="592" parent="559">
-      <ColNames>item_ID</ColNames>
-      <RefColNames>item_ID</RefColNames>
-      <RefTableName>Item</RefTableName>
-    </foreign-key>
-    <foreign-key id="593" parent="559">
-      <ColNames>streaming_ID</ColNames>
-      <RefColNames>streaming_ID</RefColNames>
-      <RefTableName>Streamings</RefTableName>
-    </foreign-key>
-    <index id="594" parent="559" name="sqlite_autoindex_Item_Streamings_1">
-      <ColNames>item_ID
-streaming_ID</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="595" parent="559">
-      <ColNames>item_ID
-streaming_ID</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_Item_Streamings_1</UnderlyingIndexName>
-    </key>
-    <column id="596" parent="560" name="item_ID">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <column id="597" parent="560" name="tag_ID">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>INT|0s</StoredType>
-    </column>
-    <foreign-key id="598" parent="560">
-      <ColNames>item_ID</ColNames>
-      <RefColNames>item_ID</RefColNames>
-      <RefTableName>Item</RefTableName>
-    </foreign-key>
-    <foreign-key id="599" parent="560">
-      <ColNames>tag_ID</ColNames>
-      <RefColNames>tag_ID</RefColNames>
-      <RefTableName>Tags</RefTableName>
-    </foreign-key>
-    <index id="600" parent="560" name="sqlite_autoindex_Item_Tags_1">
-      <ColNames>item_ID
-tag_ID</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Unique>1</Unique>
-    </index>
-    <key id="601" parent="560">
-      <ColNames>item_ID
-tag_ID</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_Item_Tags_1</UnderlyingIndexName>
-    </key>
-    <column id="602" parent="561" name="rating_ID">
-      <AutoIncrement>1</AutoIncrement>
       <Position>1</Position>
       <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="603" parent="561" name="rating">
+    <column id="585" parent="558" name="category_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>REAL|0s</StoredType>
+      <StoredType>INTEGER|0s</StoredType>
     </column>
-    <column id="604" parent="561" name="comment">
+    <foreign-key id="586" parent="558" name="FK_6A41D10A126F525E">
+      <ColNames>item_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>item</RefTableName>
+    </foreign-key>
+    <foreign-key id="587" parent="558" name="FK_6A41D10A12469DE2">
+      <ColNames>category_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>category</RefTableName>
+    </foreign-key>
+    <index id="588" parent="558" name="sqlite_autoindex_item_category_1">
+      <ColNames>item_id
+category_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="589" parent="558" name="IDX_6A41D10A126F525E">
+      <ColNames>item_id</ColNames>
+    </index>
+    <index id="590" parent="558" name="IDX_6A41D10A12469DE2">
+      <ColNames>category_id</ColNames>
+    </index>
+    <key id="591" parent="558">
+      <ColNames>item_id
+category_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_item_category_1</UnderlyingIndexName>
+    </key>
+    <column id="592" parent="559" name="item_id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="593" parent="559" name="rating_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="594" parent="559" name="FK_5E7053ED126F525E">
+      <ColNames>item_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>item</RefTableName>
+    </foreign-key>
+    <foreign-key id="595" parent="559" name="FK_5E7053EDA32EFC6">
+      <ColNames>rating_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>rating</RefTableName>
+    </foreign-key>
+    <index id="596" parent="559" name="sqlite_autoindex_item_rating_1">
+      <ColNames>item_id
+rating_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="597" parent="559" name="IDX_5E7053ED126F525E">
+      <ColNames>item_id</ColNames>
+    </index>
+    <index id="598" parent="559" name="IDX_5E7053EDA32EFC6">
+      <ColNames>rating_id</ColNames>
+    </index>
+    <key id="599" parent="559">
+      <ColNames>item_id
+rating_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_item_rating_1</UnderlyingIndexName>
+    </key>
+    <column id="600" parent="560" name="item_id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="601" parent="560" name="streaming_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="602" parent="560" name="FK_2A990E91126F525E">
+      <ColNames>item_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>item</RefTableName>
+    </foreign-key>
+    <foreign-key id="603" parent="560" name="FK_2A990E91429AEC72">
+      <ColNames>streaming_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>streaming</RefTableName>
+    </foreign-key>
+    <index id="604" parent="560" name="sqlite_autoindex_item_streaming_1">
+      <ColNames>item_id
+streaming_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="605" parent="560" name="IDX_2A990E91126F525E">
+      <ColNames>item_id</ColNames>
+    </index>
+    <index id="606" parent="560" name="IDX_2A990E91429AEC72">
+      <ColNames>streaming_id</ColNames>
+    </index>
+    <key id="607" parent="560">
+      <ColNames>item_id
+streaming_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_item_streaming_1</UnderlyingIndexName>
+    </key>
+    <column id="608" parent="561" name="item_id">
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="609" parent="561" name="tag_id">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <foreign-key id="610" parent="561" name="FK_E49CCCB1126F525E">
+      <ColNames>item_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>item</RefTableName>
+    </foreign-key>
+    <foreign-key id="611" parent="561" name="FK_E49CCCB1BAD26311">
+      <ColNames>tag_id</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>id</RefColNames>
+      <RefTableName>tag</RefTableName>
+    </foreign-key>
+    <index id="612" parent="561" name="sqlite_autoindex_item_tag_1">
+      <ColNames>item_id
+tag_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <Unique>1</Unique>
+    </index>
+    <index id="613" parent="561" name="IDX_E49CCCB1126F525E">
+      <ColNames>item_id</ColNames>
+    </index>
+    <index id="614" parent="561" name="IDX_E49CCCB1BAD26311">
+      <ColNames>tag_id</ColNames>
+    </index>
+    <key id="615" parent="561">
+      <ColNames>item_id
+tag_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_item_tag_1</UnderlyingIndexName>
+    </key>
+    <column id="616" parent="562" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="617" parent="562" name="rating">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>DOUBLE PRECISION|0s</StoredType>
+    </column>
+    <column id="618" parent="562" name="comment">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>CLOB|0s</StoredType>
+    </column>
+    <key id="619" parent="562">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="620" parent="563" name="type">
+      <Position>1</Position>
+      <StoredType>TEXT|0s</StoredType>
+    </column>
+    <column id="621" parent="563" name="name">
+      <Position>2</Position>
+      <StoredType>TEXT|0s</StoredType>
+    </column>
+    <column id="622" parent="563" name="tbl_name">
       <Position>3</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <key id="605" parent="561">
-      <ColNames>rating_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="606" parent="562" name="streaming_ID">
-      <AutoIncrement>1</AutoIncrement>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="607" parent="562" name="platform_name">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <key id="608" parent="562">
-      <ColNames>streaming_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="609" parent="563" name="tag_ID">
-      <AutoIncrement>1</AutoIncrement>
-      <Position>1</Position>
-      <StoredType>INTEGER|0s</StoredType>
-    </column>
-    <column id="610" parent="563" name="name">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <key id="611" parent="563">
-      <ColNames>tag_ID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="612" parent="564" name="type">
-      <Position>1</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <column id="613" parent="564" name="name">
-      <Position>2</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <column id="614" parent="564" name="tbl_name">
-      <Position>3</Position>
-      <StoredType>TEXT|0s</StoredType>
-    </column>
-    <column id="615" parent="564" name="rootpage">
+    <column id="623" parent="563" name="rootpage">
       <Position>4</Position>
       <StoredType>INT|0s</StoredType>
     </column>
-    <column id="616" parent="564" name="sql">
+    <column id="624" parent="563" name="sql">
       <Position>5</Position>
       <StoredType>TEXT|0s</StoredType>
     </column>
-    <column id="617" parent="565" name="name">
+    <column id="625" parent="564" name="name">
       <Position>1</Position>
     </column>
-    <column id="618" parent="565" name="seq">
+    <column id="626" parent="564" name="seq">
       <Position>2</Position>
     </column>
+    <column id="627" parent="565" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="628" parent="565" name="platform_name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>VARCHAR(128)|0s</StoredType>
+    </column>
+    <key id="629" parent="565">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="630" parent="566" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>INTEGER|0s</StoredType>
+    </column>
+    <column id="631" parent="566" name="tag_name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>VARCHAR(128)|0s</StoredType>
+    </column>
+    <key id="632" parent="566">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
   </database-model>
 </dataSource>

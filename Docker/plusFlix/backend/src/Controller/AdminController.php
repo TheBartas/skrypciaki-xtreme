@@ -38,7 +38,7 @@ class AdminController extends AbstractController {
         ]);
     }
 
-    #[Route('/main', name: 'admin_main')]
+    #[Route('/', name: 'admin_main')]
     public function adminIndex(
         Request $request,
         AdminSecurityService $adminSecurityService

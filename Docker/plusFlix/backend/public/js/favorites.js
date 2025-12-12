@@ -48,6 +48,7 @@ favButtons.forEach(btn => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const favorites = getFavorites();
+    console.log(favorites);
     document.querySelectorAll(".fav-btn").forEach(btn => {
         if (favorites.includes(btn.dataset.id)) {
             btn.classList.add("active");

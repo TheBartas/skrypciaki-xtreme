@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use Doctrine\Persistence\ManagerRegistry;
-use App\Repository\ItemRepository;
 use App\Entity\Item;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -49,8 +48,36 @@ class HomeController extends AbstractController {
             throw $this->createNotFoundException('Nie znaleziono dzieła o id ' . $id);
         }
 
+
+        $tagsString = '';
+        foreach ($item->getTags() as $tag) {
+            $tagsString .= $tag->getId();
+        }
+        $filtersTags = [ 'tags' => $tagsString ];
+
+        $categoriesString = '';
+        foreach ($item->getCategories() as $categorie) {
+            $categoriesString .= $categorie->getId();
+        }
+        $filtersCategories = [ 'categories' => $categoriesString ];
+
+
+        $similarByTags = $itemRepository->findByFilters($filtersTags);
+        $similarByCategories = $itemRepository->findByFilters($filtersCategories);
+        $combined = array_merge($similarByTags, $similarByCategories);
+        $uniqueItemsById = [];
+        foreach ($combined as $i) {
+            if($i->getId() != $item->getId())
+                $uniqueItemsById[$i->getId()] = $i;
+        }
+        $similars = array_values($uniqueItemsById);
+        $similars = array_slice($similars, 0, 4);  // keep only first 4
+
+//        dd($similars);
+
         return $this->render('public/item.html.twig', [  // placeholder bo nie ma jeszcze tego
             'item' => $item,
+            'similars' => $similars,
         ]);
     }
 

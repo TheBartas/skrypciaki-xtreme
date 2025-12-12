@@ -38,7 +38,7 @@ a {
     padding: 2dvh 2dvw;
     margin: 10dvh 10dvw;
     width: 78dvw;
-    height: 58dvh;
+    height: 70dvh;
 
     z-index: 1;
 }
@@ -46,11 +46,12 @@ a {
 .close {
     font-size: 2em;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #modalSubmitBtn {
     position: absolute;
     bottom: 2dvh;
     right: 2dvw;
+    cursor: pointer;
 }
-

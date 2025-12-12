@@ -67,6 +67,12 @@ class ItemRepository extends ServiceEntityRepository
                 ->setParameter('categories', $filters['categories']);
         }
 
+        if (!empty($filters['tags'])) {
+            $qb->leftJoin('i.tags', 't')
+                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->setParameter('tags', $filters['tags']);
+        }
+
         if (!empty($filters['streamings'])) {
             $qb->leftJoin('i.streamings', 's')
                 ->andWhere($qb->expr()->in('s.id', ':streamings'))
@@ -95,29 +101,4 @@ class ItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    //    /**
-    //     * @return Item[] Returns an array of Item objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('i.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Item
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }

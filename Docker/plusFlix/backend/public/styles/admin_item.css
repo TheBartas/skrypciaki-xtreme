@@ -36,18 +36,45 @@
 
 #itemForm {
     display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(5, 0.5fr);
+    grid-template-columns: 1fr 1fr;   /* two columns */
+    grid-auto-rows: auto;             /* auto height per row */
+    column-gap: 2em;                  /* spacing between columns */
+    row-gap: 1em;                     /* spacing between rows */
+    align-items: start;               /* prevent vertical stretching */
 }
 
-form select {
-    height: 2em;
+.form_input_container {
+    min-width: 0;
 }
 
 form input {
     margin-top: 0.2em;
     border-radius: 0.5em;
     border: none;
-    width: 70%;
     height: 2em;
+    width: 80%;
+}
+
+select {
+    width: 80%;
+}
+
+.pills-container {
+    display: flex;
+    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    gap: 6px;
+    width: 80%;
+}
+
+.pill {
+    padding: 6px 10px;
+    background: #eee;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.pill.active {
+    background: #3498db;
+    color: white;
 }
