@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +16,7 @@ use App\Repository\ItemRepository;
 
 #[Route('/admin')]
 class AdminItemController extends AbstractController {
-    
+
     #[Route('/items', name: 'admin_items')]
     public function itemsList(ItemRepository $itemRepository): Response
     {
@@ -26,7 +26,7 @@ class AdminItemController extends AbstractController {
             'items' => $items,
         ]);
     }
-    
+
     #[Route('/item/edit/{id}', name: 'admin_item_edit', methods: ['POST'])]
     public function itemEdit(Request $request, Item $item, EntityManagerInterface $em) : Response
     {
@@ -108,9 +108,9 @@ class AdminItemController extends AbstractController {
             'type' => $item->getType(),
             'duration' => $item->getDuration(),
             'season' => $item->getSeason(),
-            // If you want ManyToMany relations
-//            'categories' => $item->getCategories()->map(fn($c) => $c->getId())->toArray(),
-//            'streamings' => $item->getStreamings()->map(fn($s) => $s->getId())->toArray(),
+            'categories' => $item->getCategories()->map(fn($c) => $c->getId())->toArray(),
+            'streamings' => $item->getStreamings()->map(fn($s) => $s->getId())->toArray(),
+            'tags'       => $item->getTags()->map(fn($t) => $t->getId())->toArray(),
         ]);
     }
 
@@ -136,6 +136,9 @@ class AdminItemController extends AbstractController {
         }
         if ($streamings = $request->query->get('streamings')) {
             $filters['streamings'] = array_filter(array_map('intval', explode(',', $streamings)));
+        }
+        if ($tags = $request->query->get('tags')) {
+            $filters['tags'] = array_filter(array_map('intval', explode(',', $streamings)));
         }
 
         $items = $itemRepository->findByFilters($filters);

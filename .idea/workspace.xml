@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="36Z7u7TEzeUbnXvPMTOysH0GpqV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dn50957",
+    "last_opened_file_path": "C:/Users/alpak/Desktop/Nowy folder/skrypciaki-xtreme/Docker/plusFlix/backend/public/styles",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\public\styles" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\templates\public" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Version20251210003704.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Docker/plusFlix/backend/migrations/Version20251210003704.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.Version20251210003704.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PS-252.28238.9" />
+        <option value="bundled-php-predefined-a98d8de5180a-58f58c5035b3-com.jetbrains.php.sharedIndexes-PS-252.28238.9" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="" />
+      <created>1765202464220</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765202464220</updated>
+      <workItem from="1765202467973" duration="776000" />
+      <workItem from="1765369680528" duration="117000" />
+      <workItem from="1765371600454" duration="5558000" />
+      <workItem from="1765455768672" duration="22000" />
+      <workItem from="1765455908244" duration="5504000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

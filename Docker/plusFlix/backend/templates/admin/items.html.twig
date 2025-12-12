@@ -27,9 +27,21 @@
                 <p>{{ item.name }}</p>
                 <p>{{ item.year }}</p>
                 <p>{{ item.director }}</p>
-                <p></p>
-                <p></p>
-                <p></p>
+                <p>
+                    {% for category in item.categories %}
+                        {{ category.genre }},
+                    {% endfor %}
+                </p>
+                <p>
+                    {% for tag in item.tags %}
+                        {{ tag.tagName }},
+                    {% endfor %}
+                </p>
+                <p>
+                    {% for streaming in item.streamings %}
+                        {{ streaming.platformName }},
+                    {% endfor %}
+                </p>
                 <div style="display: flex; align-self: center">
                     <a href="#" class="editItemBtn" data-id="{{ item.id }}">modyfikuj </a>
                     |

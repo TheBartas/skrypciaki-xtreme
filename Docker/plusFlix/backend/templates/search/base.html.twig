@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}PlusFlix{% endblock %}</title>
     <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/search_results.css">
+    {% block stylesheets %}{% endblock %}
 </head>
 
 <body>
@@ -28,11 +28,28 @@
     <div class="nav-right">
         <a href="/popularne">Popularne</a>
         <a href="/favorites">Ulubione</a>
-        <button class="theme-toggle">ciemno/jasno</button>
+        <button id="themeToggle" class="theme-toggle"></button>
     </div>
 </nav>
 
 {% block body %}{% endblock %}
 
 </body>
+
+<script>
+    let isDark = false;
+    const themeToggle = document.getElementById("themeToggle");
+
+    themeToggle.onclick = () => {
+        if(!isDark) {
+            themeToggle.classList.add("dark");
+        }
+        else {
+            themeToggle.classList.remove("dark");
+        }
+
+        isDark = !isDark;
+    };
+</script>
+
 </html>
