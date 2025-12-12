@@ -16,6 +16,20 @@ class RatingRepository extends ServiceEntityRepository
         parent::__construct($registry, Rating::class);
     }
 
+    public function findWithItem() : array {
+        return $this->createQueryBuilder('r') 
+            ->select("
+                r.id AS rat_ID,
+                r.comment,
+                r.rating,
+                i.id AS item_ID,
+                i.name
+            ")
+            ->leftJoin('r.items', 'i')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     //    /**
     //     * @return Rating[] Returns an array of Rating objects
     //     */

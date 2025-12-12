@@ -1,100 +1,69 @@
 {% extends "admin/base.html.twig" %}
 
 {% block body %}
+<div class="categories">
+    <div class="categories-heading">
+        <h1>Kategorie&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addCategoryBtn">🞥</a></h1>
+    </div>
 
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-    }
 
-    .modal-content {
-        background: white;
-        padding: 20px;
-        margin: 10% auto;
-        width: 400px;
-        border-radius: 5px;
-    }
+    <input class="input-research" type="text" placeholder="Szukaj">
 
-    .close {
-        float: right;
-        font-size: 22px;
-        cursor: pointer;
-    }
-</style>
-
-<h1>Kategorie</h1>
-
-<a href="#" id="addCategoryBtn">+ Dodaj kategorię</a>
-
-<input type="text">
-
-<div class="admin-categories-container">
-
-    <table class="admin-table">
+    <table class="admin-categories-table">
         <thead>
             <tr>
                 <th>Nazwa kategorii</th>
-                <th>Liczba powiązanych dzieł</th>
-                <th>Akcje</th>
+                <th id="th-action">Liczba powiązanych dzieł</th>
+                <th id="th-action">Akcje</th>
             </tr>
         </thead>
         <tbody>
             {% for category in categories %}
                 <tr>
                     <td>{{ category.genre }}</td>
-                    <td>{{ category.item_count}}</td>
-                    <td>
+                    <td id="td-action">{{ category.item_count}}</td>
+                    <td id="td-action">
                         <a href="#" class="editCategoryBtn"
-                           data-id="{{ category.cat_ID }}"
-                           data-name="{{ category.genre }}">
-                           Edytuj
-                        </a>
+                        data-id="{{ category.cat_ID }}"
+                        data-name="{{ category.genre }}">Edytuj</a>
+                        <span class="action-separator">|</span>
                         <a href="#" 
                             class="deleteCategoryLink" 
-                            data-id="{{ category.cat_ID }}">
-                            Usuń
-                        </a>
+                            data-id="{{ category.cat_ID }}">Usuń</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-</div>
 
-<div id="categoryModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-
-        <h2 id="modalTitle">Dodaj kategorię</h2>
-
-        <form id="categoryForm" method="post">
-            <input type="text" name="genre" id="categoryName" placeholder="Nazwa kategorii" required>
-
-            <button type="submit" id="modalSubmitBtn">Zapisz</button>
-        </form>
+    <div id="categoryModal" class="modal-categories">
+        <div class="modal-categories-content">
+            <div id="div1">
+                <span class="modal-categories-close">&times;</span>
+            </div>
+            <form id="categoryForm" method="post">
+                <div class="rating-inputs">
+                    <p>Nazwa kategorii</p>
+                    <input type="text" name="genre" id="categoryName" placeholder="Nazwa kategorii" required>
+                </div>
+                <button type="submit" id="modal-categories-SubmitBtn">Zapisz</button>
+            </form>
+        </div>
     </div>
 </div>
 
 
+
 <script>
     const modal = document.getElementById('categoryModal');
-    const closeBtn = document.querySelector('.close');
+    const closeBtn = document.querySelector('.modal-categories-close');
     const addBtn = document.getElementById('addCategoryBtn');
     const form = document.getElementById('categoryForm');
-    const title = document.getElementById('modalTitle');
     const nameInput = document.getElementById('categoryName');
 
     addBtn.onclick = () => {
         modal.style.display = 'block';
-        title.innerText = "Dodaj kategorię";
         form.action = "{{ path('admin_category_add') }}";
         nameInput.value = "";
     };
@@ -102,7 +71,6 @@
     document.querySelectorAll('.editCategoryBtn').forEach(btn => {
         btn.onclick = () => {
             modal.style.display = 'block';
-            title.innerText = "Edytuj kategorię";
 
             let id = btn.dataset.id;
             let name = btn.dataset.name;

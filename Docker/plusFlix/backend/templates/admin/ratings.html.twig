@@ -1,0 +1,67 @@
+{% extends "admin/base.html.twig" %}
+
+{% block body %}
+    <div class="ratings">
+        <h1>Oceny</h1>
+        <input class="input-research" type="text" placeholder="Szukaj">
+        <table class="admin-rating-table">
+            <thead>
+                <tr>
+                    <th>Tytuł dzieła</th>
+                    <th>Ocena</th>
+                    <th>Komentarz</th>
+                    <th id="th-action">Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rating in ratings %}
+                    <tr>
+                        <td>{{ rating.name }}</td>
+                        <td>{{ rating.rating }}</td>
+                        {% if rating.comment %}
+                            <td>{{ rating.comment }}</td>
+                        {% else %}
+                            <td>NULL</td>
+                        {% endif %}
+                        <td>
+                            <a href="#" 
+                                class="editratingLink"
+                                data-id-rating="{{ rating.rat_ID }}"
+                                data-name="{{ rating.name }}"
+                                data-rating="{{ rating.rating }}"
+                                data-comment="{{ rating.comment }}">Edytuj</a>
+                            <span class="action-separator">|</span>
+                            <a href="#" 
+                                class="deleteratingLink" 
+                                data-id-rating="{{ rating.rat_ID }}">Usuń</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div id="ratingModal" class="modal-rating">
+            <div class="modal-rating-content">
+                <div id="div1">
+                    <span class="modal-rating-close">&times;</span>
+                </div>
+                <div id="div2">
+                    <h2 id="modalTitle">Placeholder</h2>
+                </div>
+                <form id="ratingForm" method="post">
+                    <div class="category-inputs">
+                        <p>Ocena</p>
+                        <input type="text" name="rating" id="ratingID" placeholder="Ocena" required>
+                        <p>Komentarz</p>
+                        <input type="text" name="comment" id="commentID" placeholder="Komentarz">
+                    </div>
+                    <button class="ratingBtn" type="submit" id="modal-ratings-SubmitBtn">Zapisz</button>
+                </form>
+            </div>
+        </div>
+
+        {% block javascript %}
+            <script src="{{ asset('js/admin/admin.rating.js') }}"></script>
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,7 +1,8 @@
-function setCookie(name, value, exdays=365) {
+function setCookie(name, value, exdays = 365) {
     const date = new Date();
-    const expires = date.setDate(date.getTime() + (exdays*24*60*60*1000));
-    document.cookie = `${name}=${value};expires=${expires}; path=/; SameSite=Lax`;
+    date.setTime(date.getTime() + exdays * 24 * 60 * 60 * 1000);
+    const expires = date.toUTCString();
+    document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
 }
 
 function getCookie(name) {
