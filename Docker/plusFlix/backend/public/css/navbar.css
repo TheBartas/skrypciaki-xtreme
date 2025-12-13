@@ -90,10 +90,33 @@
 }
 
 .theme-toggle {
-    background: none;
-    border: none;
-    font-size: 18px;
+    width: 60px;
+    height: 30px;
+    background: black;
+    border-radius: 30px;
     cursor: pointer;
     color: #fff;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.theme-toggle::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.theme-toggle.dark {
+    background-color: #d5d5d5;
+}
+
+.theme-toggle.dark::before {
+    transform: translateX(30px);
 }
 

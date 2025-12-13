@@ -10,27 +10,15 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Repository\CategoryRepository;
 use App\Entity\Category;
-use App\Service\AdminSecurityService;
 
 #[Route('/admin')]
 class AdminCategoryController extends AbstractController {
 
-    private AdminSecurityService $adminSecurity;
-
-    public function __construct(AdminSecurityService $adminSecurity)
-    {
-        $this->adminSecurity = $adminSecurity;
-    }
-    
     #[Route('/categories', name: 'admin_categories')]
     public function categorieList(
         Request $request,
         CategoryRepository $categoryRepository
         ) : Response {
-
-        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
-            return $response;
-        }
 
         $categories = $categoryRepository->findWithItemCount();
 
@@ -47,10 +35,6 @@ class AdminCategoryController extends AbstractController {
         ) : Response
     {
 
-        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
-            return $response;
-        }
-
         $em->remove($category);
         $em->flush();
         return $this->redirectToRoute('admin_categories');
@@ -62,10 +46,6 @@ class AdminCategoryController extends AbstractController {
         EntityManagerInterface $em
         ) : Response
     {
-
-        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
-            return $response;
-        }
 
         $genre = $request->request->get('genre');
         $category = new Category();
@@ -84,9 +64,6 @@ class AdminCategoryController extends AbstractController {
         EntityManagerInterface $em
         ) : Response
     {
-        if ($response = $this->adminSecurity->checkAdminLoggedIn($request)) {
-            return $response;
-        }
 
         $genre = $request->request->get('genre');
         $category->setGenre($genre);

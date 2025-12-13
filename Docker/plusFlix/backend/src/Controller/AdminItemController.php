@@ -1,6 +1,9 @@
-<?php 
+<?php
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
+use App\Repository\StreamingRepository;
+use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,19 +19,39 @@ use App\Repository\ItemRepository;
 
 #[Route('/admin')]
 class AdminItemController extends AbstractController {
-    
+
     #[Route('/items', name: 'admin_items')]
-    public function itemsList(ItemRepository $itemRepository): Response
+    public function itemsList(
+        ItemRepository $itemRepository,
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository,
+        StreamingRepository $streamingRepository,
+    ): Response
     {
         $items = $itemRepository->findAll();
+        $categories = $categoryRepository->findAll();
+        $tags = $tagRepository->findAll();
+        $streamings = $streamingRepository->findAll();
+
+
 
         return $this->render('admin/items.html.twig',[
             'items' => $items,
+            'categories' => $categories,
+            'tags' => $tags,
+            'streamings' => $streamings,
         ]);
     }
-    
+
     #[Route('/item/edit/{id}', name: 'admin_item_edit', methods: ['POST'])]
-    public function itemEdit(Request $request, Item $item, EntityManagerInterface $em) : Response
+    public function itemEdit(
+        Request $request,
+        Item $item,
+        EntityManagerInterface $em,
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository,
+        StreamingRepository $streamingRepository
+    ) : Response
     {
         $name = $request->request->get('name');
         $year = $request->request->get('year');
@@ -38,6 +61,10 @@ class AdminItemController extends AbstractController {
         $duration = $request->request->get('duration');
         $season = $request->request->get('season');
 
+        $categories = $request->request->get('categories', '');
+        $tags = $request->request->get('tags', '');
+        $streamings = $request->request->get('streamings', '');
+
         if ($name !== null) $item->setName($name);
         if ($year !== null) $item->setYear((int)$year);
         if ($director !== null) $item->setDirector($director);
@@ -45,6 +72,49 @@ class AdminItemController extends AbstractController {
         if ($type !== null) $item->setType((int)$type);
         if ($duration !== null) $item->setDuration((int)$duration);
         $item->setSeason($season !== '' ? (int)$season : null);
+
+        $item->getTags()->clear();
+        $item->getCategories()->clear();
+        $item->getStreamings()->clear();
+
+        if (!empty($categories)) {
+            if (is_string($categories)) {
+                $categoriesIds = explode(',', $categories);
+
+                foreach ($categoriesIds as $categorieId) {
+                    $categorie = $categoryRepository->find((int)$categorieId);
+                    if ($categorie) {
+                        $item->addCategory($categorie);
+                    }
+                }
+            }
+        }
+
+        if (!empty($tags)) {
+            if (is_string($tags)) {
+                $tagsIds = explode(',', $tags);
+
+                foreach ($tagsIds as $tagId) {
+                    $tag = $tagRepository->find((int)$tagId);
+                    if ($tag) {
+                        $item->addTag($tag);
+                    }
+                }
+            }
+        }
+
+        if (!empty($streamings)) {
+            if (is_string($streamings)) {
+                $streamingsIds = explode(',', $streamings);
+
+                foreach ($streamingsIds as $streamingId) {
+                    $streaming = $streamingRepository->find((int)$streamingId);
+                    if ($streaming) {
+                        $item->addStreaming($streaming);
+                    }
+                }
+            }
+        }
 
         $em->flush();
         return $this->json([
@@ -55,12 +125,22 @@ class AdminItemController extends AbstractController {
     #[Route('/item/delete/{id}', name: 'admin_item_delete', methods: ['POST'])]
     public function itemDelete(Item $item, EntityManagerInterface $em) : Response
     {
+        $ratings = $item->getRatings();
+        foreach ($ratings as $rating) {
+            $em->remove($rating);
+        }
+
         $em->remove($item);
         $em->flush();
         return $this->redirectToRoute('admin_items');
     }
     #[Route('/item/add', name: 'admin_item_add', methods: ['POST'])]
-    public function addItem(Request $request, EntityManagerInterface $em): Response
+    public function addItem(
+        Request $request,
+        EntityManagerInterface $em,
+        CategoryRepository $categoryRepository,
+        TagRepository $tagRepository,
+        StreamingRepository $streamingRepository): Response
     {
         $item = new Item();
         $item->setName($request->request->get('name'));
@@ -71,21 +151,49 @@ class AdminItemController extends AbstractController {
         $item->setDuration((int)$request->request->get('duration'));
         $item->setSeason($request->request->get('season') ? (int)$request->request->get('season') : null);
 
-// ManyToMany categories
-        $categoryIds = $request->request->all('categories') ?? [];
-        foreach ($categoryIds as $id) {
-            $category = $em->getRepository(Category::class)->find($id);
-            if ($category) $item->addCategory($category);
+        $categories = $request->request->get('categories', '');
+        $tags = $request->request->get('tags', '');
+        $streamings = $request->request->get('streamings', '');
+
+        if (!empty($categories)) {
+            if (is_string($categories)) {
+                $categoriesIds = explode(',', $categories);
+
+                foreach ($categoriesIds as $categorieId) {
+                    $categorie = $categoryRepository->find((int)$categorieId);
+                    if ($categorie) {
+                        $item->addCategory($categorie);
+                    }
+                }
+            }
         }
 
-// ManyToMany streamings
-        $streamingIds = $request->request->all('streamings') ?? [];
-        foreach ($streamingIds as $id) {
-            $streaming = $em->getRepository(Streaming::class)->find($id);
-            if ($streaming) $item->addStreaming($streaming);
+        if (!empty($tags)) {
+            if (is_string($tags)) {
+                $tagsIds = explode(',', $tags);
+
+                foreach ($tagsIds as $tagId) {
+                    $tag = $tagRepository->find((int)$tagId);
+                    if ($tag) {
+                        $item->addTag($tag);
+                    }
+                }
+            }
         }
 
-// Persist
+        if (!empty($streamings)) {
+            if (is_string($streamings)) {
+                $streamingsIds = explode(',', $streamings);
+
+                foreach ($streamingsIds as $streamingId) {
+                    $streaming = $streamingRepository->find((int)$streamingId);
+                    if ($streaming) {
+                        $item->addStreaming($streaming);
+                    }
+                }
+            }
+        }
+
         $em->persist($item);
         $em->flush();
 
@@ -108,18 +216,17 @@ class AdminItemController extends AbstractController {
             'type' => $item->getType(),
             'duration' => $item->getDuration(),
             'season' => $item->getSeason(),
-            // If you want ManyToMany relations
-//            'categories' => $item->getCategories()->map(fn($c) => $c->getId())->toArray(),
-//            'streamings' => $item->getStreamings()->map(fn($s) => $s->getId())->toArray(),
+            'categories' => $item->getCategories()->map(fn($c) => $c->getId())->toArray(),
+            'streamings' => $item->getStreamings()->map(fn($s) => $s->getId())->toArray(),
+            'tags'       => $item->getTags()->map(fn($t) => $t->getId())->toArray(),
         ]);
     }
 
-    #[Route('/list', name: 'get_list', methods: ['GET'])]
-    public function returnByFilter(Request $request, ItemRepository $itemRepository): JsonResponse
+    #[Route('/listjson', name: 'get_list_json', methods: ['GET'])]
+    public function returnByFilterJSON(Request $request, ItemRepository $itemRepository): JsonResponse
     {
         $filters = [];
 
-        // Scalar filters
         if ($name = $request->query->get('name')) $filters['name'] = $name;
         if ($year = $request->query->get('year')) $filters['year'] = (int)$year;
         if ($director = $request->query->get('director')) $filters['director'] = $director;
@@ -130,16 +237,53 @@ class AdminItemController extends AbstractController {
             $filters['season'] = $request->query->get('season') !== '' ? (int)$request->query->get('season') : null;
         }
 
-        // ManyToMany filters
         if ($categories = $request->query->get('categories')) {
             $filters['categories'] = array_filter(array_map('intval', explode(',', $categories)));
         }
         if ($streamings = $request->query->get('streamings')) {
             $filters['streamings'] = array_filter(array_map('intval', explode(',', $streamings)));
         }
+        if ($tags = $request->query->get('tags')) {
+            $filters['tags'] = array_filter(array_map('intval', explode(',', $tags)));
+        }
 
         $items = $itemRepository->findByFilters($filters);
 
         return $this->json($items);
+    }
+
+    #[Route('/list', name: 'get_list', methods: ['GET'])]
+    public function returnByFilter(Request $request, ItemRepository $itemRepository): Response
+    {
+        $filters = [];
+
+        if ($name = $request->query->get('name')) $filters['name'] = $name;
+        if ($year = $request->query->get('year')) $filters['year'] = (int)$year;
+        if ($director = $request->query->get('director')) $filters['director'] = $director;
+        if ($actors = $request->query->get('actors')) $filters['actors'] = $actors;
+        if ($type = $request->query->get('type')) $filters['type'] = (int)$type;
+        if ($duration = $request->query->get('duration')) $filters['duration'] = (int)$duration;
+        if ($request->query->has('season')) {
+            $filters['season'] = $request->query->get('season') !== '' ? (int)$request->query->get('season') : null;
+        }
+
+        if ($categories = $request->query->get('categories')) {
+            $filters['categories'] = array_filter(array_map('intval', explode(',', $categories)));
+        }
+        if ($streamings = $request->query->get('streamings')) {
+            $filters['streamings'] = array_filter(array_map('intval', explode(',', $streamings)));
+        }
+        if ($tags = $request->query->get('tags')) {
+            $filters['tags'] = array_filter(array_map('intval', explode(',', $tags)));
+        }
+
+        $items = $itemRepository->findByFilters($filters);
+
+        return $this->render('admin/items.html.twig',[
+            'items' => $items,
+            'categories' => $categories,
+            'tags' => $tags,
+            'streamings' => $streamings,
+        ]);
     }
 }

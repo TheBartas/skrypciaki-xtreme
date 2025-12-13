@@ -9,7 +9,7 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: 
+    background:
         linear-gradient(
             rgba(0, 0, 0, 0.55),
             rgba(0, 0, 0, 0.55)
@@ -40,7 +40,7 @@ body::before {
     color: gold;
     font-family: "Impact", sans-serif;
     letter-spacing: 0.05em;
-    font-size: 6rem; 
+    font-size: 6rem;
 }
 
 .nav-search {
@@ -54,6 +54,7 @@ body::before {
     flex-direction: column;
     align-items: center;
     margin: 4rem 1rem;
+    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -123,6 +124,7 @@ body::before {
 .streaming-logos-section {
     text-align: center;
     margin: 10rem;
+    margin-top: 5rem;
 }
 
 .streaming-logos-section h2 {
@@ -158,4 +160,19 @@ body::before {
 .logo-circle img {
     width: 100px;
     height: 100px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 35dvw;
+}
+
+#buttons a {
+    padding: 0.5em 1em;
+    background: #faf44b;
+    border-radius: 1em;
+    font-size: 24px;
+    text-decoration: none;
+    color: #070720;
 }
