@@ -1,11 +1,11 @@
-#categories {
+#main_content {
     height: 100dvh;
     margin: 0 2em;
     width: 900px;
     display: block;
 }
 
-.categories-heading {
+.heading {
     margin-bottom: 20px;
 }
 
@@ -27,24 +27,24 @@
 }
 
 #table-wraper {
-    height: 73dvh;
+    max-height: 73dvh;
     overflow: scroll;
     overflow-x: hidden;
 }
 
-.admin-categories-table {
+.admin-table {
     width: 100%;
     max-width: 880px;
     border-collapse: collapse;
     background: #e0e0e0;
 }
 
-.admin-categories-table thead {
+.admin-table thead {
     position: sticky;
     top: 0;
 }
 
-.admin-categories-table thead th {
+.admin-table thead th {
     background: #bcbcbc;
     text-align: left;
     padding: 12px 30px;
@@ -52,39 +52,35 @@
     font-size: 16px;
 }
 
-#td-action {
-    text-align: left;
-}
-
-.admin-categories-table tbody tr {
+.admin-table tbody tr {
     border-bottom: 1px solid #c2c2c2;
 }
 
-.admin-categories-table td {
+.admin-table td {
     border-left: 1px solid #c2c2c2;
     padding: 12px 30px;
     font-size: 14px;
 }
 
-.admin-categories-table td a{
+.admin-table td a{
     color: #57271c;
 }
 
-.admin-categories-table a {
+.admin-table a {
     color: #333;
     text-decoration: none;
     font-size: 14px;
 }
 
-.admin-categories-table a:hover {
+.admin-table a:hover {
     text-decoration: underline;
 }
 
-.admin-categories-table td:last-child {
+.admin-table td:last-child {
     white-space: nowrap;
 }
 
-.admin-categories-table .action-separator {
+.admin-table .action-separator {
     margin: 0 10px;
     color: #444;
 }

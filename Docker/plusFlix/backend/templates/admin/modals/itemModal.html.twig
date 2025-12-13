@@ -1,0 +1,81 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.itemModal.css') }}">
+{% endblock %}
+
+<div id="modal" class="modal-bg">
+    <div class="modal">
+        <span class="modal-close-btn">&times;</span>
+        <form id="form" method="post" action="{{ path('admin_item_add') }}">
+            <div class="inputs">
+                <div class="form_input_container">
+                    <label>Tytuł dzieła</label>
+                    <input id="nameInput" type="text" name="name"  placeholder="tytuł dzieła" required><br><br>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Rok produkcji</label>
+                    <input id="yearInput" type="number" name="year"  placeholder="rok produkcji" required><br><br>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Reżyser</label>
+                    <input id="directorInput" type="text" name="director"  placeholder="reżyser" required><br><br>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Actors</label>
+                    <input id="actorsInput" type="text" name="actors" required>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Type</label>
+                    <select id="typeInput" name="type" required>
+                        <option value=1>Movie</option>
+                        <option value=2>Series</option>
+                    </select>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Duration (minutes)</label>
+                    <input id="durationInput" type="number" name="duration" required>
+                </div>
+
+                <div class="form_input_container">
+                    <label>Season (if Series)</label>
+                    <input id="seasonInput" type="number" name="season">
+                </div>
+
+                <div class="form_input_container">
+                    <label>Tagi</label>
+                    <div id="tagsPills" class="pills-container" multiple>
+                        {% for tag in tags %}
+                            <div class="pill" data-value="{{ tag.id }}">{{ tag.tagName }}</div>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" id="tagsInput" name="tags">
+                </div>
+
+                <div class="form_input_container">
+                    <label>Kategorie</label>
+                    <div id="categoriesPills" class="pills-container" multiple>
+                        {% for category in categories %}
+                            <div class="pill" data-value="{{ category.id }}">{{ category.genre }}</div>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" id="categoriesInput" name="categories">
+                </div>
+
+                <div class="form_input_container">
+                    <label>Streamingi</label>
+                    <div id="streamingsPills" class="pills-container" multiple>
+                        {% for streaming in streamings %}
+                            <div class="pill" data-value="{{ streaming.id }}">{{ streaming.platformName }}</div>
+                        {% endfor %}
+                    </div>
+                    <input type="hidden" id="streamingsInput" name="streamings">
+                </div>
+            </div>
+            <button type="submit" id="modal-submit-btn">Zapisz</button>
+        </form>
+    </div>
+</div>

@@ -29,9 +29,9 @@ class AdminController extends AbstractController {
         throw new \LogicException('Will be intercepted');
     }
 
-    #[Route('/main', name: 'admin_main')]
-    public function adminIndex(): Response
-    {
+    #[Route('/', name: 'admin_main')]
+    public function adminIndex(): Response {
+
         /** @var \App\Entity\Admin $admin */
         $admin = $this->getUser();
 

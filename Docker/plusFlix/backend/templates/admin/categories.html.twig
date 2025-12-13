@@ -1,108 +1,56 @@
 {% extends "admin/base.html.twig" %}
 
-{% block body %}
-<div class="categories">
-    <div class="categories-heading">
-        <h1>Kategorie&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addCategoryBtn">🞥</a></h1>
-    </div>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.page.css') }}">
+{% endblock %}
 
+{% block body %}
+<div id="main_content">
+    <div class="heading">
+        <h1>Kategorie&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
+    </div>
 
     <input class="input-research" type="text" placeholder="Szukaj">
 
-    <table class="admin-categories-table">
-        <thead>
-            <tr>
-                <th>Nazwa kategorii</th>
-                <th id="th-action">Liczba powiązanych dzieł</th>
-                <th id="th-action">Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for category in categories %}
+    <div id="table-wraper">
+        <table class="admin-table">
+            <thead>
                 <tr>
-                    <td>{{ category.genre }}</td>
-                    <td id="td-action">{{ category.item_count}}</td>
-                    <td id="td-action">
-                        <a href="#" class="editCategoryBtn"
-                        data-id="{{ category.cat_ID }}"
-                        data-name="{{ category.genre }}">Edytuj</a>
-                        <span class="action-separator">|</span>
-                        <a href="#" 
-                            class="deleteCategoryLink" 
-                            data-id="{{ category.cat_ID }}">Usuń</a>
-                    </td>
+                    <th>Nazwa kategorii</th>
+                    <th>Liczba powiązanych dzieł</th>
+                    <th>Akcje</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <div id="categoryModal" class="modal-categories">
-        <div class="modal-categories-content">
-            <div id="div1">
-                <span class="modal-categories-close">&times;</span>
-            </div>
-            <form id="categoryForm" method="post">
-                <div class="rating-inputs">
-                    <p>Nazwa kategorii</p>
-                    <input type="text" name="genre" id="categoryName" placeholder="Nazwa kategorii" required>
-                </div>
-                <button type="submit" id="modal-categories-SubmitBtn">Zapisz</button>
-            </form>
-        </div>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.genre }}</td>
+                        <td>{{ category.item_count}}</td>
+                        <td>
+                            <a href="#" class="editCategoryBtn"
+                            data-id="{{ category.cat_ID }}"
+                            data-name="{{ category.genre }}">EDYTUJ</a>
+                            <span class="action-separator">|</span>
+                            <a href="#"
+                                class="deleteCategoryLink"
+                                data-id="{{ category.cat_ID }}">USUŃ</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    {% include 'admin/modals/commonModal.html.twig' with {
+        modal_type: 'categoryModal',
+        modal_title: 'Nazwa Kategori',
+        name_field: 'genre',
+        form_action: path('admin_category_add'),
+    }%}
 </div>
 
-
-
-<script>
-    const modal = document.getElementById('categoryModal');
-    const closeBtn = document.querySelector('.modal-categories-close');
-    const addBtn = document.getElementById('addCategoryBtn');
-    const form = document.getElementById('categoryForm');
-    const nameInput = document.getElementById('categoryName');
-
-    addBtn.onclick = () => {
-        modal.style.display = 'block';
-        form.action = "{{ path('admin_category_add') }}";
-        nameInput.value = "";
-    };
-
-    document.querySelectorAll('.editCategoryBtn').forEach(btn => {
-        btn.onclick = () => {
-            modal.style.display = 'block';
-
-            let id = btn.dataset.id;
-            let name = btn.dataset.name;
-
-            nameInput.value = name;
-
-            form.action = "/admin/categories/edit/" + id;
-        };
-    });
-
-    document.querySelectorAll('.deleteCategoryLink').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            if (!confirm('Na pewno chcesz usunąć tę kategorię?')) return;
-
-            let id = this.dataset.id;
-
-            let form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/admin/categories/delete/' + id;
-            document.body.appendChild(form);
-
-            form.submit();
-        });
-    });
-
-
-    closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    };
-</script>
+{% block script %}
+    <script src="{{ asset('js/admin/admin.categoriesModal.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/77e01af8-30a2-4f9a-a546-eb3fca7c40a2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/77e01af8-30a2-4f9a-a546-eb3fca7c40a2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.base.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories-backup.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories-backup.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/commonModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/modals/commonModal.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/itemModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/modals/itemModal.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratingsModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/modals/ratingsModal.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="$PROJECT_DIR$/../php/php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="36Z7u7TEzeUbnXvPMTOysH0GpqV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dn50957&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alpak/Desktop/Zadanie/__skrypciaki-xtreme/Docker/plusFlix/backend/public/css/admin&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\public\css\admin" />
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\templates\admin" />
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\public\js\admin" />
+      <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\public\styles" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\templates\admin\modals" />
+      <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\templates\public" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Version20251210003704.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Docker/plusFlix/backend/migrations/Version20251210003704.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHP Script.Version20251210003704.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PS-252.28238.9" />
+        <option value="bundled-php-predefined-a98d8de5180a-58f58c5035b3-com.jetbrains.php.sharedIndexes-PS-252.28238.9" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="" />
+      <created>1765202464220</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1765202464220</updated>
+      <workItem from="1765202467973" duration="776000" />
+      <workItem from="1765369680528" duration="117000" />
+      <workItem from="1765371600454" duration="5558000" />
+      <workItem from="1765455768672" duration="22000" />
+      <workItem from="1765455908244" duration="5504000" />
+      <workItem from="1765498932952" duration="14821000" />
+      <workItem from="1765579383035" duration="5038000" />
+      <workItem from="1765584575658" duration="16813000" />
+      <workItem from="1765601957623" duration="1083000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

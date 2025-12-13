@@ -19,10 +19,11 @@ class ItemRepository extends ServiceEntityRepository
     public function findByFilters(array $filters)
     {
         $qb = $this->createQueryBuilder('i');
+        $qb->addOrderBy('i.name', 'ASC');
 
         // ---------------- Scalar filters ----------------
         if (!empty($filters['name'])) {
-            $qb->andWhere('LOWER(i.name) LIKE LOWER(:name)')
+            $qb->andWhere('i.name LIKE :name')
                 ->setParameter('name', '%' . $filters['name'] . '%');
         }
 
@@ -32,12 +33,12 @@ class ItemRepository extends ServiceEntityRepository
         }
 
         if (!empty($filters['director'])) {
-            $qb->andWhere('LOWER(i.director) LIKE LOWER(:director)')
+            $qb->andWhere('i.director LIKE :director')
                 ->setParameter('director', '%' . $filters['director'] . '%');
         }
 
         if (!empty($filters['actors'])) {
-            $qb->andWhere('LOWER(i.actors) LIKE LOWER(:actors)')
+            $qb->andWhere('i.actors LIKE :actors')
                 ->setParameter('actors', '%' . $filters['actors'] . '%');
         }
 
@@ -67,13 +68,19 @@ class ItemRepository extends ServiceEntityRepository
                 ->setParameter('categories', $filters['categories']);
         }
 
+        if (!empty($filters['tags'])) {
+            $qb->leftJoin('i.tags', 't')
+                ->andWhere($qb->expr()->in('t.id', ':tags'))
+                ->setParameter('tags', $filters['tags']);
+        }
+
         if (!empty($filters['streamings'])) {
             $qb->leftJoin('i.streamings', 's')
                 ->andWhere($qb->expr()->in('s.id', ':streamings'))
                 ->setParameter('streamings', $filters['streamings']);
         }
 
-        $qb->distinct(); // avoid duplicates from joins
+        $qb->groupBy('i.id');
 
         return $qb->getQuery()->getResult();
     }
@@ -95,29 +102,4 @@ class ItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    //    /**
-    //     * @return Item[] Returns an array of Item objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('i.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Item
-    //    {
-    //        return $this->createQueryBuilder('i')
-    //            ->andWhere('i.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
 }
