@@ -1,0 +1,138 @@
+.ratings {
+    width: 900px;
+    display: block;
+}
+
+.input-research {
+    border: 1px solid #707070;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+    padding: 7px 6px 7px 6px;
+    margin-bottom: 50px;
+    background-color: #fafafa;
+}
+
+.admin-rating-table {
+    width: 100%;
+    max-width: 880px;
+    border-collapse: collapse;
+    background: #e0e0e0;
+}
+
+.admin-rating-table thead th {
+    background: #bcbcbc;
+    text-align: left;
+    padding: 12px 30px;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+#th-action {
+    text-align: center;
+}
+
+.admin-rating-table tbody tr {
+    border-bottom: 1px solid #c2c2c2;
+}
+
+.admin-rating-table td {
+    padding: 12px 30px;
+    font-size: 14px;
+}
+
+.admin-rating-table a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.admin-rating-table a:hover {
+    text-decoration: underline;
+}
+
+.admin-rating-table td:last-child {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.admin-table .action-separator {
+    margin: 0 6px 0 10px;
+    color: #444;
+} 
+
+.modal-rating {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.modal-rating-content {
+    display: block;
+    background: #acacac;
+    padding: 15px 20px 15px 20px;
+    margin: 10% auto;
+    width: 600px;
+    height: 320px;
+    border-radius: 2px;
+}
+
+.modal-rating-content #div1 {
+    margin-bottom: 30px;
+}
+
+.modal-rating-content #div2 {
+    padding-left: 30px;
+}
+
+#ratingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 30px;
+}
+
+.rating-inputs {
+    margin-bottom: 40px;
+}
+
+.rating-inputs input {
+    width: 100%; 
+    max-width: 390px;
+    padding: 10px 8px 10px 8px;
+    border: 1px solid #acacac;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.rating-inputs p {
+    margin: 6px 0 4px 0;
+}
+
+#modal-ratings-SubmitBtn {
+    width: 100%;
+    max-width: 80px;
+    padding: 4px 3px 4px 3px;
+    align-self: flex-end;
+    background-color: #545F71;
+    border: 1px solid #545F71;
+    border-radius: 5px;
+    color: #fafafa;
+}
+
+#modal-ratings-SubmitBtn:hover {
+    background-color: #616e83;
+}
+
+.modal-rating-close {
+    float: left;
+    font-size: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}

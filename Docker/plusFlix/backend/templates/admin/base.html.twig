@@ -3,7 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Panel Admina</title>
-        {% block stylesheets %}<link rel="stylesheet" href="{{ asset('styles/admin.css') }}">{% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/admin/admin.base.css') }}">
+        {% block stylesheets %}
+{#            <link rel="stylesheet" href="{{ asset('css/admin/admin.ratings.css') }}">#}
+{#            <link rel="stylesheet" href="{{ asset('css/admin/admin.categories.css') }}">#}
+        {% endblock %}
+
     </head>
     <body>
         <nav class="admin-nav">
@@ -15,4 +20,6 @@
         </nav>
         {% block body %}{% endblock %}
     </body>
+
+    {% block script %}{% endblock %}
 </html>

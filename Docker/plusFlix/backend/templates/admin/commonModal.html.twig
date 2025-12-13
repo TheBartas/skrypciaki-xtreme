@@ -1,0 +1,16 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.commonModal.css') }}">
+{% endblock %}
+
+<div id="{{ modal_type }}" class="modal-bg">
+    <div class="modal">
+        <span class="modal-close-btn">&times;</span>
+        <form id="categoryForm" method="post">
+            <div class="category-inputs">
+                <p>Nazwa kategorii</p>
+                <input type="text" name="genre" id="categoryName" placeholder="nazwa kategorii..." required>
+            </div>
+            <button type="submit" id="modal-submit-btn">Zapisz</button>
+        </form>
+    </div>
+</div>

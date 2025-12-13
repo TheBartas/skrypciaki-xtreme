@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.base.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.categories.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.ratings.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/admin/admin.rating.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminRatingController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_categories.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_categories.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/sql/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/RatingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/RatingRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +26,14 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -31,22 +47,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dn50957&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alpak/Desktop/Nowy folder/skrypciaki-xtreme/Docker/plusFlix/backend/public/styles&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Merging dn50957",
+    "last_opened_file_path": "C:/Users/alpak/Desktop/Nowy folder/skrypciaki-xtreme/Docker/plusFlix/backend/public/styles",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\public\styles" />
@@ -87,6 +104,7 @@
       <workItem from="1765455908244" duration="5504000" />
       <workItem from="1765498932952" duration="14821000" />
       <workItem from="1765579383035" duration="5038000" />
+      <workItem from="1765584575658" duration="5076000" />
     </task>
     <servers />
   </component>

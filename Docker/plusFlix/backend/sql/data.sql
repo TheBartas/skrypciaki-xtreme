@@ -250,8 +250,7 @@ INSERT INTO rating (rating, comment) VALUES
     (3.7, 'Nie do końca mój gust'),
     (4.5, 'Bardzo dobry'),
     (4.3, 'Fajne efekty'),
-    (3.9, 'Całkiem spoko'),
-    (4.1, 'Polecam');
+    (3.9, 'Całkiem spoko');
 
 
 -- ============================
