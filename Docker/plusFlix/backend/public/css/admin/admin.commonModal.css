@@ -11,8 +11,8 @@
 
 .modal {
     position: absolute;
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;*/
     background: #fff;
     width: 400px;
     top: 20%;
@@ -42,6 +42,10 @@
     margin-top: 40px;
     display: flex;
     flex-direction: column;
+}
+
+.inputs {
+    left: 0;
 }
 
 .inputs p {
