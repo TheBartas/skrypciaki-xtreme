@@ -39,6 +39,22 @@
 
 <div class="search-results-container">
 
+    <button id="filter-toggle-btn">Filtry</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const btn = document.getElementById("filter-toggle-btn");
+        const panel = document.querySelector(".filters-panel");
+
+        btn.addEventListener("click", function() {
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        });
+    });
+    </script>
+    
     <aside class="filters-panel">
         <h3>Filtry</h3>
 
