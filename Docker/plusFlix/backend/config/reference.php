@@ -259,7 +259,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         formats?: array<string, string|list<scalar|null>>,
  *     },
  *     assets?: bool|array{ // Assets configuration
- *         enabled?: bool, // Default: false
+ *         enabled?: bool, // Default: true
  *         strict_mode?: bool, // Throw an exception if an entry is missing from the manifest.json. // Default: false
  *         version_strategy?: scalar|null, // Default: null
  *         version?: scalar|null, // Default: null
@@ -325,7 +325,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         }>,
  *     },
  *     validation?: bool|array{ // Validation configuration
- *         enabled?: bool, // Default: false
+ *         enabled?: bool, // Default: true
  *         enable_attributes?: bool, // Default: true
  *         static_method?: list<scalar|null>,
  *         translation_domain?: scalar|null, // Default: "validators"
@@ -1234,6 +1234,21 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *     }>,
  *     role_hierarchy?: array<string, string|list<scalar|null>>,
  * }
+ * @psalm-type WebProfilerConfig = array{
+ *     toolbar?: bool|array{ // Profiler toolbar configuration
+ *         enabled?: bool, // Default: false
+ *         ajax_replace?: bool, // Replace toolbar on AJAX requests // Default: false
+ *     },
+ *     intercept_redirects?: bool, // Default: false
+ *     excluded_ajax_paths?: scalar|null, // Default: "^/((index|app(_[\\w]+)?)\\.php/)?_wdt"
+ * }
+ * @psalm-type DebugConfig = array{
+ *     max_items?: int, // Max number of displayed items past the first level, -1 means no limit. // Default: 2500
+ *     min_depth?: int, // Minimum tree depth to clone all the items, 1 is default. // Default: 1
+ *     max_string_length?: int, // Max length of displayed strings, -1 means no limit. // Default: -1
+ *     dump_destination?: scalar|null, // A stream URL where dumps should be written to. // Default: null
+ *     theme?: "dark"|"light", // Changes the color of the dump() output when rendered directly on the templating. "dark" (default) or "light". // Default: "dark"
+ * }
  * @psalm-type ConfigType = array{
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
@@ -1253,6 +1268,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         maker?: MakerConfig,
  *         twig?: TwigConfig,
  *         security?: SecurityConfig,
+ *         web_profiler?: WebProfilerConfig,
+ *         debug?: DebugConfig,
  *     },
  *     "when@prod"?: array{
  *         imports?: ImportsConfig,
@@ -1273,6 +1290,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
  *         doctrine_migrations?: DoctrineMigrationsConfig,
  *         twig?: TwigConfig,
  *         security?: SecurityConfig,
+ *         web_profiler?: WebProfilerConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
  *         imports?: ImportsConfig,

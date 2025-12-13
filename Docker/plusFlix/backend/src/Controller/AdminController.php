@@ -2,53 +2,42 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Cookie;
+use App\Entity\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
-use App\Service\AdminSecurityService;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/admin')]
 class AdminController extends AbstractController {
 
-    #[Route('/login', name: 'admin_login', methods: ['GET','POST'])]
-    public function login(Request $request): Response
+    #[Route('/login', name: 'admin_login', methods: ['GET', 'POST'])]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $error = null;
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
 
-        if ($request->isMethod('POST')) {
-            $user = $request->request->get('username');
-            $pass = $request->request->get('password');
+        return $this->render('admin/login.html.twig', [ 'last_username' => $lastUsername, 'error' => $error, ]);
 
-            $adminLogin = $_ENV['ADMIN_LOGIN'] ?? 'ENV_ADMIN_LOGIN_MISSING';
-            $adminPass = $_ENV['ADMIN_PASS'] ?? 'ENV_ADMIN_PASS_MISSING';
+    }
 
-            if ($user === $adminLogin && $pass === $adminPass) {
-                $response = $this->redirectToRoute('admin_main');
-                $response->headers->setCookie(new Cookie('admin_logged_in', '1'));
-                return $response;
-            } else {
-                $error = 'Niepoprawny login lub hasło';
-            }
-        }
-
-        return $this->render('admin/login.html.twig', [
-            'error' => $error
-        ]);
+    #[Route('/logout', name: 'admin_logout', methods: ['POST'])]
+    public function logout(): never
+    {
+        throw new \LogicException('Will be intercepted');
     }
 
     #[Route('/main', name: 'admin_main')]
-    public function adminIndex(
-        Request $request,
-        AdminSecurityService $adminSecurityService
-        ): Response {
+    public function adminIndex(): Response
+    {
+        /** @var \App\Entity\Admin $admin */
+        $admin = $this->getUser();
 
-        if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-            return $response;
-        }
-
-        return $this->render('admin/base.html.twig');
+        return $this->render('admin/base.html.twig', [
+            'admin' => $admin,
+        ]);
     }
 }
 

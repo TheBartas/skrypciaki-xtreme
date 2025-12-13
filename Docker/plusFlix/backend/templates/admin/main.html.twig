@@ -1,0 +1,10 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <h1>Witaj, {{ admin.username }}!</h1>
+    <p>To jest panel admina.</p>
+
+    <form action="{{ path('admin_logout') }}" method="post">
+        <button type="submit">Wyloguj</button>
+    </form>
+{% endblock %}

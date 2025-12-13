@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="admin-layout">
-            <div class="admin-base"> 
+            <div class="admin-base">
                 <aside class="admin-nav">
                     <ul>
                         <li><a href="/admin/streamings">Streamingi</a></li>
@@ -18,13 +18,13 @@
                         <li><a href="/admin/categories">Kategorie</a></li>
                         <li><a href="/admin/tags">Tagi</a></li>
                         <li><a href="/admin/ratings">Oceny</a></li>
+                        <li>
+                            <form action="{{ path('admin_logout') }}" method="post" style="margin:0;">
+                                <button type="submit" class="logout-btn">Wyloguj</button>
+                            </form>
+                        </li>
                     </ul>
                 </aside>
-            </div>
-            <div class="admin-extended">
-                {% block body %}
-                    <h1>Witaj Admin!</h1>
-                {% endblock %}
             </div>
         </div>
     </body>
