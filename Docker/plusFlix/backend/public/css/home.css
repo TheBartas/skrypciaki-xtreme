@@ -37,7 +37,7 @@ body::before {
 .app-name {
     text-align: center;
     margin-top: 8.5rem;
-    color: #fcf64c;
+    color: gold;
     font-family: "Impact", sans-serif;
     letter-spacing: 0.05em;
     font-size: 6rem; 
@@ -62,6 +62,7 @@ body::before {
     width: 90%;
     max-width: 1000px;
     margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .search-bar input {
@@ -89,6 +90,29 @@ body::before {
     width: 18px;
     height: 18px;
 }
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(30,30,30,0.95);
+    border: 1px solid #444;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #fff;
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.suggestion-item {
+    padding: 0.75rem 1rem;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
 
 .search-info {
     font-size: 1.2rem;

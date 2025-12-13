@@ -9,6 +9,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ItemRepository;
 use App\Entity\Item;
+use App\Entity\Category;
+use App\Entity\Tag;
+use App\Service\FilterOptionsProviderService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/')]
@@ -19,23 +22,53 @@ class HomeController extends AbstractController {
         return $this->render('home/index.html.twig');
     }
 
-    #[Route('/search', name: 'search_results')]
-    public function search(Request $request, ManagerRegistry $doctrine): Response
+    #[Route('/search-suggestions', name: 'search_suggestions', methods: ['GET'])]
+    public function suggestions(Request $request, ItemRepository $itemRepository): JsonResponse
     {
-        $query = $request->query->get('q', '');
+        $q = $request->query->get('q', '');
+        if (strlen($q) < 2) {
+            return $this->json([]);
+        }
 
-        $repository = $doctrine->getRepository(Item::class);
+        $results = $itemRepository->findSuggestionsByQuery($q);
 
-        $results = $repository->createQueryBuilder('i')
-            ->where('LOWER(i.name) LIKE :search')
-            ->setParameter('search', '%' . strtolower($query) . '%')
-            ->orderBy('i.name', 'ASC')
-            ->getQuery()
-            ->getResult();
+        return $this->json($results);
+    }
+
+
+
+    #[Route('/search', name: 'search_results')]
+    public function search(Request $request, ItemRepository $itemRepository, ManagerRegistry $doctrine, FilterOptionsProviderService $filterOptionsProviderService): Response
+    {
+        $filters = [
+            'name' => $request->query->get('q', ''),
+            'type' => $request->query->get('type', ''),
+            'categories' => $request->query->get('category') ? [(int)$request->query->get('category')] : [],
+            'streamings' => $request->query->get('platform') ? [(int)$request->query->get('platform')] : [],
+            'tags' =>  array_filter(array_map('intval', $request->query->all('tags'))),
+            'director' => $request->query->get('director', ''),
+            'year_range' => $request->query->get('year_range', ''),
+        ];
+
+        $sort = $request->query->get('sort', 'popularity');
+        $results = $itemRepository->findByFiltersSorted($filters, $sort);
+
+        $options = $filterOptionsProviderService->getOptions();
 
         return $this->render('search/results.html.twig', [
-            'query' => $query,
+            'query' => $filters['name'],
             'results' => $results,
+            'sort'    => $sort,
+            
+            'categories' => $options['categories'],
+            'tags' => $options['tags'],
+            'authors' => $options['authors'],
+
+            'selectedType' => $filters['type'],
+            'selectedCategory' => $filters['categories'][0] ?? null,
+            'selectedTags' => $filters['tags'],
+            'selectedDirector' => $filters['director'],
+            'selectedYearRange'=> $filters['year_range']
         ]);
     }
 

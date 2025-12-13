@@ -1,4 +1,37 @@
 {% extends 'search/base.html.twig' %}
+{% set STREAMING_DATA_BY_ID = {
+    1: {
+        name: "Netflix",
+        logo: "https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=700&h=456",
+        link: "https://www.netflix.com"
+    },
+    2: {
+        name: "HBO Max",
+        logo: "https://fwcdn.pl/nph/867323/2025/63747.7.jpg",
+        link: "https://www.hbomax.com"
+    },
+    3: {
+        name: "Disney+",
+        logo: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25357066/Disney__Logo_March_2024.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
+        link: "https://www.disneyplus.com"
+    },
+    4: {
+        name: "Amazon Prime Video",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Amazon_Prime_Video_logo_%282024%29.svg/1200px-Amazon_Prime_Video_logo_%282024%29.svg.png",
+        link: "https://www.primevideo.com"
+    },
+    5: {
+        name: "Apple TV+",
+        logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs5Uv6cx7KcDlTFANEqZFj-HK0HlwpIu7Nhg&s",
+        link: "https://tv.apple.com"
+    },
+    6: {
+        name: "Hulu",
+        logo: "https://store-images.s-microsoft.com/image/apps.60756.9007199266246590.a8642808-8fcd-48e6-805e-aede1f148787.c1baaaf0-7b9d-4e6e-9661-56452a1f7ddd",
+        link: "https://www.hulu.com"
+    }
+} %}
+
 
 {% block title %}Wyniki wyszukiwania{% endblock %}
 
@@ -9,59 +42,106 @@
     <aside class="filters-panel">
         <h3>Filtry</h3>
 
-        <div class="filter-group">
-            <label>Typ</label>
-            <select>
-                <option>Wszystkie</option>
-                <option>Film</option>
-                <option>Serial</option>
-            </select>
-        </div>
+        <form method="get" action="{{ path('search_results') }}" id="filters-form">
+            <input type="hidden" name="q" value="{{ query }}">
+            
+            <div class="filter-group">
+                <label>Typ</label>
+                <select name="type">
+                    <option value="">Wszystkie</option>
+                    <option value="1" {% if selectedType == '1' %}selected{% endif %}>Film</option>
+                    <option value="2" {% if selectedType == '2' %}selected{% endif %}>Serial</option>
+                </select>
+            </div>
 
-        <div class="filter-group">
-            <label>Rok produkcji</label>
-            <select>
-                <option>Dowolny</option>
-                <option>2020+</option>
-                <option>2010–2019</option>
-                <option>2000–2009</option>
-            </select>
-        </div>
+            <div class="filter-group">
+                <label>Rok produkcji</label>
+                <select name="year_range">
+                    <option value="">Dowolny</option>
+                    <option value="2020+"        {% if selectedYearRange == "2020+" %}selected{% endif %}>2020+</option>
+                    <option value="2010-2019"    {% if selectedYearRange == "2010-2019" %}selected{% endif %}>2010–2019</option>
+                    <option value="2000-2009"    {% if selectedYearRange == "2000-2009" %}selected{% endif %}>2000–2009</option>
+                    <option value="1990-1999"    {% if selectedYearRange == "1990-1999" %}selected{% endif %}>1990-1999</option>
+                    <option value="1980-1989"    {% if selectedYearRange == "1980-1989" %}selected{% endif %}>1980-1989</option>
+                    <option value="1970-1979"    {% if selectedYearRange == "1970-1979" %}selected{% endif %}>1970-1979</option>
+                </select>
+            </div>
 
-        <div class="filter-group">
-            <label>Autor</label>
-            <select>
-                <option>Dowolny</option>
-            </select>
-        </div>
+            <div class="filter-group">
+                <label>Autor</label>
+                <select name="director">
+                    <option value="">Dowolny</option>
+                    {% for director in authors %}
+                        <option value="{{ director }}" {% if director == selectedDirector %}selected{% endif %}>
+                            {{ director }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <div class="filter-group">
-            <label>Tagi</label>
-            <select>
-                <option>Dowolne</option>
-            </select>
-        </div>
+            <div class="dropdown-checkbox">
+                <label>Tagi</label>
+                <button type="button" class="dropdown-btn">Wszystkie</button>
+                <div class="dropdown-content">
+                    {% for tag in tags %}
+                        <label class="checkbox-option">
+                            <input
+                                type="checkbox"
+                                name="tags[]"
+                                value="{{ tag.id }}"
+                                {% if selectedTags is defined and tag.id in selectedTags %}checked{% endif %}
+                            >
+                            {{ tag.tagName }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
 
-        <div class="filter-group">
-            <label>Kategorie</label>
-            <select>
-                <option>Dowolne</option>
-            </select>
-        </div>
+            <div class="filter-group">
+                <label>Kategorie</label>
+                <select name="category">
+                    <option value="">Dowolne</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == selectedCategory %}selected{% endif %}>
+                            {{ category.genre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <button type="submit">Gotowe</button>
+                <button type="button" id="clear-filters">Wyczyść</button>
+            </div>
+        </form>
     </aside>
 
+    <script>
+        document.getElementById('clear-filters').addEventListener('click', function() {
+            const form = this.closest('form');
+            const selects = form.querySelectorAll('select');
+            selects.forEach(select => select.value = '');
+            const tagCheckboxes = form.querySelectorAll('input[name="tags[]"]');
+            tagCheckboxes.forEach(cb => cb.checked = false);
+        });
+    </script>
 
     <main class="results-main">
 
         <div class="results-header">
-            <h2>Wyniki wyszukiwania dla: <span class="query">{{ query }}</span></h2>
+            <div class="query-container">
+                <h2>Wyniki wyszukiwania dla: <span class="query">{{ query }}</span></h2>
+                {% if query %}
+                    <button id="clear-query-btn" title="Usuń zapytanie" >×</button>
+                {% endif %}
+            </div>
 
             <div class="sort-box">
                 <label><h2>Sortuj wg: </h2></label>
-                <select>
-                    <option>Popularność</option>
-                    <option>Alfabetycznie</option>
-                    <option>Rok produkcji (najnowsze)</option>
+                <select name="sort" form="filters-form" onchange="this.form.submit()">
+                    <option value="popularity"  {{ sort == 'popularity'  ? 'selected' }}>Popularność</option>
+                    <option value="alpha"       {{ sort == 'alpha'       ? 'selected' }}>Alfabetycznie</option>
+                    <option value="year_desc"   {{ sort == 'year_desc'   ? 'selected' }}>Rok produkcji (najnowsze)</option>
                 </select>
             </div>
         </div>
@@ -76,7 +156,16 @@
                             <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
 
                             <div class="streaming-icons">
-                                <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">
+                                {% for streaming in item.streamings %}
+                                    {% set data = STREAMING_DATA_BY_ID[streaming.id] ?? null %}
+                                    {% if data %}
+                                        {% include 'components/streaming_logo.html.twig' with {
+                                            name: data.name,
+                                            logo: data.logo,
+                                            link: data.link
+                                        } %}
+                                    {% endif %}
+                                {% endfor %}
                             </div>
 
 
@@ -103,6 +192,19 @@
 
     </main>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const clearBtn = document.getElementById('clear-query-btn');
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            const url = new URL(window.location.href);
+            url.searchParams.delete('q'); // remove query param
+            window.location.href = url.toString();
+        });
+    }
+});
+</script>
 
 {% block javascript %}
     <script src="{{ asset('js/favorites.js') }}"></script>
