@@ -39,18 +39,21 @@
             <h2>Admin login</h2>
 
             {% if error %}
-                <p class="admin-error">{{ error }}</p>
+                <p class="admin-error">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </p>
             {% endif %}
 
-            <form method="post" action="{{ path('admin_login') }}" class="admin-form">
+            <form action="{{ path('admin_login') }}" method="post" class="admin-form">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="_password" required>
 
                 <button type="submit">Login</button>
             </form>
+
         </div>
     </div>
 {% endblock %}
