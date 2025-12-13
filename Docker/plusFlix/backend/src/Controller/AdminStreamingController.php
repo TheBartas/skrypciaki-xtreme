@@ -17,10 +17,6 @@ class AdminStreamingController extends AbstractController {
     #[Route('/streamings', name: 'admin_streamings')]
     public function streamingsList(Request $request, StreamingRepository $streamingsRepository) : Response {
 
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
-
         $streamings = $streamingsRepository->findWithItemCount();
         return $this->render('admin/streamings.html.twig',[
             'streamings' => $streamings,
@@ -34,9 +30,6 @@ class AdminStreamingController extends AbstractController {
         EntityManagerInterface $em
     ) : Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $em->remove($streaming);
         $em->flush();
@@ -49,9 +42,6 @@ class AdminStreamingController extends AbstractController {
         EntityManagerInterface $em
     ) : Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $platformName = $request->request->get('platform_name');
         $streaming = new Streaming();
@@ -70,9 +60,6 @@ class AdminStreamingController extends AbstractController {
         EntityManagerInterface $em
     ) : Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $platformName = $request->request->get('platform_name');
         $streaming->setPlatformName($platformName);

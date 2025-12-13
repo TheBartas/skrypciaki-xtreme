@@ -17,9 +17,6 @@ class AdminTagController extends AbstractController {
     #[Route('/tags', name: 'admin_tags')]
     public function tagsList(Request $request, TagRepository $tagRepository): Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $tags = $tagRepository->findWithItemCount();
         return $this->render('admin/tags.html.twig', [
@@ -30,9 +27,6 @@ class AdminTagController extends AbstractController {
     #[Route('/tags/add', name: 'admin_tag_add', methods: ['POST'])]
     public function tagAdd(Request $request, EntityManagerInterface $em): Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $name = $request->request->get('name');
         $tag = new Tag();
@@ -50,9 +44,6 @@ class AdminTagController extends AbstractController {
         Tag $tag,
         EntityManagerInterface $em): Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $name = $request->request->get('name');
         $tag->setTagName($name);
@@ -67,9 +58,6 @@ class AdminTagController extends AbstractController {
         Tag $tag,
         EntityManagerInterface $em): Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $em->remove($tag);
         $em->flush();

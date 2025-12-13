@@ -20,10 +20,6 @@ class AdminCategoryController extends AbstractController {
         CategoryRepository $categoryRepository
         ) : Response {
 
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
-
         $categories = $categoryRepository->findWithItemCount();
 
         return $this->render('admin/categories.html.twig', [
@@ -39,10 +35,6 @@ class AdminCategoryController extends AbstractController {
         ) : Response
     {
 
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
-
         $em->remove($category);
         $em->flush();
         return $this->redirectToRoute('admin_categories');
@@ -54,10 +46,6 @@ class AdminCategoryController extends AbstractController {
         EntityManagerInterface $em
         ) : Response
     {
-
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $genre = $request->request->get('genre');
         $category = new Category();
@@ -76,9 +64,6 @@ class AdminCategoryController extends AbstractController {
         EntityManagerInterface $em
         ) : Response
     {
-        //if ($response = $adminSecurityService->checkAdminLoggedIn($request)) {
-        //  return $response;
-        //}
 
         $genre = $request->request->get('genre');
         $category->setGenre($genre);
