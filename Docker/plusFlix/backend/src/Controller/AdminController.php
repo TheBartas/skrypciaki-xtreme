@@ -30,10 +30,10 @@ class AdminController extends AbstractController {
     }
 
     #[Route('/', name: 'admin_main')]
-    public function adminIndex(
-        Request $request,
-        AdminSecurityService $adminSecurityService
-        ): Response {
+    public function adminIndex(): Response {
+
+        /** @var \App\Entity\Admin $admin */
+        $admin = $this->getUser();
 
         return $this->render('admin/base.html.twig', [
             'admin' => $admin,

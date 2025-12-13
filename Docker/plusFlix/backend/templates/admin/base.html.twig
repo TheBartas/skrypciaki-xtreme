@@ -5,8 +5,6 @@
         <title>Panel Admina</title>
         <link rel="stylesheet" href="{{ asset('css/admin/admin.base.css') }}">
         {% block stylesheets %}
-{#            <link rel="stylesheet" href="{{ asset('css/admin/admin.ratings.css') }}">#}
-{#            <link rel="stylesheet" href="{{ asset('css/admin/admin.categories.css') }}">#}
         {% endblock %}
 
     </head>
@@ -17,8 +15,13 @@
             <a href="/admin/categories">Kategorie</a>
             <a href="/admin/tags">Tagi</a>
             <a href="/admin/ratings">Oceny</a>
+            <form action="{{ path('admin_logout') }}" method="post" style="margin:0;">
+                <button type="submit" class="logout-btn">Wyloguj</button>
+            </form>
         </nav>
-        {% block body %}{% endblock %}
+        {% block body %}
+            <h1 style="font-size: 64px; margin-left: 1em">Witaj admin!</h1>
+        {% endblock %}
     </body>
 
     {% block script %}{% endblock %}
