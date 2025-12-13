@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/579a2221-7e9a-4d8f-8493-266cd85ffe6e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/579a2221-7e9a-4d8f-8493-266cd85ffe6e/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/77e01af8-30a2-4f9a-a546-eb3fca7c40a2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/77e01af8-30a2-4f9a-a546-eb3fca7c40a2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86a0aa8a-517a-4665-a0b5-463db047397e.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86a0aa8a-517a-4665-a0b5-463db047397e/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_item.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,6 +86,7 @@
       <workItem from="1765455768672" duration="22000" />
       <workItem from="1765455908244" duration="5504000" />
       <workItem from="1765498932952" duration="14821000" />
+      <workItem from="1765579383035" duration="5038000" />
     </task>
     <servers />
   </component>

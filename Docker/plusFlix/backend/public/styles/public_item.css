@@ -7,6 +7,12 @@
     padding: 2em;
 }
 
+#rightColumn {
+    margin: 2em;
+    background: rgb(220, 220, 220);
+    border-radius: 1em;
+}
+
 .bigPoster, .bigPoster img {
     width: 300px;
     height: 420px;
@@ -20,27 +26,55 @@
 
 .tag {
     padding: 0.3em 0.8em;
-    background-color: rgb(47, 47, 47);
-    color: #ebf1f1;
+    background: rgb(220, 220, 220);
     border-radius: 1em;
 }
 
 #itemScore {
-    background-color: rgb(47, 47, 47);
+    display: flex;
+    flex-direction: column;
+
+    background: rgb(255, 255, 255);
+    border-radius: 1em;
+    margin: 0.5em 0;
     width: 300px;
     height: 150px;
+
+    align-items: center;
+}
+
+#score-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 2em;
+}
+
+#score-container-small {
+    display: flex;
+    margin: 0 1em;
+    align-items: center;
+}
+
+.rating p{
+    margin: 0.5em 1em;
+}
+
+.star-symbol {
+    font-size: 2em;
+    color: #dcb253;
+    cursor: pointer;
+}
+
+#commentInput {
+    width: 80%;
+    height: 50%;
+    border-radius: 1em;
 }
 
 #similarItemsContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-/*.similarItem {*/
-/*    margin: 0.5em;*/
-/*    width: 100px;*/
-/*    height: 150px;*/
-/*}*/
 
 #streamingsContainer {
     background-color: rgb(47, 47, 47);
@@ -154,3 +188,28 @@
     font-size: 0.9rem;
     color: #666;
 }
+
+#add-to-favorites {
+    display: flex;
+    position: relative;
+    top: 0;
+    right: 0;
+    background: rgb(220, 220, 220);
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 1em;
+    width: auto;
+    height: auto;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.rating {
+    background: rgb(220, 220, 220);
+    font-size: 16px;
+    padding: 0.8em 1em;
+    border: none;
+    border-radius: 1em;
+}
+

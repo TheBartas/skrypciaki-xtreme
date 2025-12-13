@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Rating;
 use App\Repository\ItemRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,4 +94,25 @@ class HomeController extends AbstractController {
         ]);
     }
 
+    #[Route('/rating/add', name: 'rating_add', methods: ['POST'])]
+    public function addItem(Request $request, EntityManagerInterface $em, ItemRepository $itemRepository): Response
+    {
+        $item = $itemRepository->find($request->request->get('itemId'));
+
+        $rating = new Rating();
+        $rating->setRating($request->request->get('rating'));
+        $rating->setComment($request->request->get('comment'));
+
+        $em->persist($rating);
+        $em->flush();
+
+        $item->addRating($rating);
+        $em->persist($item);
+        $em->flush();
+
+        return $this->json([
+            'success' => true,
+            'id' => $rating->getId()
+        ]);
+    }
 }
