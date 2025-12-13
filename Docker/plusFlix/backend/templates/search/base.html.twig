@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}PlusFlix{% endblock %}</title>
     <link rel="stylesheet" href="/css/navbar.css">
-    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="/css/search_results.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <div class="nav-center">
         <div class="nav-search">
             <form action="/search" method="GET" class="nav-search">
-                <input name="name" type="text" placeholder="Szukaj...">
+                <input name="q" type="text" placeholder="Szukaj...">
                 <button>
                     <img src="https://cdn-icons-png.flaticon.com/256/2866/2866321.png" alt="search">
                 </button>
@@ -26,31 +26,13 @@
     </div>
 
     <div class="nav-right">
-        <a href="/search">Wszystkie</a>
+        <a href="/popularne">Popularne</a>
         <a href="/favorites">Ulubione</a>
-        <button id="themeToggle" class="theme-toggle"></button>
+        <button class="theme-toggle">ciemno/jasno</button>
     </div>
 </nav>
 
 {% block body %}{% endblock %}
 
 </body>
-
-{% block javascript %}{% endblock %}
-<script>
-    let isDark = false;
-    const themeToggle = document.getElementById("themeToggle");
-
-    themeToggle.onclick = () => {
-        if(!isDark) {
-            themeToggle.classList.add("dark");
-        }
-        else {
-            themeToggle.classList.remove("dark");
-        }
-
-        isDark = !isDark;
-    };
-</script>
-
 </html>
