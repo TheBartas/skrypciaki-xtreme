@@ -1,0 +1,21 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.commonModal.css') }}">
+{% endblock %}
+
+<div id="ratingModal" class="modal-bg">
+    <div class="modal">
+        <span class="modal-close-btn">&times;</span>
+        <div id="div2">
+            <h2 id="modalTitle">Placeholder</h2>
+        </div>
+        <form id="form" method="post">
+            <div class="inputs">
+                <p>Ocena</p>
+                <input type="text" name="rating" id="ratingID" placeholder="Ocena" required>
+                <p>Komentarz</p>
+                <input type="text" name="comment" id="commentID" placeholder="Komentarz">
+            </div>
+            <button class="ratingBtn" type="submit" id="modal-submit-btn">Zapisz</button>
+        </form>
+    </div>
+</div>

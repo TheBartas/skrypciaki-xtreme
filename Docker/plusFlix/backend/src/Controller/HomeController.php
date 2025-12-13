@@ -21,23 +21,39 @@ class HomeController extends AbstractController {
         return $this->render('public/home/index.html.twig');
     }
 
-    #[Route('/search', name: 'search_results')]
-    public function search(Request $request, ManagerRegistry $doctrine): Response
+    #[Route('/search', name: 'search_results', methods: ['GET'])]
+    public function returnByFilter(Request $request, ItemRepository $itemRepository): Response
     {
-        $query = $request->query->get('q', '');
+        $filters = [];
 
-        $repository = $doctrine->getRepository(Item::class);
+        if ($name = $request->query->get('name')) $filters['name'] = $name;
+        if ($year = $request->query->get('year')) $filters['year'] = (int)$year;
+        if ($director = $request->query->get('director')) $filters['director'] = $director;
+        if ($actors = $request->query->get('actors')) $filters['actors'] = $actors;
+        if ($type = $request->query->get('type')) $filters['type'] = (int)$type;
+        if ($duration = $request->query->get('duration')) $filters['duration'] = (int)$duration;
+        if ($request->query->has('season')) {
+            $filters['season'] = $request->query->get('season') !== '' ? (int)$request->query->get('season') : null;
+        }
 
-        $results = $repository->createQueryBuilder('i')
-            ->where('LOWER(i.name) LIKE :search')
-            ->setParameter('search', '%' . strtolower($query) . '%')
-            ->orderBy('i.name', 'ASC')
-            ->getQuery()
-            ->getResult();
+        if ($categories = $request->query->get('categories')) {
+            $filters['categories'] = array_filter(array_map('intval', explode(',', $categories)));
+        }
+        if ($streamings = $request->query->get('streamings')) {
+            $filters['streamings'] = array_filter(array_map('intval', explode(',', $streamings)));
+        }
+        if ($tags = $request->query->get('tags')) {
+            $filters['tags'] = array_filter(array_map('intval', explode(',', $tags)));
+        }
 
-        return $this->render('search/results.html.twig', [
-            'query' => $query,
-            'results' => $results,
+        $items = $itemRepository->findByFilters($filters);
+
+        return $this->render('search/results.html.twig',[
+            'query' => $name,
+            'items' => $items,
+            'categories' => $categories,
+            'tags' => $tags,
+            'streamings' => $streamings,
         ]);
     }
 

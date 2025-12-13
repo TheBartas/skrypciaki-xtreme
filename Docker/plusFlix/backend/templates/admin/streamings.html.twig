@@ -1,142 +1,60 @@
 {% extends "admin/base.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.page.css') }}">
+{% endblock %}
+
 {% block body %}
+<div id="main_content">
+    <div class="categories-heading">
+        <h1>Platformy streamingowe&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
+    </div>
 
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-    }
+    <input class="input-research" type="text" placeholder="Szukaj">
 
-    .modal-content {
-        background: white;
-        padding: 20px;
-        margin: 10% auto;
-        width: 400px;
-        border-radius: 5px;
-    }
-
-    .close {
-        float: right;
-        font-size: 22px;
-        cursor: pointer;
-    }
-</style>
-
-    <div id="main_content">
-<h1>Platformy streamingowe</h1>
-
-<a href="#" id="addStreamingBtn">+ Dodaj platformę</a>
-
-<input type="text">
-
-<div class="admin-categories-container">
-
-    <table class="admin-table">
-        <thead>
-            <tr>
-                <th>Nazwa platformy</th>
-                <th>Liczba powiązanych dzieł</th>
-                <th>Akcje</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for s in streamings %}
+    <div id="table-wraper">
+        <table class="admin-table">
+            <thead>
                 <tr>
-                    <td>{{ s.platform_name }}</td>
-                    <td>{{ s.item_count }}</td>
-                    <td>
-                        <a href="#" class="editStreamingBtn"
-                           data-id="{{ s.streaming_ID }}"
-                           data-name="{{ s.platform_name }}">
-                           Edytuj
-                        </a>
-                        <a href="#"
-                            class="deleteStreamingLink"
-                            data-id="{{ s.streaming_ID }}">
-                            Usuń
-                        </a>
-                    </td>
+                    <th>Nazwa platformy</th>
+                    <th>Liczba powiązanych dzieł</th>
+                    <th>Akcje</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-</div>
+            </thead>
+            <tbody>
+                {% for s in streamings %}
+                    <tr>
+                        <td>{{ s.platform_name }}</td>
+                        <td>{{ s.item_count }}</td>
+                        <td>
+                            <a href="#" class="editStreamingBtn"
+                               data-id="{{ s.streaming_ID }}"
+                               data-name="{{ s.platform_name }}">
+                               Edytuj
+                            </a>
+                            <span class="action-separator">|</span>
+                            <a href="#"
+                                class="deleteStreamingLink"
+                                data-id="{{ s.streaming_ID }}">
+                                Usuń
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-<div id="streamingModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-
-        <h2 id="modalTitle">Dodaj platformę</h2>
-
-        <form id="streamingForm" method="post">
-            <input type="text" name="platform_name" id="streamingName" placeholder="Nazwa platformy" required>
-
-            <button type="submit" id="modalSubmitBtn">Zapisz</button>
-        </form>
-    </div>
 </div>
 
+    {% include 'admin/commonModal.html.twig' with {
+        modal_type: 'streamingModal',
+        modal_title: 'Nazwa Platformy',
+        name_field: 'platform_name',
+        form_action: path("admin_streaming_add"),
+    }%}
 
-<script>
-    const modal = document.getElementById('streamingModal');
-    const closeBtn = document.querySelector('.close');
-    const addBtn = document.getElementById('addStreamingBtn');
-    const form = document.getElementById('streamingForm');
-    const title = document.getElementById('modalTitle');
-    const nameInput = document.getElementById('streamingName');
-
-    addBtn.onclick = () => {
-        modal.style.display = 'block';
-        title.innerText = "Dodaj platformę";
-        form.action = "{{ path('admin_streaming_add') }}";
-        nameInput.value = "";
-    };
-
-    document.querySelectorAll('.editStreamingBtn').forEach(btn => {
-        btn.onclick = () => {
-            modal.style.display = 'block';
-            title.innerText = "Edytuj platformę";
-
-            let id = btn.dataset.id;
-            let name = btn.dataset.name;
-
-            nameInput.value = name;
-
-            form.action = "/admin/streamings/edit/" + id;
-        };
-    });
-
-    document.querySelectorAll('.deleteStreamingLink').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            if (!confirm('Na pewno chcesz usunąć tę platformę?')) return;
-
-            let id = this.dataset.id;
-
-            let form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/admin/streamings/delete/' + id;
-            document.body.appendChild(form);
-
-            form.submit();
-        });
-    });
-
-
-    closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    };
-</script>
+{% block script %}
+    <script src="{{ asset('js/admin/admin.streamingsModal.js') }}"></script>
+{% endblock %}
 
 {% endblock %}

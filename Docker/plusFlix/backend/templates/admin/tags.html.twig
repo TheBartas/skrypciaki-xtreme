@@ -1,198 +1,62 @@
 {% extends "admin/base.html.twig" %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.page.css') }}">
+{% endblock %}
+
 {% block body %}
 
-<style>
-    .tags-layout {
-        display: flex;
-        gap: 12px;
-        padding: 16px;
-        box-sizing: border-box;
-    }
-    .tags-sidebar {
-        width: 180px;
-        background: #e0e0e0;
-        border-radius: 6px;
-        padding: 10px;
-    }
-    .tags-sidebar ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .tags-sidebar li {
-        margin: 6px 0;
-    }
-    .tags-sidebar a {
-        display: block;
-        padding: 8px 10px;
-        border-radius: 4px;
-        color: #222;
-        text-decoration: none;
-    }
-    .tags-sidebar a.active { font-weight: 600; }
+<div id="main_content">
+    <div class="heading">
+        <h1>Tagi&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
+    </div>
 
-    .tags-main {
-        flex: 1;
-        background: #f5f5f5;
-        border-radius: 6px;
-        padding: 16px;
-    }
+    <input class="input-research" type="text" placeholder="Szukaj">
 
-    .tags-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px; margin:
-        8px 0 16px;
-    }
-
-    .admin-table {
-        width: 100%;
-        border-collapse: collapse;
-        background: #fafafa;
-        border: 1px solid #e0e0e0;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-    .admin-table th, .admin-table td {
-        padding: 10px 12px;
-        border-bottom: 1px solid #e0e0e0;
-        text-align: left;
-    }
-    .admin-table thead th {
-        background: darkgray;
-        color: #333;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        inset: 0;
-        background: rgba(0,0,0,0.5);
-    }
-    .modal-content {
-        background: #fff;
-        padding: 16px;
-        margin: 10% auto;
-        width: 400px;
-        border-radius: 6px;
-    }
-    .close {
-        float: right;
-        font-size: 20px;
-        cursor: pointer;
-    }
-</style>
-
-<div class="tags-page">
-    <div class="tags-layout">
-        <main class="tags-main">
-            <div class="tags-header">
-                <h1>Tags</h1>
-                <a href="#" id="addTagBtn" class="btn-primary">Dodaj Tag</a>
-            </div>
-
-            <div class="tags-table-wrap">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Nazwa tagu</th>
-                            <th>Liczba powiązanych dzieł</th>
-                            <th>Akcje</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for t in tags %}
-                            <tr>
-                                <td>{{ t.name }}</td>
-                                <td>{{ t.item_count }}</td>
-                                <td>
-                                    <a href="#" class="editTagBtn"
-                                       data-id="{{ t.tag_ID }}"
-                                       data-name="{{ t.name }}">
-                                       Edytuj
-                                    </a>
-                                    <a href="#"
-                                        class="deleteTagLink"
-                                        data-id="{{ t.tag_ID }}">
-                                        Usuń
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </main>
+    <div id="table-wraper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Nazwa tagu</th>
+                    <th>Liczba powiązanych dzieł</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in tags %}
+                    <tr>
+                        <td>{{ t.name }}</td>
+                        <td>{{ t.item_count }}</td>
+                        <td>
+                            <a href="#" class="editTagBtn"
+                               data-id="{{ t.tag_ID }}"
+                               data-name="{{ t.name }}">
+                               Edytuj
+                            </a>
+                            <span class="action-separator">|</span>
+                            <a href="#"
+                                class="deleteTagLink"
+                                data-id="{{ t.tag_ID }}">
+                                Usuń
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 
-<div id="tagModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
 
-        <h2 id="modalTitle">Dodaj tag</h2>
+{% include 'admin/commonModal.html.twig' with {
+    modal_type: 'tagModal',
+    modal_title: 'Dodaj tag',
+    name_field: 'name',
+    form_action: path('admin_tag_add'),
+}%}
 
-        <form id="tagForm" method="post">
-            <input type="text" name="name" id="tagName" placeholder="Nazwa tagu" required>
-
-            <button type="submit" id="modalSubmitBtn">Zapisz</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    const modal = document.getElementById('tagModal');
-    const closeBtn = document.querySelector('.close');
-    const addBtn = document.getElementById('addTagBtn');
-    const form = document.getElementById('tagForm');
-    const title = document.getElementById('modalTitle');
-    const nameInput = document.getElementById('tagName');
-
-    addBtn.onclick = () => {
-        modal.style.display = 'block';
-        title.innerText = "Dodaj tag";
-        form.action = "{{ path('admin_tag_add') }}";
-        nameInput.value = "";
-    };
-
-    document.querySelectorAll('.editTagBtn').forEach(btn => {
-        btn.onclick = () => {
-            modal.style.display = 'block';
-            title.innerText = "Edytuj tag";
-
-            let id = btn.dataset.id;
-            let name = btn.dataset.name;
-
-            nameInput.value = name;
-
-            form.action = "/admin/tags/edit/" + id;
-        };
-    });
-
-    document.querySelectorAll('.deleteTagLink').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            if (!confirm('Na pewno chcesz usunąć ten tag?')) return;
-
-            let id = this.dataset.id;
-
-            let form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/admin/tags/delete/' + id;
-            document.body.appendChild(form);
-
-            form.submit();
-        });
-    });
-
-    closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    };
-</script>
+    {% block script %}
+        <script src="{{ asset('js/admin/admin.tagsModal.js') }}"></script>
+    {% endblock %}
 
 {% endblock %}

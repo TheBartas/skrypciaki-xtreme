@@ -1,0 +1,54 @@
+{% extends "admin/base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.categories.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="categories">
+    <div class="categories-heading">
+        <h1>Kategorie&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
+    </div>
+
+    <input class="input-research" type="text" placeholder="Szukaj">
+
+    <div id="table-wraper">
+    <table class="admin-categories-table">
+        <thead>
+            <tr>
+                <th>Nazwa kategorii</th>
+                <th>Liczba powiązanych dzieł</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.genre }}</td>
+                    <td id="td-action">{{ category.item_count}}</td>
+                    <td id="td-action">
+                        <a href="#" class="editCategoryBtn"
+                        data-id="{{ category.cat_ID }}"
+                        data-name="{{ category.genre }}">EDYTUJ</a>
+                        <span class="action-separator">|</span>
+                        <a href="#"
+                            class="deleteCategoryLink"
+                            data-id="{{ category.cat_ID }}">USUŃ</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    {% include 'admin/commonModal.html.twig' with {
+        modal_type: 'categoryModal',
+        modal_title: 'Nazwa Kategori',
+    }%}
+</div>
+
+{% block script %}
+    <script src="{{ asset('js/admin/admin.categoriesModal.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

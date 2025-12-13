@@ -2,191 +2,218 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('styles/admin_item.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/admin.page.css') }}">
 {% endblock %}
 
 {% block body %}
-<div id="main_content">
-    <h1>
-        Filmy i seriale <a href="#" id="addCategoryBtn"> + </a>
-    </h1>
-    <input id="searchBar" type="search" placeholder="Type your desired item name">
-    <div id="items_container">
-        <div id="items_nav">
-            <p>Tytuł dzieła</p>
-            <p>Rok produkcji</p>
-            <p>Reżyser</p>
-            <p>Kategorie</p>
-            <p>Tagi</p>
-            <p>Streamingi</p>
-            <p>Akcje</p>
-        </div>
+<div id="main_content" style="width: 80%">
+    <div class="heading">
+        <h1>Seriale i filmy&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
+    </div>
 
-        <div id="items">
+    <input class="input-research" type="text" placeholder="Szukaj">
+
+    <div id="table-wraper">
+        <table class="admin-table" style="max-width: none">
+            <thead>
+            <tr>
+                <th>Tytuł dzieła</th>
+                <th>Rok produkcji</th>
+                <th>Reżyser</th>
+                <th>Aktorzy</th>
+                <th>Kategorie</th>
+                <th>Tagi</th>
+                <th>Streamingi</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for item in items %}
-                <p>{{ item.name }}</p>
-                <p>{{ item.year }}</p>
-                <p>{{ item.director }}</p>
-                <p>
-                    {% for category in item.categories %}
-                        {{ category.genre }},
-                    {% endfor %}
-                </p>
-                <p>
-                    {% for tag in item.tags %}
-                        {{ tag.tagName }},
-                    {% endfor %}
-                </p>
-                <p>
-                    {% for streaming in item.streamings %}
-                        {{ streaming.platformName }},
-                    {% endfor %}
-                </p>
-                <div style="display: flex; align-self: center">
-                    <a href="#" class="editItemBtn" data-id="{{ item.id }}">modyfikuj </a>
-                    |
-                    <a href="#" class="deleteItemBtn" data-id="{{ item.id }}"> usuń</a>
-                </div>
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.director }}</td>
+                    <td>{{ item.actors }}</td>
+                    <td>
+                        {% for category in item.categories %}
+                            {{ category.genre }}
+                            {% if not loop.last %},<br>{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tag in item.tags %}
+                            {{ tag.tagName }}
+                            {% if not loop.last %},<br>{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for streaming in item.streamings %}
+                            {{ streaming.platformName }}
+                            {% if not loop.last %},<br>{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="#" class="editItemBtn"
+                           data-id="{{ item.id }}"
+                           data-name="{{ item.name }}">
+                            Edytuj
+                        </a>
+                        <span class="action-separator">|</span>
+                        <a href="#"
+                           class="deleteItemBtn"
+                           data-id="{{ item.id }}">
+                            Usuń
+                        </a>
+                    </td>
+                </tr>
             {% endfor %}
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 
-<div id="itemAddModal" class="modal" style="visibility: hidden">
-    <div class="modal-content">
-        <span class="close">&times;</span>
+{#<div id="main_content">#}
+{#    <h1>#}
+{#        Filmy i seriale <a href="#" id="addCategoryBtn"> + </a>#}
+{#    </h1>#}
+{#    <input id="searchBar" type="search" placeholder="Type your desired item name">#}
+{#    <div id="items_container">#}
+{#        <div id="items_nav">#}
+{#            <p>Tytuł dzieła</p>#}
+{#            <p>Rok produkcji</p>#}
+{#            <p>Reżyser</p>#}
+{#            <p>Kategorie</p>#}
+{#            <p>Tagi</p>#}
+{#            <p>Streamingi</p>#}
+{#            <p>Akcje</p>#}
+{#        </div>#}
 
-        <h2 id="modalTitle"></h2>
+{#        <div id="items">#}
+{#            {% for item in items %}#}
+{#                <p>{{ item.name }}</p>#}
+{#                <p>{{ item.year }}</p>#}
+{#                <p>{{ item.director }}</p>#}
+{#                <p>#}
+{#                    {% for category in item.categories %}#}
+{#                        {{ category.genre }},#}
+{#                    {% endfor %}#}
+{#                </p>#}
+{#                <p>#}
+{#                    {% for tag in item.tags %}#}
+{#                        {{ tag.tagName }},#}
+{#                    {% endfor %}#}
+{#                </p>#}
+{#                <p>#}
+{#                    {% for streaming in item.streamings %}#}
+{#                        {{ streaming.platformName }},#}
+{#                    {% endfor %}#}
+{#                </p>#}
+{#                <div style="display: flex; align-self: center">#}
+{#                    <a href="#" class="editItemBtn" data-id="{{ item.id }}">modyfikuj </a>#}
+{#                    |#}
+{#                    <a href="#" class="deleteItemBtn" data-id="{{ item.id }}"> usuń</a>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
-        <form id="itemForm" method="POST" action="{{ path('admin_item_add') }}">
-            <div class="form_input_container">
-                <label>Tytuł dzieła</label><br>
-                <input id="nameInput" type="text" name="name"  placeholder="tytuł dzieła" required><br><br>
-            </div>
+    {% include 'admin/itemModal.html.twig' %}
 
-            <div class="form_input_container">
-                <label>Rok produkcji</label><br>
-                <input id="yearInput" type="number" name="year"  placeholder="rok produkcji" required><br><br>
-            </div>
+{#<div id="itemAddModal" class="modal" style="display: none">#}
+{#    <div class="modal-content">#}
+{#        <span class="close">&times;</span>#}
 
-            <div class="form_input_container">
-                <label>Reżyser</label><br>
-                <input id="directorInput" type="text" name="director"  placeholder="reżyser" required><br><br>
-            </div>
+{#        <h2 id="modalTitle"></h2>#}
 
-            <div class="form_input_container">
-                <label>Actors</label><br>
-                <input id="actorsInput" type="text" name="actors" required>
-            </div>
+{#        <form id="itemForm" method="POST" action="{{ path('admin_item_add') }}">#}
+{#            <div class="form_input_container">#}
+{#                <label>Tytuł dzieła</label><br>#}
+{#                <input id="nameInput" type="text" name="name"  placeholder="tytuł dzieła" required><br><br>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Type</label><br>
-                <select id="typeInput" name="type" required>
-                    <option value=1>Movie</option>
-                    <option value=2>Series</option>
-                </select>
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Rok produkcji</label><br>#}
+{#                <input id="yearInput" type="number" name="year"  placeholder="rok produkcji" required><br><br>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Duration (minutes)</label><br>
-                <input id="durationInput" type="number" name="duration" required>
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Reżyser</label><br>#}
+{#                <input id="directorInput" type="text" name="director"  placeholder="reżyser" required><br><br>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Season (if Series)</label><br>
-                <input id="seasonInput" type="number" name="season">
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Actors</label><br>#}
+{#                <input id="actorsInput" type="text" name="actors" required>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Tagi</label><br>
-                <div id="tagsPills" class="pills-container" multiple>
-                    {% for tag in tags %}
-                        <div class="pill" data-value="{{ tag.id }}">{{ tag.tagName }}</div>
-                    {% endfor %}
-                </div>
-                <input type="hidden" id="tagsInput" name="tags">
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Type</label><br>#}
+{#                <select id="typeInput" name="type" required>#}
+{#                    <option value=1>Movie</option>#}
+{#                    <option value=2>Series</option>#}
+{#                </select>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Kategorie</label><br>
-                <div id="categoriesPills" class="pills-container" multiple>
-                    {% for category in categories %}
-                        <div class="pill" data-value="{{ category.id }}">{{ category.genre }}</div>
-                    {% endfor %}
-                </div>
-                <input type="hidden" id="categoriesInput" name="categories">
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Duration (minutes)</label><br>#}
+{#                <input id="durationInput" type="number" name="duration" required>#}
+{#            </div>#}
 
-            <div class="form_input_container">
-                <label>Streamingi</label><br>
-                <div id="streamingsPills" class="pills-container" multiple>
-                    {% for streaming in streamings %}
-                        <div class="pill" data-value="{{ streaming.id }}">{{ streaming.platformName }}</div>
-                    {% endfor %}
-                </div>
-                <input type="hidden" id="streamingsInput" name="streamings">
-            </div>
+{#            <div class="form_input_container">#}
+{#                <label>Season (if Series)</label><br>#}
+{#                <input id="seasonInput" type="number" name="season">#}
+{#            </div>#}
 
-            <button type="submit" id="modalSubmitBtn">Zapisz</button>
-        </form>
-    </div>
-</div>
+{#            <div class="form_input_container">#}
+{#                <label>Tagi</label><br>#}
+{#                <div id="tagsPills" class="pills-container" multiple>#}
+{#                    {% for tag in tags %}#}
+{#                        <div class="pill" data-value="{{ tag.id }}">{{ tag.tagName }}</div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#                <input type="hidden" id="tagsInput" name="tags">#}
+{#            </div>#}
+
+{#            <div class="form_input_container">#}
+{#                <label>Kategorie</label><br>#}
+{#                <div id="categoriesPills" class="pills-container" multiple>#}
+{#                    {% for category in categories %}#}
+{#                        <div class="pill" data-value="{{ category.id }}">{{ category.genre }}</div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#                <input type="hidden" id="categoriesInput" name="categories">#}
+{#            </div>#}
+
+{#            <div class="form_input_container">#}
+{#                <label>Streamingi</label><br>#}
+{#                <div id="streamingsPills" class="pills-container" multiple>#}
+{#                    {% for streaming in streamings %}#}
+{#                        <div class="pill" data-value="{{ streaming.id }}">{{ streaming.platformName }}</div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#                <input type="hidden" id="streamingsInput" name="streamings">#}
+{#            </div>#}
+
+{#            <button type="submit" id="modalSubmitBtn">Zapisz</button>#}
+{#        </form>#}
+{#    </div>#}
+{#</div>#}
+
+
+    {% block script %}
+        <script src="{{ asset('js/pills/pills.js') }}"></script>
+    {% endblock %}
+
 
 <script>
-    const tagsPills = document.querySelectorAll('#tagsPills .pill');
-    const categoriesPills = document.querySelectorAll('#categoriesPills .pill');
-    const streamingsPills = document.querySelectorAll('#streamingsPills .pill');
-
-    const pillsContainer = document.querySelectorAll('.pills-container');
-
-    pillsContainer.forEach(container => {
-        container.addEventListener('wheel', function (e) {
-            // prevent vertical scrolling
-            e.preventDefault();
-
-            // scroll horizontally
-            container.scrollLeft += e.deltaY;
-        });
-    });
-
-    tagsPills.forEach( pill => {
-        pill.addEventListener('click', () => {
-            pill.classList.toggle('active');
-            const selected = [...document.querySelectorAll('#tagsPills .pill.active')]
-                .map(p => p.dataset.value);
-
-            document.getElementById('tagsInput').value = selected.join(',');
-        });
-    })
-
-    categoriesPills.forEach( pill => {
-        pill.addEventListener('click', () => {
-            pill.classList.toggle('active');
-            const selected = [...document.querySelectorAll('#categoriesPills .pill.active')]
-                .map(p => p.dataset.value);
-
-            document.getElementById('categoriesInput').value = selected.join(',');
-            console.log(document.getElementById('categoriesInput').value);
-        });
-    });
-
-    streamingsPills.forEach( pill => {
-        pill.addEventListener('click', () => {
-            pill.classList.toggle('active');
-            const selected = [...document.querySelectorAll('#streamingsPills .pill.active')]
-                .map(p => p.dataset.value);
-
-            document.getElementById('streamingsInput').value = selected.join(',');
-        });
-    });
-
-
-    const modal = document.getElementById('itemAddModal');
-    const closeBtn = document.querySelector('.close');
-    const addBtn = document.getElementById('addCategoryBtn');
-    const form = document.getElementById('itemForm');
-    const title = document.getElementById('modalTitle');
-    const searchBar = document.getElementById('searchBar');
+    // Modal
+    const modal = document.getElementById('modal');
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const addBtn = document.getElementById('addBtn');
+    const form = document.getElementById('form');
+    // const title = document.getElementById('modalTitle');
+    const searchBar = document.querySelector('.input-research');
     const itemContainer = document.getElementById('items');
 
     let isEdit = false;  // track mode
@@ -214,11 +241,12 @@
     });
 
     addBtn.onclick = () => {
+        document.querySelectorAll('.pill').forEach(pill => pill.classList.remove('active'));
         isEdit = false;
         editId = null;
-        modal.style.visibility = "visible";
+        modal.style.display = "block";
         form.reset();
-        title.innerHTML = "Dodaj Film/Serial";
+        // title.innerHTML = "Dodaj Film/Serial";
         form.action = "{{ path('admin_item_add') }}";
     };
 
@@ -230,10 +258,10 @@
             fetch(`/admin/item/${editId}`)
                 .then(res => res.json())
                 .then(item => {
-                    modal.style.visibility = "visible";
+                    modal.style.display = "block";
                     form.reset();
 
-                    title.innerHTML = "Edytuj Film/Serial";
+                    // title.innerHTML = "Edytuj Film/Serial";
 
                     form.action = "{{ path('admin_item_edit', {'id': 'IDPLACEHOLDER'}) }}".replace('IDPLACEHOLDER', editId);
 
@@ -300,57 +328,24 @@
 
 
 
-    closeBtn.onclick = () => modal.style.visibility = "hidden";
-    // window.onclick = (e) => {
-    //     if ((e.target !== modal) && (modal.style.visibility === "visible"))
-    //         modal.style.visibility = "hidden";
-    // };
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    };
 
-    searchBar.onchange = () => {
-        const query = searchBar.value;
+    searchBar.onkeydown = (e) => {
+        if (e.key === 'Enter') {
+            const query = searchBar.value;
 
-        let searchUrl = '/admin/list';
-        searchUrl = searchUrl + '?name=' + query;
+            if(query !== '') {
+                let searchUrl = '/admin/list';
+                searchUrl = searchUrl + '?name=' + query;
 
-        fetch(searchUrl)
-            .then(response => response.json())
-            .then(data => {
-                // Clear existing <p> elements and old content
-                itemContainer.innerHTML = '';
-
-                // Append <p> elements for each item
-                data.forEach(item => {
-                    // name
-                    const pName = document.createElement('p');
-                    pName.textContent = item.name;
-                    itemContainer.appendChild(pName);
-
-                    // year
-                    const pYear = document.createElement('p');
-                    pYear.textContent = `(${item.year})`;
-                    itemContainer.appendChild(pYear);
-
-                    // director
-                    const pDirector = document.createElement('p');
-                    pDirector.textContent = item.director;
-                    itemContainer.appendChild(pDirector);
-
-                    // empty placeholders for alignment
-                    for (let i = 0; i < 3; i++) {
-                        const pEmpty = document.createElement('p');
-                        pEmpty.textContent = '';
-                        itemContainer.appendChild(pEmpty);
-                    }
-
-                    // actions
-                    const actions = document.createElement('div');
-                    actions.style.display = 'flex';
-                    actions.style.alignSelf = 'center';
-                    actions.innerHTML = '<div>modyfikuj</div> | <div>usun</div>';
-                    itemContainer.appendChild(actions);
-                });
-            })
-            .catch(err => console.error('Error fetching items:', err));
+                window.location.href = searchUrl;
+            }
+            else
+                window.location.href = '/admin/list';
+        }
     };
 </script>
 

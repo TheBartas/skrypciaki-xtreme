@@ -1,12 +1,11 @@
 const modal = document.getElementById('categoryModal');
 const closeBtn = document.querySelector('.modal-close-btn');
-const addBtn = document.getElementById('addCategoryBtn');
-const form = document.getElementById('categoryForm');
-const nameInput = document.getElementById('categoryName');
+const addBtn = document.getElementById('addBtn');
+const form = document.getElementById('form');
+const nameInput = document.getElementById('formInput');
 
 addBtn.onclick = () => {
     modal.style.display = 'block';
-    form.action = "{{ path('admin_category_add') }}";
     nameInput.value = "";
 };
 

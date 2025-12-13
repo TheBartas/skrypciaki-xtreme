@@ -5,19 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.base.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.categories.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.ratings.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/admin/admin.rating.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminRatingController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/favorites.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_categories.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_categories.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/sql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/sql/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/RatingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/RatingRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.categories.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.categories.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.commonModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/admin/admin.commonModal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/admin/admin.commonModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/admin/admin.categoriesModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/js/admin/admin.rating.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/AdminItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/categories.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/commonModal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/commonModal.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/items.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/ratings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/streamings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/admin/tags.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/home/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,8 +58,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Merging dn50957",
-    "last_opened_file_path": "C:/Users/alpak/Desktop/Nowy folder/skrypciaki-xtreme/Docker/plusFlix/backend/public/styles",
+    "git-widget-placeholder": "dn50957",
+    "last_opened_file_path": "C:/Users/alpak/Desktop/Zadanie/__skrypciaki-xtreme/Docker/plusFlix/backend/public/css/admin",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -66,6 +71,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\public\css\admin" />
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\templates\admin" />
+      <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\public\js\admin" />
       <recent name="C:\Users\alpak\Desktop\Nowy folder\skrypciaki-xtreme\Docker\plusFlix\backend\public\styles" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -104,7 +112,7 @@
       <workItem from="1765455908244" duration="5504000" />
       <workItem from="1765498932952" duration="14821000" />
       <workItem from="1765579383035" duration="5038000" />
-      <workItem from="1765584575658" duration="5076000" />
+      <workItem from="1765584575658" duration="16813000" />
     </task>
     <servers />
   </component>

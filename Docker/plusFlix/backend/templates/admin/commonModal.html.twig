@@ -5,10 +5,10 @@
 <div id="{{ modal_type }}" class="modal-bg">
     <div class="modal">
         <span class="modal-close-btn">&times;</span>
-        <form id="categoryForm" method="post">
-            <div class="category-inputs">
-                <p>Nazwa kategorii</p>
-                <input type="text" name="genre" id="categoryName" placeholder="nazwa kategorii..." required>
+        <form id="form" method="post" action="{{ form_action }}">
+            <div class="inputs">
+                <p id="modal-title">{{ modal_title }}</p>
+                <input type="text" name="{{ name_field }}" id="formInput" placeholder="{{ modal_title|lower }}..." required>
             </div>
             <button type="submit" id="modal-submit-btn">Zapisz</button>
         </form>

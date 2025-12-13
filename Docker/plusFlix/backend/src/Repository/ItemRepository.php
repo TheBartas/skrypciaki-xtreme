@@ -19,10 +19,11 @@ class ItemRepository extends ServiceEntityRepository
     public function findByFilters(array $filters)
     {
         $qb = $this->createQueryBuilder('i');
+        $qb->addOrderBy('i.name', 'ASC');
 
         // ---------------- Scalar filters ----------------
         if (!empty($filters['name'])) {
-            $qb->andWhere('LOWER(i.name) LIKE LOWER(:name)')
+            $qb->andWhere('i.name LIKE :name')
                 ->setParameter('name', '%' . $filters['name'] . '%');
         }
 
@@ -32,12 +33,12 @@ class ItemRepository extends ServiceEntityRepository
         }
 
         if (!empty($filters['director'])) {
-            $qb->andWhere('LOWER(i.director) LIKE LOWER(:director)')
+            $qb->andWhere('i.director LIKE :director')
                 ->setParameter('director', '%' . $filters['director'] . '%');
         }
 
         if (!empty($filters['actors'])) {
-            $qb->andWhere('LOWER(i.actors) LIKE LOWER(:actors)')
+            $qb->andWhere('i.actors LIKE :actors')
                 ->setParameter('actors', '%' . $filters['actors'] . '%');
         }
 
@@ -79,7 +80,7 @@ class ItemRepository extends ServiceEntityRepository
                 ->setParameter('streamings', $filters['streamings']);
         }
 
-        $qb->distinct(); // avoid duplicates from joins
+        $qb->groupBy('i.id');
 
         return $qb->getQuery()->getResult();
     }
