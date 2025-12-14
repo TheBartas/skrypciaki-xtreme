@@ -173,6 +173,7 @@ class AdminItemController extends AbstractController {
         $item->setType($request->request->get('type'));
         $item->setDuration((int)$request->request->get('duration'));
         $item->setSeason($request->request->get('season') ? (int)$request->request->get('season') : null);
+        $item->setCoverUrl($request->request->get('cover_url') ? $request->request->get('cover_url') : null);
 
         $categories = $request->request->get('categories', '');
         $tags = $request->request->get('tags', '');
