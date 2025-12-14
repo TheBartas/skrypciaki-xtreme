@@ -21,7 +21,12 @@
 
                     <a href="{{ path('item_detail', {'id': item.id}) }}">
                         <div class="poster-wrapper">
-                            <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
+                            <img
+                                src="{{ item.coverUrl ?: 'https://tvod.iat.pl/view/img/notfound_portrait.jpg' }}"
+                                class="poster"
+                                loading="lazy"
+                                alt="{{ item.name }}"
+                            >
 
                             <div class="streaming-icons">
                                 <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">

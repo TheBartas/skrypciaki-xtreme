@@ -43,6 +43,9 @@ class Item
     #[ORM\Column(nullable: true)]
     private ?int $season = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $coverUrl = null;
+
     /**
      * @var Collection<int, Streaming>
      */
@@ -161,6 +164,17 @@ class Item
     {
         $this->season = $season;
 
+        return $this;
+    }
+
+    public function getCoverUrl(): ?string
+    {
+        return $this->coverUrl;
+    }
+
+    public function setCoverUrl(?string $coverUrl): self
+    {
+        $this->coverUrl = $coverUrl;
         return $this;
     }
 

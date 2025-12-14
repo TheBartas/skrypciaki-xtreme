@@ -21,7 +21,7 @@ final class Version20251210003704 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE category (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, genre VARCHAR(128) NOT NULL)');
-        $this->addSql('CREATE TABLE item (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(128) NOT NULL, year INTEGER NOT NULL, director VARCHAR(128) NOT NULL, actors CLOB NOT NULL, type INTEGER NOT NULL, duration INTEGER DEFAULT NULL, season INTEGER DEFAULT NULL)');
+        $this->addSql('CREATE TABLE item (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(128) NOT NULL, year INTEGER NOT NULL, director VARCHAR(128) NOT NULL, actors CLOB NOT NULL, type INTEGER NOT NULL, duration INTEGER DEFAULT NULL, season INTEGER DEFAULT NULL, cover_url VARCHAR(255) DEFAULT NULL)');
         $this->addSql('CREATE TABLE item_streaming (item_id INTEGER NOT NULL, streaming_id INTEGER NOT NULL, PRIMARY KEY (item_id, streaming_id), CONSTRAINT FK_2A990E91126F525E FOREIGN KEY (item_id) REFERENCES item (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE, CONSTRAINT FK_2A990E91429AEC72 FOREIGN KEY (streaming_id) REFERENCES streaming (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE)');
         $this->addSql('CREATE INDEX IDX_2A990E91126F525E ON item_streaming (item_id)');
         $this->addSql('CREATE INDEX IDX_2A990E91429AEC72 ON item_streaming (streaming_id)');

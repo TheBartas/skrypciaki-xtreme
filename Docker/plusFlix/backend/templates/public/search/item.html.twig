@@ -48,7 +48,10 @@
     <div id="main_content">
         <div id="leftColumn">
             <div class="bigPoster">
-                <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg">
+                <img src="{{ item.coverUrl ?: 'https://tvod.iat.pl/view/img/notfound_portrait.jpg' }}"
+                     class="poster"
+                     loading="lazy"
+                     alt="{{ item.name }}">
             </div>
 
             <div id="itemTags">
@@ -146,7 +149,10 @@
                             <button class="fav-btn" data-id="{{ similar.id }}">★</button>
                             <a href="{{ path('item_detail', {'id': similar.id}) }}">
                                 <div class="poster-wrapper">
-                                    <img src="https://tvod.iat.pl/view/img/notfound_portrait.jpg" class="poster">
+                                    <img src="{{ similar.coverUrl ?: 'https://tvod.iat.pl/view/img/notfound_portrait.jpg' }}"
+                                         class="poster"
+                                         loading="lazy"
+                                         alt="{{ similar.name }}">
                                     <div class="streaming-icons">
                                         {% for streaming in similar.streamings %}
                                             {% set data = STREAMING_DATA_BY_ID[streaming.id] ?? null %}
