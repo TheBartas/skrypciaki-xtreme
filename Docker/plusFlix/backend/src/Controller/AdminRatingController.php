@@ -26,6 +26,20 @@ class AdminRatingController extends AbstractController {
         ]);
     }
 
+    #[Route('/rating', name: 'admin_rating_search')]
+    public function categorySearch(
+        Request $request,
+        RatingRepository $ratingRepository,
+    ) : Response {
+        $q = $request->query->get('q');
+
+        $ratings = $ratingRepository->searchByItemTitle($q);
+
+        return $this->render('admin/ratings.html.twig', [
+            'ratings' => $ratings,
+        ]);
+    }
+
     #[Route('/rating/edit/{id}', name: 'admin_rating_edit', methods: ['POST'])]
     public function editRating(
         Request $request,

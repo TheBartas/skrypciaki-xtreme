@@ -30,6 +30,26 @@ class RatingRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function searchByItemTitle(?string $name): array
+    {
+        $query = $this->createQueryBuilder('r')
+            ->select("
+                r.id AS rat_ID,
+                r.comment,
+                r.rating,
+                i.id AS item_ID,
+                i.name
+            ")
+            ->leftJoin('r.items', 'i');
+
+        if ($name) {
+            $query->andWhere('i.name LIKE :query')
+            ->setParameter('query', '%' . $name . '%');
+        }
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     //    /**
     //     * @return Rating[] Returns an array of Rating objects
     //     */

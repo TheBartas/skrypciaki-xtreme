@@ -13,8 +13,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Entity\Item;
-use App\Entity\Category;
-use App\Entity\Streaming;
 use App\Repository\ItemRepository;
 
 #[Route('/admin')]
@@ -145,6 +143,7 @@ class AdminItemController extends AbstractController {
             'id' => $item->getId(),
         ]);
     }
+
     #[Route('/item/delete/{id}', name: 'admin_item_delete', methods: ['POST'])]
     public function itemDelete(Item $item, EntityManagerInterface $em) : Response
     {

@@ -10,7 +10,21 @@
         <h1>Kategorie&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" id="addBtn">+</a></h1>
     </div>
 
-    <input class="input-research" type="text" placeholder="Szukaj">
+    <form method="get" action="{{ path('admin_category_search') }}">
+        <div class="search-container">
+            <input
+                class="input-research"
+                type="text"
+                name="q"
+                value="{{ app.request.query.get('q') }}"
+                placeholder="Szukaj"
+            >
+
+            <button class="search-btn" type="submit">
+                <img src="https://cdn-icons-png.flaticon.com/256/2866/2866321.png" alt="search">
+            </button>
+        </div>
+    </form>
 
     <div id="table-wraper">
         <table class="admin-table">

@@ -26,6 +26,22 @@ class StreamingRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function searchByPlatformName(?string $name): array
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id AS streaming_ID, c.platformName AS platform_name, COUNT(i.id) AS item_count')
+            ->leftJoin('c.items', 'i');
+
+        if ($name) {
+            $query->andWhere('c.platformName LIKE :query')
+            ->setParameter('query', '%' . $name . '%');
+        }
+
+        $query->groupBy('c.id, c.platformName')->orderBy('c.platformName', 'ASC');
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     //    /**
     //     * @return Streaming[] Returns an array of Streaming objects
     //     */

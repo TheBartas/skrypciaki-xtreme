@@ -26,6 +26,22 @@ class CategoryRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function searchByGenre(?string $genre): array
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id AS cat_ID, c.genre, COUNT(i.id) AS item_count')
+            ->leftJoin('c.items', 'i');
+
+        if ($genre) {
+            $query->andWhere('c.genre LIKE :query')
+            ->setParameter('query', '%' . $genre . '%');
+        }
+
+        $query->groupBy('c.id, c.genre')->orderBy('c.genre', 'ASC');
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     //    /**
     //     * @return Category[] Returns an array of Category objects
     //     */

@@ -15,15 +15,40 @@
     font-size: 32px;
 }
 
-.input-research {
-    border: 1px solid #707070;
-    border-radius: 5px;
+.search-container {
+    position: relative;
     width: 100%;
     max-width: 600px;
+    margin-bottom: 50px;
+}
+
+.input-research {
+    border: 1px solid #707070;
+    width: 100%;
     border-radius: 5px;
     padding: 7px 6px 7px 6px;
-    margin-bottom: 50px;
     background-color: #fafafa;
+}
+
+.search-btn {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-btn img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.6;
+}
+
+.search-btn:hover img {
+    opacity: 1;
 }
 
 #table-wraper {
