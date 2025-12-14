@@ -54,7 +54,7 @@ class HomeController extends AbstractController {
 
         $options = $filterOptionsProviderService->getOptions();
 
-        return $this->render('search/results.html.twig', [
+        return $this->render('public/search/results.html.twig', [
             'query' => $filters['name'],
             'results' => $results,
             'sort' => $sort,
@@ -107,7 +107,7 @@ class HomeController extends AbstractController {
 
 //        dd($similars);
 
-        return $this->render('public/item.html.twig', [  // placeholder bo nie ma jeszcze tego
+        return $this->render('public/search/item.html.twig', [  // placeholder bo nie ma jeszcze tego
             'item' => $item,
             'similars' => $similars,
         ]);
@@ -119,7 +119,7 @@ class HomeController extends AbstractController {
         $favorites = json_decode($favoritesRaw, true) ?? [];
         $favorites = $itemRepository->findByIds(array_map('intval', $favorites));
 
-        return $this->render('search/favorites.html.twig', [
+        return $this->render('public/search/favorites.html.twig', [
             'favorites' => $favorites,
         ]);
     }

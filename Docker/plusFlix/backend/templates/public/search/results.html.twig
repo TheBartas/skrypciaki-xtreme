@@ -1,4 +1,4 @@
-{% extends 'search/base.html.twig' %}
+{% extends 'public/search/base.html.twig' %}
 {% set STREAMING_DATA_BY_ID = {
     1: {
         name: "Netflix",
@@ -35,6 +35,11 @@
 
 {% block title %}Wyniki wyszukiwania{% endblock %}
 
+{% block stylesheets %}
+        <link rel="stylesheet" href="/css/public/search_results.css">
+{% endblock %}
+
+
 {% block body %}
 
 <div class="search-results-container">
@@ -54,7 +59,7 @@
         });
     });
     </script>
-    
+
     <aside class="filters-panel">
         <h3>Filtry</h3>
 

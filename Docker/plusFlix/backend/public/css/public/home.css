@@ -174,6 +174,38 @@ body::before {
     color: #070720;
 }
 
+.nav-lists-btns {
+    background-color: #fdd500;
+    border: 2px solid #8e8e9c;
+    padding: 6px 12px;
+    border-radius: 1em;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.nav-lists-btns:hover {
+    background-color: #c3a600;
+    text-decoration: underline;
+}
+
+#lists-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+#lists-buttons a {
+    margin: 0 20px;
+}
+
+#toggle-wrapper {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+
+    margin-top: 20px;
+}
+
 @media (max-width: 800px) {
 
     .logo-fixed {

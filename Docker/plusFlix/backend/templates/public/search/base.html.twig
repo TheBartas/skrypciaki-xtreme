@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}PlusFlix{% endblock %}</title>
-    <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/search_results.css">
-    <link rel="stylesheet" href="css/font_base.css">
+    <link rel="stylesheet" href="/css/public/navbar.css">
+    <link rel="stylesheet" href="/css/public/font_base.css">
+    <link rel="stylesheet" href="/css/public/darkmode_toggle.css">
+    {% block stylesheets %}
+    {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -28,13 +30,15 @@
     </div>
 
     <div class="nav-right">
-        <a href="/popularne">Popularne</a>
-        <a href="/favorites">Ulubione</a>
-        <button class="theme-toggle">ciemno/jasno</button>
+        <a class="nav-lists-btns" href="/search">Wszystkie</a>
+        <a class="nav-lists-btns" href="/favorites">Ulubione</a>
+        <button class="theme-toggle"></button>
     </div>
 </nav>
 
 {% block body %}{% endblock %}
+
+{% block javascript %}{% endblock %}
 
 </body>
 </html>
