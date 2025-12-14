@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -77,7 +78,7 @@ class ItemRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-    //julkowe
+    
     public function findByNameContains(string $name): array
     {
         return $this->createQueryBuilder('i')
@@ -95,7 +96,7 @@ class ItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
+    
     public function findAllDirectors(): array
     {
         $results = $this->createQueryBuilder('i')

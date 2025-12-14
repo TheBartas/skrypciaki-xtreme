@@ -23,6 +23,20 @@ class AdminStreamingController extends AbstractController {
         ]);
     }
 
+    #[Route('/streaming', name: 'admin_streaming_search')]
+    public function categorySearch(
+        Request $request,
+        StreamingRepository $streamingRepository,
+    ) : Response {
+        $q = $request->query->get('q');
+
+        $streamings = $streamingRepository->searchByPlatformName($q);
+
+        return $this->render('admin/streamings.html.twig',[
+            'streamings' => $streamings,
+        ]);
+    }
+
     #[Route('/streamings/delete/{id}', name: 'admin_streaming_delete', methods: ['POST'])]
     public function streamingDelete(
         Request $request,

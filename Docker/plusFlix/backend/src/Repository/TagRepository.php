@@ -26,6 +26,22 @@ class TagRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function searchByTagName(?string $name): array
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c.id AS tag_ID, c.tagName AS name, COUNT(i.id) AS item_count')
+            ->leftJoin('c.items', 'i');
+
+        if ($name) {
+            $query->andWhere('c.tagName LIKE :name')
+            ->setParameter('name', '%' . $name . '%');
+        }
+
+        $query->groupBy('c.id, c.tagName')->orderBy('c.tagName', 'ASC');
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     //    /**
     //     * @return Tag[] Returns an array of Tag objects
     //     */

@@ -17,8 +17,21 @@ class AdminTagController extends AbstractController {
     #[Route('/tags', name: 'admin_tags')]
     public function tagsList(Request $request, TagRepository $tagRepository): Response
     {
-
         $tags = $tagRepository->findWithItemCount();
+        return $this->render('admin/tags.html.twig', [
+            'tags' => $tags,
+        ]);
+    }
+
+    #[Route('/tag', name: 'admin_search_tags')]
+    public function tagSearch(
+        Request $request, 
+        TagRepository $tagRepository
+    ) {
+        $q = $request->query->get('q');
+
+        $tags = $tagRepository->searchByTagName($q);
+        
         return $this->render('admin/tags.html.twig', [
             'tags' => $tags,
         ]);

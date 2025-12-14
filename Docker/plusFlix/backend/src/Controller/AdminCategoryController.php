@@ -27,6 +27,20 @@ class AdminCategoryController extends AbstractController {
         ]);
     }
 
+    #[Route('/category', name: 'admin_category_search')]
+    public function categorySearch(
+        Request $request,
+        CategoryRepository $categoryRepository,
+    ) : Response {
+        $q = $request->query->get('q');
+
+        $categories = $categoryRepository->searchByGenre($q);
+
+        return $this->render('admin/categories.html.twig', [
+            'categories' => $categories,
+        ]);
+    }
+
     #[Route('/categories/delete/{id}', name: 'admin_category_delete', methods: ['POST'])]
     public function categorieDelete(
         Request $request,
