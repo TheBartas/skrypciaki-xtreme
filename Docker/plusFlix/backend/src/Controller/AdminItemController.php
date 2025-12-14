@@ -22,24 +22,47 @@ class AdminItemController extends AbstractController {
 
     #[Route('/items', name: 'admin_items')]
     public function itemsList(
+        Request $request,
         ItemRepository $itemRepository,
         CategoryRepository $categoryRepository,
         TagRepository $tagRepository,
         StreamingRepository $streamingRepository,
     ): Response
     {
-        $items = $itemRepository->findAll();
-        $categories = $categoryRepository->findAll();
-        $tags = $tagRepository->findAll();
-        $streamings = $streamingRepository->findAll();
+        $filters = [];
+
+        if ($name = $request->query->get('name')) $filters['name'] = $name;
+        if ($year = $request->query->get('year')) $filters['year'] = (int)$year;
+        if ($director = $request->query->get('director')) $filters['director'] = $director;
+        if ($actors = $request->query->get('actors')) $filters['actors'] = $actors;
+        if ($type = $request->query->get('type')) $filters['type'] = (int)$type;
+        if ($duration = $request->query->get('duration')) $filters['duration'] = (int)$duration;
+        if ($request->query->has('season')) {
+            $filters['season'] = $request->query->get('season') !== '' ? (int)$request->query->get('season') : null;
+        }
+
+        if ($categories = $request->query->get('categories')) {
+            $filters['categories'] = array_filter(array_map('intval', explode(',', $categories)));
+        }
+        if ($streamings = $request->query->get('streamings')) {
+            $filters['streamings'] = array_filter(array_map('intval', explode(',', $streamings)));
+        }
+        if ($tags = $request->query->get('tags')) {
+            $filters['tags'] = array_filter(array_map('intval', explode(',', $tags)));
+        }
+
+        $items = $itemRepository->findByFilters($filters);
+        $categoriesAll = $categoryRepository->findAll();
+        $tagsAll = $tagRepository->findAll();
+        $streamingsAll = $streamingRepository->findAll();
 
 
 
         return $this->render('admin/items.html.twig',[
             'items' => $items,
-            'categories' => $categories,
-            'tags' => $tags,
-            'streamings' => $streamings,
+            'categories' => $categoriesAll,
+            'tags' => $tagsAll,
+            'streamings' => $streamingsAll,
         ]);
     }
 
