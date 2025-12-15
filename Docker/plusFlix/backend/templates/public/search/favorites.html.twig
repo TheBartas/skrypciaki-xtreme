@@ -6,6 +6,39 @@
     <link rel="stylesheet" href="/css/public/search_results.css">
 {% endblock %}
 
+{% set STREAMING_DATA_BY_ID = {
+    1: {
+        name: "Netflix",
+        logo: "https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=700&h=456",
+        link: "https://www.netflix.com"
+    },
+    2: {
+        name: "HBO Max",
+        logo: "https://fwcdn.pl/nph/867323/2025/63747.7.jpg",
+        link: "https://www.hbomax.com"
+    },
+    3: {
+        name: "Disney+",
+        logo: "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25357066/Disney__Logo_March_2024.png?quality=90&strip=all&crop=7.8125%2C0%2C84.375%2C100&w=2400",
+        link: "https://www.disneyplus.com"
+    },
+    4: {
+        name: "Amazon Prime Video",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Amazon_Prime_Video_logo_%282024%29.svg/1200px-Amazon_Prime_Video_logo_%282024%29.svg.png",
+        link: "https://www.primevideo.com"
+    },
+    5: {
+        name: "Apple TV+",
+        logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs5Uv6cx7KcDlTFANEqZFj-HK0HlwpIu7Nhg&s",
+        link: "https://tv.apple.com"
+    },
+    6: {
+        name: "Hulu",
+        logo: "https://store-images.s-microsoft.com/image/apps.60756.9007199266246590.a8642808-8fcd-48e6-805e-aede1f148787.c1baaaf0-7b9d-4e6e-9661-56452a1f7ddd",
+        link: "https://www.hulu.com"
+    }
+} %}
+
 {% block body %}
 
 <div class="heading">
@@ -29,7 +62,16 @@
                             >
 
                             <div class="streaming-icons">
-                                <img src="https://fwcdn.pl/nph/867323/2025/63747.7.jpg">
+                                {% for streaming in item.streamings %}
+                                    {% set data = STREAMING_DATA_BY_ID[streaming.id] ?? null %}
+                                    {% if data %}
+                                        {% include 'components/streaming_logo.html.twig' with {
+                                            name: data.name,
+                                            logo: data.logo,
+                                            link: data.link
+                                        } %}
+                                    {% endif %}
+                                {% endfor %}
                             </div>
 
 

@@ -1,28 +1,52 @@
+:root {
+    --bg: #ffffff;
+    --accent-color: #c1c1c1;
+    --sec-accent-color: #ededed;
+    --text: #111111;
+    --sec-text: #666;
+}
+
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --accent-color: #202f4e;
+    --sec-accent-color: #334b87;
+    --text: #e5e7eb;
+    --sec-text: #b3b3b3;
+}
+
+
 .theme-toggle {
     width: 60px;
     height: 30px;
-    background: black;
+    background-color: #d5d5d5;
     border-radius: 30px;
+    border: 1px solid black;
     cursor: pointer;
-    color: #fff;
+    color: #ffffff;
     position: relative;
     transition: background-color 0.3s;
 }
 
 .theme-toggle::before {
-    content: "";
-    width: 22px;
-    height: 22px;
-    background-color: white;
+    content: "☀️";
+    width: 21px;
+    height: 21px;
+    background-color: #252525;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 2px;
     transition: transform 0.3s;
 }
 
 .theme-toggle.dark {
-    background-color: #d5d5d5;
+    background: black;
+    border: 1px solid white;
+}
+
+.theme-toggle.dark::before {
+    content: "🌙";
+    background-color: #eaeaea;
 }
 
 .theme-toggle.dark::before {

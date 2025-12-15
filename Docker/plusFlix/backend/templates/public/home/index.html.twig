@@ -1,3 +1,6 @@
+<script src="{{ asset('js/theme_toggle.js') }}"></script>
+
+{% block body %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/public/home.css">
 <link rel="stylesheet" href="/css/public/font_base.css">
@@ -37,10 +40,10 @@
 } %}
 
 
-<div class="logo-fixed">Logo</div>
+<img src="{{ asset('logo.png') }}" alt="logo" class="logo-fixed">
 
 <div id="toggle-wrapper">
-    <button class="theme-toggle"></button>
+    <button id="theme-toggle" class="theme-toggle"></button>
 </div>
 
 <h1 class="app-name">PlusFlix</h1>
@@ -81,6 +84,7 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
 
 {% block javascript %}
     <script src="{{ asset('js/search_suggestions.js') }}"></script>

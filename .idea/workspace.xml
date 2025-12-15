@@ -5,27 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6724139d-e29f-4941-aba3-fbd062985c3c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/public_item.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/item.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/font_base.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/font_base.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/search_results.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/search_results.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_categories.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/admin_item.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/styles/public_item.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/darkmode_toggle.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/darkmode_toggle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/public_item.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/public_item.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/search_results.css" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/public/css/public/search_results.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Controller/UserController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/base.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/base.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/src/Repository/ItemRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/home/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/item.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/favorites.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/favorites.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/search/results.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/results.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/favorites.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/favorites.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/item.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/Docker/plusFlix/backend/templates/public/search/item.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +27,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="JavaScript File" />
         <option value="CSS File" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -56,24 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dn50957",
-    "last_opened_file_path": "C:/Users/alpak/Desktop/Zadanie/__skrypciaki-xtreme/Docker/plusFlix/backend/public/css/admin",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dn50957&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alpak/Desktop/Zadanie/__skrypciaki-xtreme/Docker/plusFlix/backend/public/css/admin&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\alpak\Desktop\Zadanie\__skrypciaki-xtreme\Docker\plusFlix\backend\public\css\admin" />
@@ -126,6 +115,8 @@
       <workItem from="1765603203657" duration="599000" />
       <workItem from="1765663965825" duration="447000" />
       <workItem from="1765668966413" duration="14210000" />
+      <workItem from="1765743055421" duration="9596000" />
+      <workItem from="1765756985409" duration="1000" />
     </task>
     <servers />
   </component>

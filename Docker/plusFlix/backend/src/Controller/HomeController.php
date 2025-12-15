@@ -83,16 +83,17 @@ class HomeController extends AbstractController {
 
         $tagsString = '';
         foreach ($item->getTags() as $tag) {
-            $tagsString .= $tag->getId();
+            $tagsString .= $tag->getId() . ',';
         }
-        $filtersTags = [ 'tags' => $tagsString ];
+        $tagsArray = array_map('intval', array_filter(explode(',', $tagsString)));
+        $filtersTags = [ 'tags' => $tagsArray ];
 
         $categoriesString = '';
         foreach ($item->getCategories() as $categorie) {
-            $categoriesString .= $categorie->getId();
+            $categoriesString .= $categorie->getId() . ',';
         }
-        $filtersCategories = [ 'categories' => $categoriesString ];
-
+        $categoriesArray = array_map('intval', array_filter(explode(',', $categoriesString)));
+        $filtersCategories = [ 'categories' => $categoriesArray ];
 
         $similarByTags = $itemRepository->findByFilters($filtersTags);
         $similarByCategories = $itemRepository->findByFilters($filtersCategories);
@@ -104,8 +105,6 @@ class HomeController extends AbstractController {
         }
         $similars = array_values($uniqueItemsById);
         $similars = array_slice($similars, 0, 4);  // keep only first 4
-
-//        dd($similars);
 
         return $this->render('public/search/item.html.twig', [  // placeholder bo nie ma jeszcze tego
             'item' => $item,

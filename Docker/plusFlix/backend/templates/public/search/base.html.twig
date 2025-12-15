@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}PlusFlix{% endblock %}</title>
+    <script src="{{ asset('js/theme_toggle.js') }}"></script>
+    <link rel="stylesheet" href="/css/public/theme_toggle.css">
     <link rel="stylesheet" href="/css/public/navbar.css">
     <link rel="stylesheet" href="/css/public/font_base.css">
     <link rel="stylesheet" href="/css/public/darkmode_toggle.css">
@@ -32,7 +34,7 @@
     <div class="nav-right">
         <a class="nav-lists-btns" href="/search">Wszystkie</a>
         <a class="nav-lists-btns" href="/favorites">Ulubione</a>
-        <button class="theme-toggle"></button>
+        <button id="theme-toggle" class="theme-toggle"></button>
     </div>
 </nav>
 
